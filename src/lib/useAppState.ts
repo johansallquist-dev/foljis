@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { AppState, initialState, todayKey, MoodEntry, MoodLevel, Feeling, RoutineItem, Lesson } from "./types";
+import { AppState, initialState, todayKey, MoodEntry, MoodLevel, Feeling, RoutineItem, Lesson, CompanionSpeciesId } from "./types";
 import { ACHIEVEMENTS, evaluateAchievements } from "./achievements";
 import { toast } from "sonner";
 
