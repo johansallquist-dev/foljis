@@ -163,13 +163,13 @@ export default function SchedulePage() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="rounded-3xl">
           <DialogHeader>
-            <DialogTitle>Ny lektion på {DAYS[activeDay].toLowerCase()}</DialogTitle>
+            <DialogTitle>Ny aktivitet på {DAYS[activeDay].toLowerCase()}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-1.5">
-              <Label>Ämne</Label>
+              <Label>Aktivitet / ämne</Label>
               <Input
-                placeholder="T.ex. Matematik"
+                placeholder="T.ex. Matematik, Fotboll, Pianolektion"
                 value={draft.subject}
                 onChange={e => setDraft({ ...draft, subject: e.target.value })}
                 autoFocus
@@ -186,9 +186,9 @@ export default function SchedulePage() {
               </div>
             </div>
             <div className="space-y-1.5">
-              <Label>Sal (valfritt)</Label>
+              <Label>Sal eller plats (valfritt)</Label>
               <Input
-                placeholder="T.ex. 12B"
+                placeholder="T.ex. 12B eller Idrottshallen"
                 value={draft.room}
                 onChange={e => setDraft({ ...draft, room: e.target.value })}
               />
