@@ -213,7 +213,7 @@ export default function MoodPage() {
       {step === "tips" && (
         <div className="space-y-5">
           <Card className="border-0 gradient-calm p-5 text-center pop-in shadow-card-soft">
-            <Companion mood={4} size={120} />
+            <Companion mood={4} size={120} species={state.companionSpecies} />
             <p className="font-display text-lg mt-2">Tack för att du lyssnade på dig själv 💛</p>
             {feeling && (
               <p className="text-sm text-muted-foreground">Här är några saker som kan hjälpa när du känner dig {feeling}:</p>
