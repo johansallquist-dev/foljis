@@ -74,11 +74,11 @@ export default function SchedulePage() {
         ))}
       </div>
 
-      {/* Lektioner */}
+      {/* Aktiviteter */}
       <div className="space-y-2">
         {lessons.length === 0 && (
           <Card className="p-6 text-center border-dashed border-2 bg-transparent">
-            <p className="text-muted-foreground">Inga lektioner inlagda för {DAYS[activeDay].toLowerCase()}.</p>
+            <p className="text-muted-foreground">Inga aktiviteter inlagda för {DAYS[activeDay].toLowerCase()}.</p>
           </Card>
         )}
 
@@ -157,7 +157,7 @@ export default function SchedulePage() {
         className="w-full h-14 rounded-2xl border-dashed border-2"
         onClick={() => setOpen(true)}
       >
-        <Plus className="w-5 h-5 mr-2" /> Lägg till lektion
+        <Plus className="w-5 h-5 mr-2" /> Lägg till aktivitet
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
