@@ -55,6 +55,8 @@ export interface AppState {
   lastActiveDate: string | null;
   routine: RoutineItem[];
   routineHistory: RoutineCompletion[];
+  eveningRoutine: RoutineItem[];
+  eveningHistory: RoutineCompletion[];
   schedule: Lesson[];
   lessonCompletions: LessonCompletion[];
   moodEntries: MoodEntry[];
@@ -81,12 +83,24 @@ export const defaultRoutine: RoutineItem[] = [
   { id: "r6", label: "På väg till skolan", emoji: "🚶" },
 ];
 
+export const defaultEveningRoutine: RoutineItem[] = [
+  { id: "e1", label: "Lägg fram kläder till imorgon", emoji: "👕" },
+  { id: "e2", label: "Packa skolväskan", emoji: "🎒" },
+  { id: "e3", label: "Borsta tänderna", emoji: "🪥" },
+  { id: "e4", label: "Duscha", emoji: "🚿" },
+  { id: "e5", label: "Läs en stund", emoji: "📖" },
+  { id: "e6", label: "Lägg undan mobilen", emoji: "📱" },
+  { id: "e7", label: "Gå och lägg dig", emoji: "🛏️" },
+];
+
 export const initialState: AppState = {
   points: 0,
   streak: 0,
   lastActiveDate: null,
   routine: defaultRoutine,
   routineHistory: [],
+  eveningRoutine: defaultEveningRoutine,
+  eveningHistory: [],
   schedule: [],
   lessonCompletions: [],
   moodEntries: [],
