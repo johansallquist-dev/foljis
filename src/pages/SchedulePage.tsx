@@ -12,7 +12,7 @@ const DAYS = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag"];
 const SUBJECT_EMOJIS = ["📚","🔢","🧪","🌍","🎨","🎵","🏃","💻","🔤","📖","✍️","🌱","🌌","🍳","🛠️"];
 
 export default function SchedulePage() {
-  const { state, addLesson, removeLesson, toggleLessonComplete } = useApp();
+  const { state, addLesson, removeLesson, setLessonRating } = useApp();
   const today = todayKey();
   const jsDay = new Date().getDay();
   const todaySchoolDay = jsDay >= 1 && jsDay <= 5 ? jsDay - 1 : 0;
