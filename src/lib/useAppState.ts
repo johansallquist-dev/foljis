@@ -185,6 +185,37 @@ export function useAppState() {
     });
   }, [checkAchievements]);
 
+  const setLessonRating = useCallback((lessonId: string, rating: LessonRating) => {
+    setState(s => {
+      const today = todayKey();
+      const existing = s.lessonCompletions.find(c => c.date === today && c.lessonId === lessonId);
+      let completions;
+      let pointDelta = 0;
+      if (existing) {
+        if (existing.rating === rating) {
+          completions = s.lessonCompletions.filter(c => !(c.date === today && c.lessonId === lessonId));
+          pointDelta = -3;
+        } else {
+          completions = s.lessonCompletions.map(c =>
+            c.date === today && c.lessonId === lessonId ? { ...c, rating } : c
+          );
+        }
+      } else {
+        completions = [...s.lessonCompletions, { date: today, lessonId, rating }];
+        pointDelta = 3;
+      }
+      const { streak, lastActiveDate } = bumpStreak(s);
+      const next: AppState = {
+        ...s,
+        lessonCompletions: completions,
+        points: Math.max(0, s.points + pointDelta),
+        streak,
+        lastActiveDate,
+      };
+      return checkAchievements(next);
+    });
+  }, [checkAchievements]);
+
   const markTipRead = useCallback((tipId: string) => {
     setState(s => {
       if (s.readTips.includes(tipId)) return s;
