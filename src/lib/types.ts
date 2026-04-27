@@ -90,5 +90,6 @@ export const initialState: AppState = {
   unlockedAchievements: [],
   readTips: [],
   companionName: "Solis",
+  companionSpecies: "sun",
   onboardingDone: false,
 };
