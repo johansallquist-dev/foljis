@@ -9,7 +9,16 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Plus, Trash2, Clock, MapPin } from "lucide-react";
 
 const DAYS = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag"];
-const SUBJECT_EMOJIS = ["📚","🔢","🧪","🌍","🎨","🎵","🏃","💻","🔤","📖","✍️","🌱","🌌","🍳","🛠️"];
+const SUBJECT_EMOJIS = [
+  // Skolämnen
+  "📚","🔢","🧪","🌍","🎨","🎵","🏃","💻","🔤","📖","✍️","🌱","🌌","🍳","🛠️",
+  // Aktiviteter & sport
+  "⚽","🏀","🏐","🎾","🏓","🏸","🥊","🥋","🤸","🏊","🚴","🛹","⛸️","🎿","🏂","🏇","🏑","🏒","🥅","🏉","🥏",
+  // Musik & dans
+  "🎸","🎹","🥁","🎺","🎻","🎤","💃","🩰",
+  // Övrigt
+  "🎭","🎬","🧩","♟️","🐴","🐶","🌳","🧘","🛼","🧗"
+];
 
 export default function SchedulePage() {
   const { state, addLesson, removeLesson, setLessonRating } = useApp();
@@ -44,7 +53,7 @@ export default function SchedulePage() {
     <div className="max-w-2xl mx-auto px-5 pt-2 space-y-5">
       <header className="space-y-1">
         <p className="text-sm text-muted-foreground">Schema</p>
-        <h1 className="text-2xl font-display font-semibold">Mitt schema 📅</h1>
+        <h1 className="text-2xl font-display font-semibold">Mina aktiviteter 📅</h1>
       </header>
 
       {/* Veckodagsväljare */}
