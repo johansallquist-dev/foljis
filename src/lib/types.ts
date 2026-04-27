@@ -38,9 +38,12 @@ export interface Lesson {
   color: string; // semantic key
 }
 
+export type LessonRating = "bad" | "ok" | "good";
+
 export interface LessonCompletion {
   date: string;
   lessonId: string;
+  rating?: LessonRating;
 }
 
 export type CompanionSpeciesId =
