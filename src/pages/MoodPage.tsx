@@ -55,21 +55,24 @@ export default function MoodPage() {
 
   const copingTips = feeling ? (COPING_BY_FEELING[feeling] || []).map(id => TIPS.find(t => t.id === id)).filter(Boolean) : [];
 
-  // historik-data för diagram (senaste 7 dagar, snitt per dag)
+  // historik-data för diagram (denna veckas måndag–fredag)
   const chartData = useMemo(() => {
     const days: { date: string; label: string; value: number | null }[] = [];
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date(); d.setDate(d.getDate() - i);
+    const today = new Date();
+    const jsDay = today.getDay(); // 0=sön, 1=mån ...
+    const offsetToMonday = jsDay === 0 ? -6 : 1 - jsDay;
+    const monday = new Date(today);
+    monday.setDate(today.getDate() + offsetToMonday);
+    const labels = ["mån", "tis", "ons", "tor", "fre"];
+    for (let i = 0; i < 5; i++) {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
       const key = d.toISOString().slice(0, 10);
       const dayEntries = state.moodEntries.filter(m => m.date.startsWith(key));
       const avg = dayEntries.length > 0
         ? dayEntries.reduce((s, e) => s + e.mood, 0) / dayEntries.length
         : null;
-      days.push({
-        date: key,
-        label: ["sön","mån","tis","ons","tor","fre","lör"][d.getDay()],
-        value: avg,
-      });
+      days.push({ date: key, label: labels[i], value: avg });
     }
     return days;
   }, [state.moodEntries]);
