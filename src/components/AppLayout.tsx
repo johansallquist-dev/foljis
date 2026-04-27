@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useLocation } from "react-router-dom";
-import { Home, ListChecks, CalendarDays, Heart, Sparkles, Settings } from "lucide-react";
+import { Home, ListChecks, Moon, CalendarDays, Heart, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Companion } from "@/components/Companion";
 import { useApp } from "@/lib/AppStateContext";
@@ -8,9 +8,9 @@ import { useCompanionMood } from "@/lib/useCompanionMood";
 const navItems = [
   { to: "/", label: "Hem", icon: Home, end: true },
   { to: "/morgon", label: "Morgon", icon: ListChecks },
+  { to: "/kvall", label: "Kväll", icon: Moon },
   { to: "/schema", label: "Schema", icon: CalendarDays },
   { to: "/maende", label: "Mående", icon: Heart },
-  { to: "/tips", label: "Tips", icon: Sparkles },
 ];
 
 export function AppLayout() {
