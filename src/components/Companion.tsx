@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef, useState, useCallback, useEffect } from "react";
 
 export type CompanionSpecies =
   | "sun"     // Solis – sol
@@ -38,27 +38,117 @@ interface Props {
   celebrate?: boolean;
   name?: string;
   species?: CompanionSpecies;
+  /** Aktivera klapp-interaktion (klicka och dra över). Default: true */
+  pettable?: boolean;
+  /** Anropas när användaren klappar följeslagaren */
+  onPet?: () => void;
 }
 
+interface Heart { id: number; x: number; y: number; }
+
 /** Helt SVG-baserade följeslagare. Ansiktsuttryck byts efter humör. */
-export function Companion({ mood, size = 180, celebrate, name, species = "sun" }: Props) {
-  const cls = useMemo(() => celebrate ? "companion-float celebrate" : "companion-float", [celebrate]);
-  const expr = getExpression(mood);
+export function Companion({ mood, size = 180, celebrate, name, species = "sun", pettable = true, onPet }: Props) {
+  const [isPetting, setIsPetting] = useState(false);
+  const [hearts, setHearts] = useState<Heart[]>([]);
+  const pettingRef = useRef(false);
+  const lastHeartRef = useRef(0);
+  const heartIdRef = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const cls = useMemo(() => {
+    const base = "companion-float";
+    if (celebrate) return `${base} celebrate`;
+    if (isPetting) return `${base} wiggle`;
+    return base;
+  }, [celebrate, isPetting]);
+
+  // Boostat humör vid klapp
+  const displayMood = isPetting ? Math.max(mood, 4) : mood;
+  const expr = getExpression(displayMood);
+
+  const spawnHeart = useCallback((clientX: number, clientY: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = clientX - rect.left + (Math.random() * 20 - 10);
+    const y = clientY - rect.top + (Math.random() * 10 - 5);
+    const id = heartIdRef.current++;
+    setHearts(h => [...h, { id, x, y }]);
+    setTimeout(() => setHearts(h => h.filter(p => p.id !== id)), 900);
+  }, []);
+
+  const handleMove = useCallback((clientX: number, clientY: number) => {
+    if (!pettingRef.current) return;
+    const now = Date.now();
+    if (now - lastHeartRef.current > 140) {
+      lastHeartRef.current = now;
+      spawnHeart(clientX, clientY);
+      onPet?.();
+    }
+  }, [spawnHeart, onPet]);
+
+  const startPet = useCallback((clientX: number, clientY: number) => {
+    if (!pettable) return;
+    pettingRef.current = true;
+    setIsPetting(true);
+    spawnHeart(clientX, clientY);
+    onPet?.();
+  }, [pettable, spawnHeart, onPet]);
+
+  const stopPet = useCallback(() => {
+    pettingRef.current = false;
+    setIsPetting(false);
+  }, []);
+
+  // Globalt mouseup/touchend för att alltid sluta
+  useEffect(() => {
+    const up = () => stopPet();
+    window.addEventListener("mouseup", up);
+    window.addEventListener("touchend", up);
+    window.addEventListener("touchcancel", up);
+    return () => {
+      window.removeEventListener("mouseup", up);
+      window.removeEventListener("touchend", up);
+      window.removeEventListener("touchcancel", up);
+    };
+  }, [stopPet]);
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className={cls} style={{ width: size, height: size }}>
-        <svg viewBox="0 0 200 200" width={size} height={size} aria-label={`${name || "Följeslagare"}`}>
-          <defs>
-            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
-              <feOffset dx="0" dy="3" result="off" />
-              <feComponentTransfer><feFuncA type="linear" slope="0.22"/></feComponentTransfer>
-              <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          {renderSpecies(species, expr, mood)}
-        </svg>
+      <div
+        ref={containerRef}
+        className={`relative ${pettable ? "cursor-grab active:cursor-grabbing select-none" : ""}`}
+        style={{ width: size, height: size, touchAction: pettable ? "none" : undefined }}
+        onMouseDown={pettable ? e => startPet(e.clientX, e.clientY) : undefined}
+        onMouseMove={pettable ? e => handleMove(e.clientX, e.clientY) : undefined}
+        onMouseEnter={pettable ? e => { if (e.buttons === 1) startPet(e.clientX, e.clientY); } : undefined}
+        onMouseLeave={pettable ? stopPet : undefined}
+        onTouchStart={pettable ? e => { const t = e.touches[0]; startPet(t.clientX, t.clientY); } : undefined}
+        onTouchMove={pettable ? e => { const t = e.touches[0]; handleMove(t.clientX, t.clientY); } : undefined}
+      >
+        <div className={cls} style={{ width: size, height: size }}>
+          <svg viewBox="0 0 200 200" width={size} height={size} aria-label={`${name || "Följeslagare"}`}>
+            <defs>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+                <feOffset dx="0" dy="3" result="off" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.22"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            {renderSpecies(species, expr, displayMood)}
+          </svg>
+        </div>
+        {hearts.map(h => (
+          <span
+            key={h.id}
+            className="pointer-events-none absolute text-2xl heart-pop"
+            style={{ left: h.x, top: h.y, transform: "translate(-50%, -50%)" }}
+            aria-hidden
+          >
+            💖
+          </span>
+        ))}
       </div>
     </div>
   );
