@@ -17,8 +17,8 @@ export function Onboarding() {
 
   const speciesInfo = SPECIES.find(s => s.id === species)!;
 
-  const next = () => setStep(s => Math.min(3, (s + 1) as Step));
-  const back = () => setStep(s => Math.max(0, (s - 1) as Step));
+  const next = () => setStep(s => (s < 3 ? ((s + 1) as Step) : s));
+  const back = () => setStep(s => (s > 0 ? ((s - 1) as Step) : s));
 
   const handleSelectSpecies = (id: CompanionSpeciesId) => {
     setSpecies(id);
