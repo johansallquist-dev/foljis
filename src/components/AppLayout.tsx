@@ -1,6 +1,9 @@
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { Home, ListChecks, CalendarDays, Heart, Sparkles, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Companion } from "@/components/Companion";
+import { useApp } from "@/lib/AppStateContext";
+import { useCompanionMood } from "@/lib/useCompanionMood";
 
 const navItems = [
   { to: "/", label: "Hem", icon: Home, end: true },
@@ -12,11 +15,15 @@ const navItems = [
 
 export function AppLayout() {
   const loc = useLocation();
+  const { state } = useApp();
+  const mood = useCompanionMood();
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <header className="px-5 pt-5 pb-2 flex items-center justify-between">
         <NavLink to="/" className="flex items-center gap-2">
-          <span className="text-2xl">🌞</span>
+          <div className="w-10 h-10 -my-1 flex items-center justify-center">
+            <Companion mood={mood} size={44} species={state.companionSpecies} />
+          </div>
           <span className="font-display font-semibold text-lg">Solstråle</span>
         </NavLink>
         <NavLink
