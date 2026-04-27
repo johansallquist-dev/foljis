@@ -9,7 +9,7 @@ export interface Tip {
 }
 
 export const TIPS: Tip[] = [
-  { id: "t1", category: "morgon", emoji: "🌤️", title: "Klä på dig kvällen innan",
+  { id: "t1", category: "morgon", emoji: "🌤️", title: "Lägg fram kläder kvällen innan",
     body: "Lägg fram dina kläder kvällen innan. Då blir morgonen mycket lugnare och du slipper leta." },
   { id: "t2", category: "morgon", emoji: "🥣", title: "Något litet i magen räcker",
     body: "Om du inte är hungrig på morgonen – ta något litet, som en banan eller smörgås. Hjärnan jobbar bättre med energi." },
