@@ -24,7 +24,7 @@ export function AppLayout() {
           <div className="w-10 h-10 -my-1 flex items-center justify-center">
             <Companion mood={mood} size={44} species={state.companionSpecies} />
           </div>
-          <span className="font-display font-semibold text-lg">Solstråle</span>
+          <span className="font-display font-semibold text-lg">{state.companionName}</span>
         </NavLink>
         <NavLink
           to="/min-sida"
