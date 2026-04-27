@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Plus, Trash2, Check, Clock, MapPin } from "lucide-react";
+import { Plus, Trash2, Clock, MapPin } from "lucide-react";
 
 const DAYS = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag"];
 const SUBJECT_EMOJIS = ["📚","🔢","🧪","🌍","🎨","🎵","🏃","💻","🔤","📖","✍️","🌱","🌌","🍳","🛠️"];
 
 export default function SchedulePage() {
-  const { state, addLesson, removeLesson, toggleLessonComplete } = useApp();
+  const { state, addLesson, removeLesson, setLessonRating } = useApp();
   const today = todayKey();
   const jsDay = new Date().getDay();
   const todaySchoolDay = jsDay >= 1 && jsDay <= 5 ? jsDay - 1 : 0;
@@ -75,42 +75,69 @@ export default function SchedulePage() {
 
         {lessons.map(l => {
           const isToday = activeDay === todaySchoolDay;
-          const isDone = state.lessonCompletions.some(c => c.date === today && c.lessonId === l.id);
+          const completion = state.lessonCompletions.find(c => c.date === today && c.lessonId === l.id);
+          const rating = completion?.rating;
+          const isDone = !!completion;
+
+          const RATING_OPTIONS: { value: "bad" | "ok" | "good"; emoji: string; label: string; bg: string; ring: string }[] = [
+            { value: "bad",  emoji: "😟", label: "Dåligt",      bg: "bg-destructive/80 text-destructive-foreground", ring: "ring-destructive" },
+            { value: "ok",   emoji: "😐", label: "Mittemellan", bg: "bg-mood-3 text-foreground",                     ring: "ring-mood-3" },
+            { value: "good", emoji: "😊", label: "Bra",         bg: "bg-calm text-calm-foreground",                  ring: "ring-calm" },
+          ];
+
           return (
             <Card
               key={l.id}
-              className={`p-4 border-0 shadow-card-soft flex items-center gap-3 transition-colors ${
+              className={`p-4 border-0 shadow-card-soft transition-colors ${
                 isDone ? "bg-calm-soft" : "bg-card"
               }`}
             >
-              <span className="text-3xl">{l.emoji}</span>
-              <div className="flex-1 min-w-0">
-                <p className={`font-semibold ${isDone ? "line-through text-muted-foreground" : ""}`}>
-                  {l.subject}
-                </p>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5">
-                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{l.startTime}–{l.endTime}</span>
-                  {l.room && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{l.room}</span>}
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{l.emoji}</span>
+                <div className="flex-1 min-w-0">
+                  <p className={`font-semibold ${isDone ? "line-through text-muted-foreground" : ""}`}>
+                    {l.subject}
+                  </p>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5">
+                    <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{l.startTime}–{l.endTime}</span>
+                    {l.room && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{l.room}</span>}
+                  </div>
                 </div>
-              </div>
-              {isToday && (
                 <button
-                  onClick={() => toggleLessonComplete(l.id)}
-                  className={`w-9 h-9 rounded-full border-2 flex items-center justify-center transition-all ${
-                    isDone ? "bg-calm border-calm" : "border-border"
-                  }`}
-                  aria-label="Markera klar"
+                  onClick={() => removeLesson(l.id)}
+                  className="p-1 text-muted-foreground hover:text-destructive"
+                  aria-label="Ta bort"
                 >
-                  {isDone && <Check className="w-5 h-5 text-calm-foreground" />}
+                  <Trash2 className="w-4 h-4" />
                 </button>
+              </div>
+
+              {isToday && (
+                <div className="mt-3 pt-3 border-t border-border/60">
+                  <p className="text-xs text-muted-foreground mb-2">Hur det kändes?</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {RATING_OPTIONS.map(opt => {
+                      const selected = rating === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          onClick={() => setLessonRating(l.id, opt.value)}
+                          className={`py-2 rounded-xl flex flex-col items-center gap-0.5 transition-all active:scale-95 ${
+                            selected
+                              ? `${opt.bg} ring-2 ${opt.ring} shadow-soft`
+                              : "bg-muted hover:bg-secondary"
+                          }`}
+                          aria-label={opt.label}
+                          aria-pressed={selected}
+                        >
+                          <span className="text-xl">{opt.emoji}</span>
+                          <span className="text-[11px] font-medium">{opt.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               )}
-              <button
-                onClick={() => removeLesson(l.id)}
-                className="p-1 text-muted-foreground hover:text-destructive"
-                aria-label="Ta bort"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
             </Card>
           );
         })}
