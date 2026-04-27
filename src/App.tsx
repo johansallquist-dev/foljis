@@ -8,6 +8,7 @@ import { AppLayout } from "@/components/AppLayout";
 import { Onboarding } from "@/components/Onboarding";
 import HomePage from "./pages/HomePage";
 import MorningPage from "./pages/MorningPage";
+import EveningPage from "./pages/EveningPage";
 import SchedulePage from "./pages/SchedulePage";
 import MoodPage from "./pages/MoodPage";
 import TipsPage from "./pages/TipsPage";
@@ -25,6 +26,7 @@ const AppContent = () => {
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/morgon" element={<MorningPage />} />
+          <Route path="/kvall" element={<EveningPage />} />
           <Route path="/schema" element={<SchedulePage />} />
           <Route path="/maende" element={<MoodPage />} />
           <Route path="/tips" element={<TipsPage />} />

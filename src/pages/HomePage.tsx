@@ -28,6 +28,10 @@ export default function HomePage() {
   const routineDone = todayRoutine?.itemIds.length || 0;
   const routineTotal = state.routine.length;
 
+  const todayEvening = state.eveningHistory.find(h => h.date === today);
+  const eveningDone = todayEvening?.itemIds.length || 0;
+  const eveningTotal = state.eveningRoutine.length;
+
   const todayMoods = state.moodEntries.filter(m => m.date.startsWith(today));
 
   // hitta nästa lektion idag (mån=0..fre=4 i datat; JS getDay sön=0..lör=6)
@@ -90,7 +94,7 @@ export default function HomePage() {
           className="p-4 border-0 shadow-card-soft cursor-pointer hover:shadow-soft transition-shadow"
           onClick={() => navigate("/schema")}
         >
-          <p className="text-xs text-muted-foreground mb-1">Nästa lektion</p>
+          <p className="text-xs text-muted-foreground mb-1">Nästa aktivitet</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-3xl">{nextLesson.emoji}</span>
@@ -120,6 +124,17 @@ export default function HomePage() {
             : `${routineDone} / ${routineTotal} klart idag`}
           progress={routineTotal > 0 ? routineDone / routineTotal : 0}
           accent="primary"
+        />
+
+        <ActionCard
+          onClick={() => navigate("/kvall")}
+          icon={<span className="text-xl">🌙</span>}
+          title="Kvällsrutin"
+          subtitle={eveningTotal === 0
+            ? "Skapa din kvällsrutin"
+            : `${eveningDone} / ${eveningTotal} klart ikväll`}
+          progress={eveningTotal > 0 ? eveningDone / eveningTotal : 0}
+          accent="accent"
         />
 
         <ActionCard

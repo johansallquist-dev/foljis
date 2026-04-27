@@ -126,6 +126,46 @@ export function useAppState() {
     setState(s => ({ ...s, routine: items }));
   }, []);
 
+  const toggleEveningItem = useCallback((itemId: string) => {
+    setState(s => {
+      const today = todayKey();
+      const existing = s.eveningHistory.find(h => h.date === today);
+      const wasDone = existing?.itemIds.includes(itemId) ?? false;
+      let history;
+      if (existing) {
+        const updated = wasDone
+          ? existing.itemIds.filter(i => i !== itemId)
+          : [...existing.itemIds, itemId];
+        history = s.eveningHistory.map(h => h.date === today ? { ...h, itemIds: updated } : h);
+      } else {
+        history = [...s.eveningHistory, { date: today, itemIds: [itemId] }];
+      }
+      const { streak, lastActiveDate } = bumpStreak(s);
+      const pointDelta = wasDone ? -5 : 5;
+      const next: AppState = {
+        ...s,
+        eveningHistory: history,
+        points: Math.max(0, s.points + pointDelta),
+        streak,
+        lastActiveDate,
+      };
+      const todayDone = history.find(h => h.date === today)?.itemIds || [];
+      if (!wasDone && todayDone.length === s.eveningRoutine.length && s.eveningRoutine.length > 0) {
+        next.points += 15;
+        toast.success("🌙 Hela kvällsrutinen klar!", { description: "+15 bonuspoäng" });
+      }
+      return checkAchievements(next);
+    });
+  }, [checkAchievements]);
+
+  const addEveningItem = useCallback((label: string, emoji: string) => {
+    setState(s => ({ ...s, eveningRoutine: [...s.eveningRoutine, { id: uid(), label, emoji }] }));
+  }, []);
+
+  const removeEveningItem = useCallback((id: string) => {
+    setState(s => ({ ...s, eveningRoutine: s.eveningRoutine.filter(r => r.id !== id) }));
+  }, []);
+
   const addMoodEntry = useCallback((mood: MoodLevel, feeling?: Feeling, note?: string) => {
     setState(s => {
       const entry: MoodEntry = {
@@ -255,6 +295,9 @@ export function useAppState() {
     addRoutineItem,
     removeRoutineItem,
     reorderRoutine,
+    toggleEveningItem,
+    addEveningItem,
+    removeEveningItem,
     addMoodEntry,
     addLesson,
     updateLesson,
