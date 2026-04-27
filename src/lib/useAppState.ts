@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { AppState, initialState, todayKey, MoodEntry, MoodLevel, Feeling, RoutineItem, Lesson } from "./types";
+import { AppState, initialState, todayKey, MoodEntry, MoodLevel, Feeling, RoutineItem, Lesson, CompanionSpeciesId } from "./types";
 import { ACHIEVEMENTS, evaluateAchievements } from "./achievements";
 import { toast } from "sonner";
 
@@ -204,6 +204,10 @@ export function useAppState() {
     setState(s => ({ ...s, companionName: name }));
   }, []);
 
+  const setCompanionSpecies = useCallback((species: CompanionSpeciesId) => {
+    setState(s => ({ ...s, companionSpecies: species }));
+  }, []);
+
   const finishOnboarding = useCallback(() => {
     setState(s => ({ ...s, onboardingDone: true }));
   }, []);
@@ -227,6 +231,7 @@ export function useAppState() {
     toggleLessonComplete,
     markTipRead,
     setCompanionName,
+    setCompanionSpecies,
     finishOnboarding,
     resetAll,
   };
