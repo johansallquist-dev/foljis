@@ -80,9 +80,9 @@ export default function SchedulePage() {
           const isDone = !!completion;
 
           const RATING_OPTIONS: { value: "bad" | "ok" | "good"; emoji: string; label: string; bg: string; ring: string }[] = [
-            { value: "bad",  emoji: "😟", label: "Dåligt",     bg: "bg-mood-1",  ring: "ring-mood-1" },
-            { value: "ok",   emoji: "😐", label: "Mittemellan", bg: "bg-mood-3", ring: "ring-mood-3" },
-            { value: "good", emoji: "😊", label: "Bra",        bg: "bg-mood-5", ring: "ring-mood-5" },
+            { value: "bad",  emoji: "😟", label: "Dåligt",      bg: "bg-destructive/80 text-destructive-foreground", ring: "ring-destructive" },
+            { value: "ok",   emoji: "😐", label: "Mittemellan", bg: "bg-mood-3 text-foreground",                     ring: "ring-mood-3" },
+            { value: "good", emoji: "😊", label: "Bra",         bg: "bg-calm text-calm-foreground",                  ring: "ring-calm" },
           ];
 
           return (
