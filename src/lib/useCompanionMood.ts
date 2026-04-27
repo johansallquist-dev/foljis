@@ -1,14 +1,9 @@
-import { useAppState } from "@/lib/useAppState";
-import { todayKey } from "@/lib/types";
 import { useMemo } from "react";
+import { useApp } from "@/lib/AppStateContext";
+import { todayKey } from "@/lib/types";
 
-/**
- * Räknar ut följeslagarens mood (0-4) baserat på:
- * - streak
- * - dagens aktivitet (morgonrutin, mående, lektioner)
- */
 export function useCompanionMood() {
-  const { state } = useAppState();
+  const { state } = useApp();
 
   return useMemo(() => {
     const today = todayKey();
