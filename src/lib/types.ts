@@ -43,6 +43,9 @@ export interface LessonCompletion {
   lessonId: string;
 }
 
+export type CompanionSpeciesId =
+  | "sun" | "fox" | "panda" | "bunny" | "cat" | "owl" | "dragon" | "axolotl" | "penguin";
+
 export interface AppState {
   points: number;
   streak: number;
@@ -55,6 +58,7 @@ export interface AppState {
   unlockedAchievements: string[];
   readTips: string[];
   companionName: string;
+  companionSpecies: CompanionSpeciesId;
   onboardingDone: boolean;
 }
 
