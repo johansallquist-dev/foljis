@@ -94,7 +94,7 @@ export default function HomePage() {
           className="p-4 border-0 shadow-card-soft cursor-pointer hover:shadow-soft transition-shadow"
           onClick={() => navigate("/schema")}
         >
-          <p className="text-xs text-muted-foreground mb-1">Nästa lektion</p>
+          <p className="text-xs text-muted-foreground mb-1">Nästa aktivitet</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-3xl">{nextLesson.emoji}</span>
