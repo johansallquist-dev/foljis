@@ -64,29 +64,50 @@ export function Onboarding() {
           {step === 1 && (
             <div className="flex-1 space-y-4 pop-in">
               <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Så här funkar det</p>
-                <h1 className="text-2xl font-display font-semibold">Det här kan du göra</h1>
+                <p className="text-sm text-muted-foreground">Så här funkar det · 1 av 2</p>
+                <h1 className="text-2xl font-display font-semibold">Rutiner och schema</h1>
               </div>
               <div className="space-y-3">
                 <FeatureCard
                   icon={<Sun className="w-5 h-5" />}
                   title="Morgonrutin"
-                  body="Bocka av saker som väcka, frukost och kläder. Du får poäng för varje grej."
+                  body="Bocka av saker som väcka, frukost och kläder. +5 poäng per grej och +15 när allt är klart."
                 />
                 <FeatureCard
-                  icon={<Heart className="w-5 h-5" />}
-                  title="Hur mår du?"
-                  body="Checka in med ett känsloansikte. Du får tips som passar känslan."
+                  icon={<Moon className="w-5 h-5" />}
+                  title="Kvällsrutin"
+                  body="En lugn checklista för kvällen – lägg fram kläder, packa väskan, varva ner. Gör morgonen mycket lättare."
                 />
                 <FeatureCard
                   icon={<ListChecks className="w-5 h-5" />}
-                  title="Schema"
-                  body="Lägg in dina lektioner och kryssa av dem under dagen."
+                  title="Schema med aktiviteter"
+                  body="Lägg in lektioner OCH fritidsaktiviteter som fotboll, dans eller musik. Bedöm hur det kändes – röd, gul eller grön."
+                />
+              </div>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="flex-1 space-y-4 pop-in">
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">Så här funkar det · 2 av 2</p>
+                <h1 className="text-2xl font-display font-semibold">Mående & följeslagare</h1>
+              </div>
+              <div className="space-y-3">
+                <FeatureCard
+                  icon={<Heart className="w-5 h-5" />}
+                  title="Hur mår du?"
+                  body="Checka in med ett känsloansikte. Du får tips som passar precis hur du känner dig."
+                />
+                <FeatureCard
+                  icon={<Hand className="w-5 h-5" />}
+                  title="Klappa följeslagaren"
+                  body="Tryck och dra över din följeslagare för att klappa den. Den vickar, det regnar hjärtan och den blir gladare."
                 />
                 <FeatureCard
                   icon={<Trophy className="w-5 h-5" />}
-                  title="Poäng & streak"
-                  body="Samla poäng, håll igång din streak och se din följeslagare bli gladare."
+                  title="Poäng, streaks & achievements"
+                  body="Samla poäng och håll igång din streak. Lås upp över 20 achievements på vägen!"
                 />
               </div>
             </div>
