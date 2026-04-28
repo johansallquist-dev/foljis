@@ -49,14 +49,57 @@ export const TIPS: Tip[] = [
     body: "Drick vatten och rör på dig 2 minuter. Det väcker hjärnan bättre än att stirra på boken." },
   { id: "t18", category: "fokus", emoji: "📋", title: "Skriv en lista",
     body: "Skriv ner allt du ska göra. Bocka av en sak i taget. Det blir tydligare och du känner dig klokare." },
+
+  // Kvällstips
+  { id: "t19", category: "kvall", emoji: "🌙", title: "Kvällsrutin gör morgonen lättare",
+    body: "Att göra samma saker i samma ordning varje kväll lugnar hjärnan och hjälper dig somna." },
+  { id: "t20", category: "kvall", emoji: "👕", title: "Lägg fram allt redan ikväll",
+    body: "Kläder, väska, vattenflaska – ställ fram det vid dörren. Då blir morgonen nästan automatisk." },
+  { id: "t21", category: "kvall", emoji: "📵", title: "Skärmpaus en timme innan",
+    body: "Lägg undan mobilen ungefär en timme innan du ska sova. Hjärnan får då lättare att varva ner." },
+  { id: "t22", category: "kvall", emoji: "📔", title: "Skriv av dig",
+    body: "Skriv ner tre saker som var bra idag och en sak du ser fram emot. Det gör tankarna lugnare innan sängen." },
+  { id: "t23", category: "kvall", emoji: "🛁", title: "Varmt = sömnigt",
+    body: "Ett varmt bad eller dusch på kvällen hjälper kroppen att slappna av och bli redo för sömn." },
+
+  // Sömn
+  { id: "t24", category: "sömn", emoji: "🛏️", title: "Samma tid varje kväll",
+    body: "Försök gå och lägga dig ungefär samma tid varje dag – även på helger. Kroppen älskar rytm." },
+  { id: "t25", category: "sömn", emoji: "🌑", title: "Mörkt och svalt",
+    body: "Ett mörkt och lite svalt rum hjälper dig sova djupare. Dra för gardinerna och vädra en stund." },
+  { id: "t26", category: "sömn", emoji: "🐑", title: "Tankarna snurrar?",
+    body: "Räkna långsamt baklänges från 100. Det ger hjärnan något tråkigt att göra så du somnar lättare." },
+
+  // Kropp & rörelse
+  { id: "t27", category: "kropp", emoji: "🚶", title: "Gå en kort runda",
+    body: "Bara 10 minuters promenad gör skillnad för humöret. Du behöver inte träna hårt." },
+  { id: "t28", category: "kropp", emoji: "🤸", title: "Stretcha 2 minuter",
+    body: "Sträck armarna mot taket, rulla axlarna, böj dig framåt. Kroppen blir piggare på sekunder." },
+  { id: "t29", category: "kropp", emoji: "💃", title: "En låt = ett pass",
+    body: "Sätt på din favoritlåt och dansa loss. Tre minuters rörelse höjer humöret rejält." },
+  { id: "t30", category: "kropp", emoji: "🥤", title: "Drick vatten ofta",
+    body: "Hjärnan jobbar mycket bättre när du är pigg och hydrerad. Ta ett glas vatten nu." },
+
+  // Fler skola/social/andning
+  { id: "t31", category: "skola", emoji: "🎧", title: "Hörlurar som lugn",
+    body: "Lugn musik eller brus i hörlurarna kan hjälpa när det är rörigt runt omkring." },
+  { id: "t32", category: "social", emoji: "💬", title: "Texta först",
+    body: "Att skicka ett kort meddelande är ofta lättare än att prata. Det räknas också!" },
+  { id: "t33", category: "andning", emoji: "🌊", title: "Vågandning",
+    body: "Tänk dig en våg som rullar in när du andas in och ut när du andas ut. Gör det 5 gånger." },
+  { id: "t34", category: "morgon", emoji: "🎵", title: "Morgonlåt",
+    body: "Spela en låt du gillar direkt när du vaknar. Den ger kroppen energi att komma igång." },
 ];
 
 export const TIP_CATEGORIES: Record<Tip["category"], { label: string; emoji: string; gradient: string }> = {
   morgon:  { label: "Klara morgonen",         emoji: "🌅", gradient: "gradient-sunrise" },
+  kvall:   { label: "Lugn kväll",             emoji: "🌙", gradient: "gradient-sky" },
+  sömn:    { label: "Sova bättre",            emoji: "💤", gradient: "gradient-calm" },
   skola:   { label: "När det känns jobbigt",  emoji: "🌧️", gradient: "gradient-sky" },
   andning: { label: "Andningsövningar",       emoji: "🫁", gradient: "gradient-calm" },
   social:  { label: "Sociala situationer",    emoji: "👋", gradient: "gradient-sky" },
   fokus:   { label: "Fokus & läxor",          emoji: "🎯", gradient: "gradient-sunrise" },
+  kropp:   { label: "Kropp & rörelse",        emoji: "💪", gradient: "gradient-sunrise" },
 };
 
 // Coping-tips per känsla
