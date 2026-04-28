@@ -2,7 +2,7 @@ import { Feeling } from "./types";
 
 export interface Tip {
   id: string;
-  category: "morgon" | "skola" | "andning" | "social" | "fokus";
+  category: "morgon" | "skola" | "andning" | "social" | "fokus" | "kvall" | "sömn" | "kropp";
   title: string;
   body: string;
   emoji: string;
