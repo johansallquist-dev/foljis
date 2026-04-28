@@ -8,8 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Lock, Trash2, Pencil, Check } from "lucide-react";
+import { Lock, Trash2, Pencil, Check, Share2 } from "lucide-react";
 import { toast } from "sonner";
+import { shareReport } from "@/lib/shareReport";
 
 export default function MyPage() {
   const { state, setCompanionName, setCompanionSpecies, resetAll, recordPet } = useApp();
@@ -146,6 +147,41 @@ export default function MyPage() {
             </div>
           </>
         )}
+      </section>
+
+      {/* Dela med vuxen */}
+      <section className="space-y-3">
+        <Card className="p-5 border-0 shadow-card-soft gradient-warm">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-card/70 flex items-center justify-center shrink-0">
+              <Share2 className="w-5 h-5" />
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold">Dela med en vuxen</p>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                Skapa en sammanställning av dina rutiner, ditt mående och dina aktiviteter
+                den senaste veckan – som du kan visa eller skicka till en vårdnadshavare eller mentor.
+              </p>
+            </div>
+          </div>
+          <Button
+            className="w-full rounded-2xl mt-4"
+            onClick={async () => {
+              try {
+                const result = await shareReport(state);
+                toast.success(
+                  result === "shared" ? "Sammanställning delad ✨" : "PDF nedladdad 📄",
+                  { description: "Du bestämmer själv vem som får se den." }
+                );
+              } catch (e) {
+                console.error(e);
+                toast.error("Kunde inte skapa PDF", { description: "Försök igen om en stund." });
+              }
+            }}
+          >
+            <Share2 className="w-4 h-4 mr-2" /> Skapa sammanställning (PDF)
+          </Button>
+        </Card>
       </section>
 
       {/* Integritet & rensa */}
