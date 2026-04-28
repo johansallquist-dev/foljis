@@ -231,18 +231,21 @@ export function useAppState() {
       const existing = s.lessonCompletions.find(c => c.date === today && c.lessonId === lessonId);
       let completions;
       let pointDelta = 0;
+      const ratingBonus = (r: LessonRating) => r === "good" ? 2 : r === "ok" ? 1 : 1;
       if (existing) {
         if (existing.rating === rating) {
+          // Avmarkera
           completions = s.lessonCompletions.filter(c => !(c.date === today && c.lessonId === lessonId));
-          pointDelta = -3;
+          pointDelta = -3 - (existing.rating ? ratingBonus(existing.rating) : 0);
         } else {
           completions = s.lessonCompletions.map(c =>
             c.date === today && c.lessonId === lessonId ? { ...c, rating } : c
           );
+          pointDelta = ratingBonus(rating) - (existing.rating ? ratingBonus(existing.rating) : 0);
         }
       } else {
         completions = [...s.lessonCompletions, { date: today, lessonId, rating }];
-        pointDelta = 3;
+        pointDelta = 3 + ratingBonus(rating);
       }
       const { streak, lastActiveDate } = bumpStreak(s);
       const next: AppState = {
