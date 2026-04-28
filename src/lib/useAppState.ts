@@ -280,8 +280,23 @@ export function useAppState() {
   }, []);
 
   const finishOnboarding = useCallback(() => {
-    setState(s => ({ ...s, onboardingDone: true }));
-  }, []);
+    setState(s => checkAchievements({ ...s, onboardingDone: true }));
+  }, [checkAchievements]);
+
+  const recordPet = useCallback(() => {
+    setState(s => {
+      const newCount = s.pettingCount + 1;
+      let pointsAdded = 0;
+      // +1 poäng var 5:e klapp
+      if (newCount % 5 === 0) pointsAdded = 1;
+      const next: AppState = {
+        ...s,
+        pettingCount: newCount,
+        points: s.points + pointsAdded,
+      };
+      return checkAchievements(next);
+    });
+  }, [checkAchievements]);
 
   const resetAll = useCallback(() => {
     setState(initialState);
