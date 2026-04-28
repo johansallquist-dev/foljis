@@ -55,7 +55,7 @@ export function Onboarding() {
                 <h1 className="text-3xl font-display font-semibold">Hej och välkommen! 👋</h1>
                 <p className="text-muted-foreground max-w-sm">
                   Det här är en lugn liten app som hjälper dig komma igång på morgonen,
-                  hålla koll på hur du mår och samla poäng tillsammans med din egen följis.
+                  hålla koll på hur du mår och samla Följispoäng tillsammans med din egen följis.
                 </p>
               </div>
             </div>
@@ -71,7 +71,7 @@ export function Onboarding() {
                 <FeatureCard
                   icon={<Sun className="w-5 h-5" />}
                   title="Morgonrutin"
-                  body="Bocka av saker som väcka, frukost och kläder. +5 poäng per grej och +15 när allt är klart."
+                  body="Bocka av saker som väcka, frukost och kläder. +5 Följispoäng per grej och +15 när allt är klart."
                 />
                 <FeatureCard
                   icon={<Moon className="w-5 h-5" />}
@@ -106,8 +106,8 @@ export function Onboarding() {
                 />
                 <FeatureCard
                   icon={<Trophy className="w-5 h-5" />}
-                  title="Poäng, streaks & achievements"
-                  body="Samla poäng och håll igång din streak. Lås upp över 20 achievements på vägen!"
+                  title="Följispoäng, streaks & achievements"
+                  body="Samla Följispoäng och håll igång din streak. Lås upp över 20 achievements på vägen!"
                 />
               </div>
             </div>

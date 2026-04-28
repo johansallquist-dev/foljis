@@ -33,7 +33,7 @@ export default function MorningPage() {
         <p className="text-sm text-muted-foreground">Morgonrutin</p>
         <h1 className="text-2xl font-display font-semibold">Dags att göra dig redo 🌅</h1>
         <p className="text-sm text-muted-foreground">
-          Bocka av allt eftersom – varje punkt ger 5 poäng, hela listan ger bonus!
+          Bocka av allt eftersom – varje punkt ger 5 Följispoäng, hela listan ger bonus!
         </p>
       </header>
 

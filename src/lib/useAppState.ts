@@ -74,7 +74,7 @@ export function useAppState() {
       const { streak, lastActiveDate } = bumpStreak(s);
       const next: AppState = { ...s, points: s.points + amount, streak, lastActiveDate };
       if (reason) {
-        toast(`+${amount} poäng`, { description: reason });
+        toast(`+${amount} Följispoäng`, { description: reason });
       }
       return checkAchievements(next);
     });
@@ -104,11 +104,11 @@ export function useAppState() {
         lastActiveDate,
       };
 
-      // Bonuspoäng om alla rutinpunkter klara idag
+      // Bonus om alla rutinpunkter klara idag
       const todayDone = history.find(h => h.date === today)?.itemIds || [];
       if (!wasDone && todayDone.length === s.routine.length && s.routine.length > 0) {
         next.points += 15;
-        toast.success("🎉 Hela morgonrutinen klar!", { description: "+15 bonuspoäng" });
+        toast.success("🎉 Hela morgonrutinen klar!", { description: "+15 Följispoäng bonus" });
       }
       return checkAchievements(next);
     });
@@ -152,7 +152,7 @@ export function useAppState() {
       const todayDone = history.find(h => h.date === today)?.itemIds || [];
       if (!wasDone && todayDone.length === s.eveningRoutine.length && s.eveningRoutine.length > 0) {
         next.points += 15;
-        toast.success("🌙 Hela kvällsrutinen klar!", { description: "+15 bonuspoäng" });
+        toast.success("🌙 Hela kvällsrutinen klar!", { description: "+15 Följispoäng bonus" });
       }
       return checkAchievements(next);
     });
@@ -183,7 +183,7 @@ export function useAppState() {
         streak,
         lastActiveDate,
       };
-      toast("+10 poäng", { description: "Tack för att du checkade in 💛" });
+      toast("+10 Följispoäng", { description: "Tack för att du checkade in 💛" });
       return checkAchievements(next);
     });
   }, [checkAchievements]);

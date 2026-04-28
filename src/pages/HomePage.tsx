@@ -83,7 +83,7 @@ export default function HomePage() {
           </div>
           <div>
             <p className="text-2xl font-display font-bold text-accent-foreground">{state.points}</p>
-            <p className="text-xs text-muted-foreground">poäng totalt</p>
+            <p className="text-xs text-muted-foreground">Följispoäng totalt</p>
           </div>
         </Card>
       </div>

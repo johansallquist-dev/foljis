@@ -29,7 +29,7 @@ export default function TipsPage() {
           disabled={isRead}
           onClick={() => { markTipRead(selected.id); }}
         >
-          {isRead ? <><Check className="w-4 h-4 mr-1" /> Läst</> : "Markera som läst (+2 poäng)"}
+          {isRead ? <><Check className="w-4 h-4 mr-1" /> Läst</> : "Markera som läst (+2 Följispoäng)"}
         </Button>
       </div>
     );

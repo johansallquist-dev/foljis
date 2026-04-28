@@ -72,7 +72,7 @@ export default function MyPage() {
             <DialogHeader>
               <DialogTitle>Välj din följis</DialogTitle>
             </DialogHeader>
-            <p className="text-sm text-muted-foreground -mt-2">Du kan byta när du vill. Din streak och dina poäng följer med.</p>
+            <p className="text-sm text-muted-foreground -mt-2">Du kan byta när du vill. Din streak och dina Följispoäng följer med.</p>
             <div className="grid grid-cols-3 gap-3 max-h-[60vh] overflow-y-auto pt-2">
               {SPECIES.map(sp => {
                 const selected = sp.id === state.companionSpecies;
@@ -107,7 +107,7 @@ export default function MyPage() {
             <p className="font-display text-xl font-bold">🔥 {state.streak}</p>
           </div>
           <div className="bg-card/60 rounded-xl p-2">
-            <p className="text-xs text-muted-foreground">Poäng</p>
+            <p className="text-xs text-muted-foreground">Följispoäng</p>
             <p className="font-display text-xl font-bold">✨ {state.points}</p>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default function MyPage() {
             <AlertDialogHeader>
               <AlertDialogTitle>Rensa allt och börja om?</AlertDialogTitle>
               <AlertDialogDescription>
-                Detta tar bort ditt schema, dina rutiner, mående-incheckningar, poäng,
+                Detta tar bort ditt schema, dina rutiner, mående-incheckningar, Följispoäng,
                 streak och achievements. Det går inte att ångra.
               </AlertDialogDescription>
             </AlertDialogHeader>
