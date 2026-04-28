@@ -110,4 +110,5 @@ export const initialState: AppState = {
   companionName: "Solis",
   companionSpecies: "sun",
   onboardingDone: false,
+  pettingCount: 0,
 };
