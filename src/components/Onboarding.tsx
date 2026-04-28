@@ -5,9 +5,9 @@ import { CompanionSpeciesId } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight, Check, Sparkles, Sun, ListChecks, Heart, Trophy } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, Sun, Moon, ListChecks, Heart, Trophy, Hand } from "lucide-react";
 
-type Step = 0 | 1 | 2 | 3;
+type Step = 0 | 1 | 2 | 3 | 4;
 
 export function Onboarding() {
   const { state, setCompanionSpecies, setCompanionName, finishOnboarding } = useApp();
@@ -17,7 +17,7 @@ export function Onboarding() {
 
   const speciesInfo = SPECIES.find(s => s.id === species)!;
 
-  const next = () => setStep(s => (s < 3 ? ((s + 1) as Step) : s));
+  const next = () => setStep(s => (s < 4 ? ((s + 1) as Step) : s));
   const back = () => setStep(s => (s > 0 ? ((s - 1) as Step) : s));
 
   const handleSelectSpecies = (id: CompanionSpeciesId) => {
@@ -37,7 +37,7 @@ export function Onboarding() {
       <div className="flex-1 flex flex-col max-w-2xl w-full mx-auto px-5 py-8">
         {/* Progress */}
         <div className="flex gap-1.5 mb-6">
-          {[0, 1, 2, 3].map(i => (
+          {[0, 1, 2, 3, 4].map(i => (
             <div
               key={i}
               className={`h-1.5 flex-1 rounded-full transition-colors ${
