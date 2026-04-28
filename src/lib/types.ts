@@ -65,6 +65,7 @@ export interface AppState {
   companionName: string;
   companionSpecies: CompanionSpeciesId;
   onboardingDone: boolean;
+  pettingCount: number;
 }
 
 export const todayKey = (d = new Date()) => {
