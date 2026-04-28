@@ -18,7 +18,7 @@ const dayNames = ["söndag","måndag","tisdag","onsdag","torsdag","fredag","lör
 const monthNames = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"];
 
 export default function HomePage() {
-  const { state } = useApp();
+  const { state, recordPet } = useApp();
   const mood = useCompanionMood();
   const navigate = useNavigate();
   const now = new Date();
