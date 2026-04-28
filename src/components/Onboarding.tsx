@@ -113,7 +113,7 @@ export function Onboarding() {
             </div>
           )}
 
-          {step === 2 && (
+          {step === 3 && (
             <div className="flex-1 space-y-5 pop-in">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Steg 1 av 2</p>
@@ -149,7 +149,7 @@ export function Onboarding() {
             </div>
           )}
 
-          {step === 3 && (
+          {step === 4 && (
             <div className="flex-1 space-y-5 pop-in">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Steg 2 av 2</p>
@@ -191,13 +191,13 @@ export function Onboarding() {
             </Button>
           )}
           <div className="flex-1" />
-          {step < 3 && (
+          {step < 4 && (
             <Button onClick={next} size="lg" className="rounded-2xl">
               {step === 0 ? "Kom igång" : "Vidare"}
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           )}
-          {step === 3 && (
+          {step === 4 && (
             <Button onClick={finish} size="lg" className="rounded-2xl">
               <Sparkles className="w-4 h-4 mr-1" /> Sätt igång
             </Button>
