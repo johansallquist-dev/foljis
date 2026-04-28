@@ -12,7 +12,7 @@ import { Lock, Trash2, Pencil, Check } from "lucide-react";
 import { toast } from "sonner";
 
 export default function MyPage() {
-  const { state, setCompanionName, setCompanionSpecies, resetAll } = useApp();
+  const { state, setCompanionName, setCompanionSpecies, resetAll, recordPet } = useApp();
   const mood = useCompanionMood();
   const [editing, setEditing] = useState(false);
   const [nameDraft, setNameDraft] = useState(state.companionName);
@@ -43,7 +43,7 @@ export default function MyPage() {
 
       {/* Följeslagare */}
       <Card className="border-0 gradient-hero p-6 text-center shadow-card-soft">
-        <Companion mood={mood} size={160} name={state.companionName} species={state.companionSpecies} />
+        <Companion mood={mood} size={160} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
         {editing ? (
           <div className="flex gap-2 mt-3 max-w-xs mx-auto">
             <Input value={nameDraft} onChange={e => setNameDraft(e.target.value)} maxLength={20} />
