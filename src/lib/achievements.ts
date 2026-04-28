@@ -108,6 +108,87 @@ export const ACHIEVEMENTS: Achievement[] = [
     check: (s) => s.readTips.length >= 5,
   },
   {
+    id: "tip-master",
+    title: "Tipsmästare",
+    description: "Läst 15 tips",
+    hint: "Fortsätt utforska tips",
+    icon: "📚",
+    check: (s) => s.readTips.length >= 15,
+  },
+  {
+    id: "evening-hero",
+    title: "Kvällshjälte",
+    description: "Klarat hela kvällsrutinen en dag",
+    hint: "Bocka av allt på kvällschecklistan",
+    icon: "🌙",
+    check: (s) => s.eveningHistory.some(h => h.itemIds.length >= s.eveningRoutine.length && s.eveningRoutine.length > 0),
+  },
+  {
+    id: "evening-week",
+    title: "Lugna kvällar",
+    description: "5 kvällar med full checklista",
+    hint: "Klara kvällsrutinen 5 gånger",
+    icon: "🌜",
+    check: (s) => s.eveningHistory.filter(h => h.itemIds.length >= s.eveningRoutine.length && s.eveningRoutine.length > 0).length >= 5,
+  },
+  {
+    id: "full-day",
+    title: "Hela dagen klar",
+    description: "Morgon- och kvällsrutin samma dag",
+    hint: "Klara båda rutinerna på samma dag",
+    icon: "🌗",
+    check: (s) => {
+      if (s.routine.length === 0 || s.eveningRoutine.length === 0) return false;
+      return s.routineHistory.some(m =>
+        m.itemIds.length >= s.routine.length &&
+        s.eveningHistory.some(e => e.date === m.date && e.itemIds.length >= s.eveningRoutine.length)
+      );
+    },
+  },
+  {
+    id: "rating-first",
+    title: "Hur kändes det?",
+    description: "Ditt första aktivitetsbetyg",
+    hint: "Bedöm hur en aktivitet kändes",
+    icon: "🎭",
+    check: (s) => s.lessonCompletions.some(c => !!c.rating),
+  },
+  {
+    id: "rating-good-5",
+    title: "Bra dag-samlare",
+    description: "5 aktiviteter som kändes bra",
+    hint: "Markera 'Bra' på flera aktiviteter",
+    icon: "🌈",
+    check: (s) => s.lessonCompletions.filter(c => c.rating === "good").length >= 5,
+  },
+  {
+    id: "honest-feeler",
+    title: "Ärlig med känslor",
+    description: "Använt alla tre betyg minst en gång",
+    hint: "Prova röd, gul och grön",
+    icon: "🎨",
+    check: (s) =>
+      s.lessonCompletions.some(c => c.rating === "bad") &&
+      s.lessonCompletions.some(c => c.rating === "ok") &&
+      s.lessonCompletions.some(c => c.rating === "good"),
+  },
+  {
+    id: "companion-named",
+    title: "Bästa vänner",
+    description: "Du har valt din följeslagare",
+    hint: "Välj och namnge en följeslagare",
+    icon: "🫂",
+    check: (s) => s.onboardingDone,
+  },
+  {
+    id: "petting-pro",
+    title: "Mjukis",
+    description: "Klappat din följeslagare 25 gånger",
+    hint: "Klicka och dra över din följeslagare",
+    icon: "💕",
+    check: (s) => s.pettingCount >= 25,
+  },
+  {
     id: "points-100",
     title: "100-klubben",
     description: "Samlat 100 poäng",

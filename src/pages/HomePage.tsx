@@ -18,7 +18,7 @@ const dayNames = ["söndag","måndag","tisdag","onsdag","torsdag","fredag","lör
 const monthNames = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"];
 
 export default function HomePage() {
-  const { state } = useApp();
+  const { state, recordPet } = useApp();
   const mood = useCompanionMood();
   const navigate = useNavigate();
   const now = new Date();
@@ -57,7 +57,7 @@ export default function HomePage() {
 
       {/* Följeslagaren */}
       <div className="gradient-hero rounded-3xl p-6 shadow-card-soft text-center space-y-3">
-        <Companion mood={mood} size={180} name={state.companionName} species={state.companionSpecies} />
+        <Companion mood={mood} size={180} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
         <div>
           <p className="font-display text-lg">{state.companionName}</p>
           <p className="text-sm text-muted-foreground">

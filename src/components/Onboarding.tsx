@@ -5,9 +5,9 @@ import { CompanionSpeciesId } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight, Check, Sparkles, Sun, ListChecks, Heart, Trophy } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, Sun, Moon, ListChecks, Heart, Trophy, Hand } from "lucide-react";
 
-type Step = 0 | 1 | 2 | 3;
+type Step = 0 | 1 | 2 | 3 | 4;
 
 export function Onboarding() {
   const { state, setCompanionSpecies, setCompanionName, finishOnboarding } = useApp();
@@ -17,7 +17,7 @@ export function Onboarding() {
 
   const speciesInfo = SPECIES.find(s => s.id === species)!;
 
-  const next = () => setStep(s => (s < 3 ? ((s + 1) as Step) : s));
+  const next = () => setStep(s => (s < 4 ? ((s + 1) as Step) : s));
   const back = () => setStep(s => (s > 0 ? ((s - 1) as Step) : s));
 
   const handleSelectSpecies = (id: CompanionSpeciesId) => {
@@ -37,7 +37,7 @@ export function Onboarding() {
       <div className="flex-1 flex flex-col max-w-2xl w-full mx-auto px-5 py-8">
         {/* Progress */}
         <div className="flex gap-1.5 mb-6">
-          {[0, 1, 2, 3].map(i => (
+          {[0, 1, 2, 3, 4].map(i => (
             <div
               key={i}
               className={`h-1.5 flex-1 rounded-full transition-colors ${
@@ -64,35 +64,56 @@ export function Onboarding() {
           {step === 1 && (
             <div className="flex-1 space-y-4 pop-in">
               <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Så här funkar det</p>
-                <h1 className="text-2xl font-display font-semibold">Det här kan du göra</h1>
+                <p className="text-sm text-muted-foreground">Så här funkar det · 1 av 2</p>
+                <h1 className="text-2xl font-display font-semibold">Rutiner och schema</h1>
               </div>
               <div className="space-y-3">
                 <FeatureCard
                   icon={<Sun className="w-5 h-5" />}
                   title="Morgonrutin"
-                  body="Bocka av saker som väcka, frukost och kläder. Du får poäng för varje grej."
+                  body="Bocka av saker som väcka, frukost och kläder. +5 poäng per grej och +15 när allt är klart."
                 />
                 <FeatureCard
-                  icon={<Heart className="w-5 h-5" />}
-                  title="Hur mår du?"
-                  body="Checka in med ett känsloansikte. Du får tips som passar känslan."
+                  icon={<Moon className="w-5 h-5" />}
+                  title="Kvällsrutin"
+                  body="En lugn checklista för kvällen – lägg fram kläder, packa väskan, varva ner. Gör morgonen mycket lättare."
                 />
                 <FeatureCard
                   icon={<ListChecks className="w-5 h-5" />}
-                  title="Schema"
-                  body="Lägg in dina lektioner och kryssa av dem under dagen."
-                />
-                <FeatureCard
-                  icon={<Trophy className="w-5 h-5" />}
-                  title="Poäng & streak"
-                  body="Samla poäng, håll igång din streak och se din följeslagare bli gladare."
+                  title="Schema med aktiviteter"
+                  body="Lägg in lektioner OCH fritidsaktiviteter som fotboll, dans eller musik. Bedöm hur det kändes – röd, gul eller grön."
                 />
               </div>
             </div>
           )}
 
           {step === 2 && (
+            <div className="flex-1 space-y-4 pop-in">
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">Så här funkar det · 2 av 2</p>
+                <h1 className="text-2xl font-display font-semibold">Mående & följeslagare</h1>
+              </div>
+              <div className="space-y-3">
+                <FeatureCard
+                  icon={<Heart className="w-5 h-5" />}
+                  title="Hur mår du?"
+                  body="Checka in med ett känsloansikte. Du får tips som passar precis hur du känner dig."
+                />
+                <FeatureCard
+                  icon={<Hand className="w-5 h-5" />}
+                  title="Klappa följeslagaren"
+                  body="Tryck och dra över din följeslagare för att klappa den. Den vickar, det regnar hjärtan och den blir gladare."
+                />
+                <FeatureCard
+                  icon={<Trophy className="w-5 h-5" />}
+                  title="Poäng, streaks & achievements"
+                  body="Samla poäng och håll igång din streak. Lås upp över 20 achievements på vägen!"
+                />
+              </div>
+            </div>
+          )}
+
+          {step === 3 && (
             <div className="flex-1 space-y-5 pop-in">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Steg 1 av 2</p>
@@ -128,7 +149,7 @@ export function Onboarding() {
             </div>
           )}
 
-          {step === 3 && (
+          {step === 4 && (
             <div className="flex-1 space-y-5 pop-in">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Steg 2 av 2</p>
@@ -170,13 +191,13 @@ export function Onboarding() {
             </Button>
           )}
           <div className="flex-1" />
-          {step < 3 && (
+          {step < 4 && (
             <Button onClick={next} size="lg" className="rounded-2xl">
               {step === 0 ? "Kom igång" : "Vidare"}
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           )}
-          {step === 3 && (
+          {step === 4 && (
             <Button onClick={finish} size="lg" className="rounded-2xl">
               <Sparkles className="w-4 h-4 mr-1" /> Sätt igång
             </Button>
