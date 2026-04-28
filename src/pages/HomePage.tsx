@@ -55,7 +55,7 @@ export default function HomePage() {
         </h1>
       </div>
 
-      {/* Följeslagaren */}
+      {/* Följisn */}
       <div className="gradient-hero rounded-3xl p-6 shadow-card-soft text-center space-y-3">
         <Companion mood={mood} size={180} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
         <div>
@@ -83,7 +83,7 @@ export default function HomePage() {
           </div>
           <div>
             <p className="text-2xl font-display font-bold text-accent-foreground">{state.points}</p>
-            <p className="text-xs text-muted-foreground">poäng totalt</p>
+            <p className="text-xs text-muted-foreground">Följispoäng totalt</p>
           </div>
         </Card>
       </div>

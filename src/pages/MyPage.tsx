@@ -8,8 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Lock, Trash2, Pencil, Check } from "lucide-react";
+import { Lock, Trash2, Pencil, Check, Share2 } from "lucide-react";
 import { toast } from "sonner";
+import { shareReport } from "@/lib/shareReport";
 
 export default function MyPage() {
   const { state, setCompanionName, setCompanionSpecies, resetAll, recordPet } = useApp();
@@ -38,10 +39,10 @@ export default function MyPage() {
     <div className="max-w-2xl mx-auto px-5 pt-2 space-y-5">
       <header className="space-y-1">
         <p className="text-sm text-muted-foreground">Min sida</p>
-        <h1 className="text-2xl font-display font-semibold">Du och din följeslagare</h1>
+        <h1 className="text-2xl font-display font-semibold">Du och din följis</h1>
       </header>
 
-      {/* Följeslagare */}
+      {/* Följis */}
       <Card className="border-0 gradient-hero p-6 text-center shadow-card-soft">
         <Companion mood={mood} size={160} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
         {editing ? (
@@ -65,14 +66,14 @@ export default function MyPage() {
         <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm" className="rounded-full mt-3 bg-card/70">
-              Byt följeslagare
+              Byt följis
             </Button>
           </DialogTrigger>
           <DialogContent className="rounded-3xl max-w-lg">
             <DialogHeader>
-              <DialogTitle>Välj din följeslagare</DialogTitle>
+              <DialogTitle>Välj din följis</DialogTitle>
             </DialogHeader>
-            <p className="text-sm text-muted-foreground -mt-2">Du kan byta när du vill. Din streak och dina poäng följer med.</p>
+            <p className="text-sm text-muted-foreground -mt-2">Du kan byta när du vill. Din streak och dina Följispoäng följer med.</p>
             <div className="grid grid-cols-3 gap-3 max-h-[60vh] overflow-y-auto pt-2">
               {SPECIES.map(sp => {
                 const selected = sp.id === state.companionSpecies;
@@ -107,7 +108,7 @@ export default function MyPage() {
             <p className="font-display text-xl font-bold">🔥 {state.streak}</p>
           </div>
           <div className="bg-card/60 rounded-xl p-2">
-            <p className="text-xs text-muted-foreground">Poäng</p>
+            <p className="text-xs text-muted-foreground">Följispoäng</p>
             <p className="font-display text-xl font-bold">✨ {state.points}</p>
           </div>
         </div>
@@ -148,6 +149,41 @@ export default function MyPage() {
         )}
       </section>
 
+      {/* Dela med vuxen */}
+      <section className="space-y-3">
+        <Card className="p-5 border-0 shadow-card-soft gradient-warm">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-card/70 flex items-center justify-center shrink-0">
+              <Share2 className="w-5 h-5" />
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold">Dela med en vuxen</p>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                Skapa en sammanställning av dina rutiner, ditt mående och dina aktiviteter
+                den senaste veckan – som du kan visa eller skicka till en vårdnadshavare eller mentor.
+              </p>
+            </div>
+          </div>
+          <Button
+            className="w-full rounded-2xl mt-4"
+            onClick={async () => {
+              try {
+                const result = await shareReport(state);
+                toast.success(
+                  result === "shared" ? "Sammanställning delad ✨" : "PDF nedladdad 📄",
+                  { description: "Du bestämmer själv vem som får se den." }
+                );
+              } catch (e) {
+                console.error(e);
+                toast.error("Kunde inte skapa PDF", { description: "Försök igen om en stund." });
+              }
+            }}
+          >
+            <Share2 className="w-4 h-4 mr-2" /> Skapa sammanställning (PDF)
+          </Button>
+        </Card>
+      </section>
+
       {/* Integritet & rensa */}
       <section className="pt-4 space-y-3">
         <Card className="p-4 border-0 shadow-card-soft bg-primary-soft">
@@ -168,7 +204,7 @@ export default function MyPage() {
             <AlertDialogHeader>
               <AlertDialogTitle>Rensa allt och börja om?</AlertDialogTitle>
               <AlertDialogDescription>
-                Detta tar bort ditt schema, dina rutiner, mående-incheckningar, poäng,
+                Detta tar bort ditt schema, dina rutiner, mående-incheckningar, Följispoäng,
                 streak och achievements. Det går inte att ångra.
               </AlertDialogDescription>
             </AlertDialogHeader>

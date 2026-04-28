@@ -33,7 +33,7 @@ export default function EveningPage() {
         <p className="text-sm text-muted-foreground">Kvällsrutin</p>
         <h1 className="text-2xl font-display font-semibold">Gör dig redo för imorgon 🌙</h1>
         <p className="text-sm text-muted-foreground">
-          Bocka av allt eftersom – varje punkt ger 5 poäng, hela listan ger bonus!
+          Bocka av allt eftersom – varje punkt ger 5 Följispoäng, hela listan ger bonus!
         </p>
       </header>
 

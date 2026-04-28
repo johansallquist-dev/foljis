@@ -55,7 +55,7 @@ export function Onboarding() {
                 <h1 className="text-3xl font-display font-semibold">Hej och välkommen! 👋</h1>
                 <p className="text-muted-foreground max-w-sm">
                   Det här är en lugn liten app som hjälper dig komma igång på morgonen,
-                  hålla koll på hur du mår och samla poäng tillsammans med din egen följeslagare.
+                  hålla koll på hur du mår och samla Följispoäng tillsammans med din egen följis.
                 </p>
               </div>
             </div>
@@ -71,7 +71,7 @@ export function Onboarding() {
                 <FeatureCard
                   icon={<Sun className="w-5 h-5" />}
                   title="Morgonrutin"
-                  body="Bocka av saker som väcka, frukost och kläder. +5 poäng per grej och +15 när allt är klart."
+                  body="Bocka av saker som väcka, frukost och kläder. +5 Följispoäng per grej och +15 när allt är klart."
                 />
                 <FeatureCard
                   icon={<Moon className="w-5 h-5" />}
@@ -91,7 +91,7 @@ export function Onboarding() {
             <div className="flex-1 space-y-4 pop-in">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Så här funkar det · 2 av 2</p>
-                <h1 className="text-2xl font-display font-semibold">Mående & följeslagare</h1>
+                <h1 className="text-2xl font-display font-semibold">Mående & följis</h1>
               </div>
               <div className="space-y-3">
                 <FeatureCard
@@ -101,13 +101,13 @@ export function Onboarding() {
                 />
                 <FeatureCard
                   icon={<Hand className="w-5 h-5" />}
-                  title="Klappa följeslagaren"
-                  body="Tryck och dra över din följeslagare för att klappa den. Den vickar, det regnar hjärtan och den blir gladare."
+                  title="Klappa följisn"
+                  body="Tryck och dra över din följis för att klappa den. Den vickar, det regnar hjärtan och den blir gladare."
                 />
                 <FeatureCard
                   icon={<Trophy className="w-5 h-5" />}
-                  title="Poäng, streaks & achievements"
-                  body="Samla poäng och håll igång din streak. Lås upp över 20 achievements på vägen!"
+                  title="Följispoäng, streaks & achievements"
+                  body="Samla Följispoäng och håll igång din streak. Lås upp över 20 achievements på vägen!"
                 />
               </div>
             </div>
@@ -117,7 +117,7 @@ export function Onboarding() {
             <div className="flex-1 space-y-5 pop-in">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Steg 1 av 2</p>
-                <h1 className="text-2xl font-display font-semibold">Välj din följeslagare 🌟</h1>
+                <h1 className="text-2xl font-display font-semibold">Välj din följis 🌟</h1>
                 <p className="text-sm text-muted-foreground">
                   Den växer och blir gladare när du sköter dina rutiner.
                 </p>
