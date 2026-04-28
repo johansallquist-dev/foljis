@@ -323,6 +323,7 @@ export function useAppState() {
     setCompanionName,
     setCompanionSpecies,
     finishOnboarding,
+    recordPet,
     resetAll,
   };
 }
