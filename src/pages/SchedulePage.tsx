@@ -195,13 +195,13 @@ export default function SchedulePage() {
             </div>
             <div className="space-y-1.5">
               <Label>Ikon</Label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto p-2 rounded-xl bg-muted/30 border border-border">
                 {SUBJECT_EMOJIS.map(em => (
                   <button
                     key={em}
                     onClick={() => setDraft({ ...draft, emoji: em })}
-                    className={`w-10 h-10 rounded-xl text-xl flex items-center justify-center transition-all ${
-                      draft.emoji === em ? "bg-primary-soft ring-2 ring-primary" : "bg-muted"
+                    className={`w-10 h-10 rounded-xl text-xl flex items-center justify-center transition-all shrink-0 ${
+                      draft.emoji === em ? "bg-primary-soft ring-2 ring-primary" : "bg-card"
                     }`}
                   >
                     {em}
