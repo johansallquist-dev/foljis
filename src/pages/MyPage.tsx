@@ -38,10 +38,10 @@ export default function MyPage() {
     <div className="max-w-2xl mx-auto px-5 pt-2 space-y-5">
       <header className="space-y-1">
         <p className="text-sm text-muted-foreground">Min sida</p>
-        <h1 className="text-2xl font-display font-semibold">Du och din följeslagare</h1>
+        <h1 className="text-2xl font-display font-semibold">Du och din följis</h1>
       </header>
 
-      {/* Följeslagare */}
+      {/* Följis */}
       <Card className="border-0 gradient-hero p-6 text-center shadow-card-soft">
         <Companion mood={mood} size={160} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
         {editing ? (
@@ -65,12 +65,12 @@ export default function MyPage() {
         <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm" className="rounded-full mt-3 bg-card/70">
-              Byt följeslagare
+              Byt följis
             </Button>
           </DialogTrigger>
           <DialogContent className="rounded-3xl max-w-lg">
             <DialogHeader>
-              <DialogTitle>Välj din följeslagare</DialogTitle>
+              <DialogTitle>Välj din följis</DialogTitle>
             </DialogHeader>
             <p className="text-sm text-muted-foreground -mt-2">Du kan byta när du vill. Din streak och dina poäng följer med.</p>
             <div className="grid grid-cols-3 gap-3 max-h-[60vh] overflow-y-auto pt-2">

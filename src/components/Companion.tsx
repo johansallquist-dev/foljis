@@ -40,13 +40,13 @@ interface Props {
   species?: CompanionSpecies;
   /** Aktivera klapp-interaktion (klicka och dra över). Default: true */
   pettable?: boolean;
-  /** Anropas när användaren klappar följeslagaren */
+  /** Anropas när användaren klappar följisn */
   onPet?: () => void;
 }
 
 interface Heart { id: number; x: number; y: number; }
 
-/** Helt SVG-baserade följeslagare. Ansiktsuttryck byts efter humör. */
+/** Helt SVG-baserade följis. Ansiktsuttryck byts efter humör. */
 export function Companion({ mood, size = 180, celebrate, name, species = "sun", pettable = true, onPet }: Props) {
   const [isPetting, setIsPetting] = useState(false);
   const [hearts, setHearts] = useState<Heart[]>([]);
@@ -127,7 +127,7 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
         onTouchMove={pettable ? e => { const t = e.touches[0]; handleMove(t.clientX, t.clientY); } : undefined}
       >
         <div className={cls} style={{ width: size, height: size }}>
-          <svg viewBox="0 0 200 200" width={size} height={size} aria-label={`${name || "Följeslagare"}`}>
+          <svg viewBox="0 0 200 200" width={size} height={size} aria-label={`${name || "Följis"}`}>
             <defs>
               <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
                 <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
