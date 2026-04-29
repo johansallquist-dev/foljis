@@ -55,7 +55,7 @@ interface Props {
 interface Heart { id: number; x: number; y: number; }
 
 /** Helt SVG-baserade följis. Ansiktsuttryck byts efter humör. */
-export function Companion({ mood, size = 180, celebrate, name, species = "sun", pettable = true, onPet }: Props) {
+export function Companion({ mood, size = 180, celebrate, name, species = "sun", pettable = true, onPet, accessoryId, backgroundId, motion }: Props) {
   const [isPetting, setIsPetting] = useState(false);
   const [hearts, setHearts] = useState<Heart[]>([]);
   const pettingRef = useRef(false);
@@ -67,8 +67,9 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
     const base = "companion-float";
     if (celebrate) return `${base} celebrate`;
     if (isPetting) return `${base} wiggle`;
+    if (motion) return `${base} motion-${motion}`;
     return base;
-  }, [celebrate, isPetting]);
+  }, [celebrate, isPetting, motion]);
 
   // Boostat humör vid klapp
   const displayMood = isPetting ? Math.max(mood, 4) : mood;
@@ -125,8 +126,13 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
     <div className="flex flex-col items-center gap-2">
       <div
         ref={containerRef}
-        className={`relative ${pettable ? "cursor-grab active:cursor-grabbing select-none" : ""}`}
-        style={{ width: size, height: size, touchAction: pettable ? "none" : undefined }}
+        className={`relative rounded-3xl overflow-hidden ${pettable ? "cursor-grab active:cursor-grabbing select-none" : ""}`}
+        style={{
+          width: size,
+          height: size,
+          touchAction: pettable ? "none" : undefined,
+          background: getBackgroundStyle(backgroundId),
+        }}
         onMouseDown={pettable ? e => startPet(e.clientX, e.clientY) : undefined}
         onMouseMove={pettable ? e => handleMove(e.clientX, e.clientY) : undefined}
         onMouseEnter={pettable ? e => { if (e.buttons === 1) startPet(e.clientX, e.clientY); } : undefined}
@@ -134,6 +140,7 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
         onTouchStart={pettable ? e => { const t = e.touches[0]; startPet(t.clientX, t.clientY); } : undefined}
         onTouchMove={pettable ? e => { const t = e.touches[0]; handleMove(t.clientX, t.clientY); } : undefined}
       >
+        {backgroundId && <BackgroundDecor id={backgroundId} />}
         <div className={cls} style={{ width: size, height: size }}>
           <svg viewBox="0 0 200 200" width={size} height={size} aria-label={`${name || "Följis"}`}>
             <defs>
@@ -145,6 +152,7 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
               </filter>
             </defs>
             {renderSpecies(species, expr, displayMood)}
+            {accessoryId && renderAccessory(accessoryId)}
           </svg>
         </div>
         {hearts.map(h => (
