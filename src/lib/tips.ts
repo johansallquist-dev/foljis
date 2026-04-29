@@ -48,7 +48,7 @@ export const TIPS: Tip[] = [
   { id: "t17", category: "fokus", emoji: "💧", title: "Vatten och rörelse",
     body: "Drick vatten och rör på dig 2 minuter. Det väcker hjärnan bättre än att stirra på boken." },
   { id: "t18", category: "fokus", emoji: "📋", title: "Skriv en lista",
-    body: "Skriv ner allt du ska göra. Bocka av en sak i taget. Det blir tydligare och du känner dig klokare." },
+    body: "Skriv ner allt du önskar göra. Bocka av en sak i taget. Det blir tydligare och du känner dig klokare." },
 
   // Kvällstips
   { id: "t19", category: "kvall", emoji: "🌙", title: "Kvällsrutin gör morgonen lättare",
