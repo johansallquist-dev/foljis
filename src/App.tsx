@@ -12,6 +12,7 @@ import EveningPage from "./pages/EveningPage";
 import SchedulePage from "./pages/SchedulePage";
 import MoodPage from "./pages/MoodPage";
 import TipsPage from "./pages/TipsPage";
+import ShopPage from "./pages/ShopPage";
 import MyPage from "./pages/MyPage";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +31,7 @@ const AppContent = () => {
           <Route path="/schema" element={<SchedulePage />} />
           <Route path="/maende" element={<MoodPage />} />
           <Route path="/tips" element={<TipsPage />} />
+          <Route path="/affar" element={<ShopPage />} />
           <Route path="/min-sida" element={<MyPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
