@@ -66,7 +66,7 @@ export const TIPS: Tip[] = [
   { id: "t24", category: "sömn", emoji: "🛏️", title: "Samma tid varje kväll",
     body: "Försök gå och lägga dig ungefär samma tid varje dag – även på helger. Kroppen älskar rytm." },
   { id: "t25", category: "sömn", emoji: "🌑", title: "Mörkt och svalt",
-    body: "Ett mörkt och lite svalt rum hjälper dig sova djupare. Dra för gardinerna och vädra en stund." },
+    body: "Ett svalt och gärna ganska mörkt rum hjälper dig sova djupare. Dra för gardinerna och vädra en stund. En nattlampa kan också vara bra att ha!" },
   { id: "t26", category: "sömn", emoji: "🐑", title: "Tankarna snurrar?",
     body: "Räkna långsamt baklänges från 100. Det ger hjärnan något tråkigt att göra så du somnar lättare." },
 
