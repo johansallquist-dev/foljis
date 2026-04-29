@@ -121,6 +121,13 @@
   .wiggle {
     animation: wiggle 0.6s ease-in-out;
   }
+
+  .motion-dance  { animation: motion-dance 1.2s ease-in-out infinite; }
+  .motion-jump   { animation: motion-jump 0.9s ease-in-out infinite; }
+  .motion-spin   { animation: motion-spin 2.5s linear infinite; }
+  .motion-wave   { animation: motion-wave 1.4s ease-in-out infinite; }
+  .motion-wiggle { animation: motion-wiggle 0.7s ease-in-out infinite; }
+  .motion-float  { animation: motion-float 3s ease-in-out infinite; }
 }
 
 @keyframes companion-float {
@@ -156,4 +163,31 @@
 
 .heart-pop {
   animation: heart-pop 0.9s ease-out forwards;
+}
+
+@keyframes motion-dance {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  25% { transform: translateY(-6px) rotate(6deg); }
+  50% { transform: translateY(0) rotate(-6deg); }
+  75% { transform: translateY(-6px) rotate(6deg); }
+}
+@keyframes motion-jump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-22px); }
+}
+@keyframes motion-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes motion-wave {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(8deg); }
+}
+@keyframes motion-wiggle {
+  0%, 100% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+}
+@keyframes motion-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-14px) scale(1.04); }
 }
