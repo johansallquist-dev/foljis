@@ -503,3 +503,40 @@ function Penguin({ e, mood }: { e: Expression; mood: number }) {
     </>
   );
 }
+
+/* ---------- Giraff ---------- */
+function Giraffe({ e, mood }: { e: Expression; mood: number }) {
+  const body = mood >= 1 ? "hsl(42 75% 70%)" : "hsl(42 25% 70%)";
+  const spot = mood >= 1 ? "hsl(28 60% 40%)" : "hsl(28 15% 50%)";
+  const dark = "hsl(28 50% 30%)";
+  return (
+    <>
+      {/* Horn (ossicones) */}
+      <line x1="88" y1="48" x2="86" y2="32" stroke={dark} strokeWidth="3" strokeLinecap="round" />
+      <line x1="112" y1="48" x2="114" y2="32" stroke={dark} strokeWidth="3" strokeLinecap="round" />
+      <circle cx="86" cy="30" r="4" fill={spot} />
+      <circle cx="114" cy="30" r="4" fill={spot} />
+      {/* Öron */}
+      <ellipse cx="68" cy="62" rx="10" ry="6" fill={body} transform="rotate(-25 68 62)" />
+      <ellipse cx="132" cy="62" rx="10" ry="6" fill={body} transform="rotate(25 132 62)" />
+      {/* Lång hals (bakom huvudet, leds neråt) */}
+      <rect x="92" y="115" width="16" height="60" rx="6" fill={body} />
+      {/* Man längs halsen */}
+      <path d="M92 120 Q90 140 92 170" stroke={spot} strokeWidth="3" fill="none" strokeLinecap="round" />
+      {/* Huvud */}
+      <ellipse cx="100" cy="105" rx="42" ry="48" fill={body} filter="url(#softShadow)" />
+      {/* Fläckar */}
+      <ellipse cx="78" cy="88" rx="6" ry="5" fill={spot} opacity="0.85" />
+      <ellipse cx="124" cy="92" rx="5" ry="4" fill={spot} opacity="0.85" />
+      <ellipse cx="82" cy="128" rx="5" ry="4" fill={spot} opacity="0.85" />
+      <ellipse cx="120" cy="130" rx="6" ry="5" fill={spot} opacity="0.85" />
+      <ellipse cx="98" cy="148" rx="5" ry="4" fill={spot} opacity="0.85" />
+      {/* Nosparti */}
+      <ellipse cx="100" cy="128" rx="20" ry="14" fill="hsl(42 60% 85%)" />
+      {/* Näsborrar */}
+      <ellipse cx="94" cy="126" rx="1.5" ry="2" fill={dark} />
+      <ellipse cx="106" cy="126" rx="1.5" ry="2" fill={dark} />
+      <Face e={e} cy={100} eyeDx={14} eyeDy={-8} mouthDy={28} />
+    </>
+  );
+}
