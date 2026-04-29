@@ -12,7 +12,7 @@ export const TIPS: Tip[] = [
   { id: "t1", category: "morgon", emoji: "🌤️", title: "Lägg fram kläder kvällen innan",
     body: "Lägg fram dina kläder kvällen innan. Då blir morgonen mycket lugnare och du slipper leta." },
   { id: "t2", category: "morgon", emoji: "🥣", title: "Något litet i magen räcker",
-    body: "Om du inte är hungrig på morgonen – ta något litet, som en banan eller smörgås. Hjärnan jobbar bättre med energi." },
+    body: "kropp och knopp behöver energi för att orka dagen. Det behöver inte vara något stort, ett glas mjölk, en macka eller en banan funkar bra! Kan du inte äta på morgonen - ta med mellis!" },
   { id: "t3", category: "morgon", emoji: "⏰", title: "5 minuters extra-marginal",
     body: "Försök att ställa väckaren 5 minuter tidigare. Lite extra tid gör hela skillnaden." },
   { id: "t4", category: "morgon", emoji: "🎒", title: "Packa väskan kvällen innan",
