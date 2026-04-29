@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { useApp } from "@/lib/AppStateContext";
 import { todayKey } from "@/lib/types";
 import { Card } from "@/components/ui/card";
@@ -12,6 +13,8 @@ const SUGGESTIONS = ["👕","🎒","🪥","🚿","📖","📱","🛏️","🌙",
 export default function EveningPage() {
   const { state, toggleEveningItem, addEveningItem, removeEveningItem } = useApp();
   const today = todayKey();
+  const hasMoodToday = state.moodEntries.some(m => m.date.startsWith(today));
+  if (!hasMoodToday) return <Navigate to="/maende" replace state={{ from: "kvall" }} />;
   const todayDone = state.eveningHistory.find(h => h.date === today)?.itemIds || [];
   const allDone = state.eveningRoutine.length > 0 && todayDone.length === state.eveningRoutine.length;
 
