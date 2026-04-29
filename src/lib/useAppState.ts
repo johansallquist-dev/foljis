@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { AppState, initialState, todayKey, MoodEntry, MoodLevel, Feeling, RoutineItem, Lesson, CompanionSpeciesId, LessonRating } from "./types";
 import { ACHIEVEMENTS, evaluateAchievements } from "./achievements";
+import { findShopItem } from "./shop";
 import { toast } from "sonner";
 
 const STORAGE_KEY = "solstrale-app-state-v1";
