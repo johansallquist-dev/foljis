@@ -57,7 +57,7 @@ export default function HomePage() {
 
       {/* Följisen */}
       <div className="gradient-hero rounded-3xl p-6 shadow-card-soft text-center space-y-3">
-        <Companion mood={mood} size={180} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
+        <Companion mood={mood} size={180} name={state.companionName} species={state.companionSpecies} onPet={recordPet} accessoryId={state.equippedAccessoryId} backgroundId={state.equippedBackgroundId} />
         <div>
           <p className="font-display text-lg">{state.companionName}</p>
           <p className="text-sm text-muted-foreground">

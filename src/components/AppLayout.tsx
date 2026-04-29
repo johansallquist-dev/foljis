@@ -23,7 +23,7 @@ export function AppLayout() {
       <header className="px-5 pt-5 pb-2 flex items-center justify-between">
         <NavLink to="/" className="flex items-center gap-2">
           <div className="w-10 h-10 -my-1 flex items-center justify-center">
-            <Companion mood={mood} size={44} species={state.companionSpecies} />
+            <Companion mood={mood} size={44} species={state.companionSpecies} accessoryId={state.equippedAccessoryId} pettable={false} />
           </div>
           <span className="font-display font-semibold text-lg">{state.companionName}</span>
         </NavLink>
