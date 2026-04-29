@@ -42,7 +42,7 @@ export default function MorningPage() {
 
       {allDone && (
         <Card className="border-0 gradient-sunrise p-5 text-center pop-in shadow-card-soft">
-          <Companion mood={4} size={120} celebrate species={state.companionSpecies} />
+          <Companion mood={4} size={120} celebrate species={state.companionSpecies} accessoryId={state.equippedAccessoryId} backgroundId={state.equippedBackgroundId} />
           <p className="font-display text-lg mt-2">Du är redo för dagen! 🎉</p>
           <p className="text-sm text-muted-foreground">Bra jobbat, du klarade allt.</p>
         </Card>

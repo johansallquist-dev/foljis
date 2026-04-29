@@ -44,7 +44,7 @@ export default function MyPage() {
 
       {/* Följis */}
       <Card className="border-0 gradient-hero p-6 text-center shadow-card-soft">
-        <Companion mood={mood} size={160} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
+        <Companion mood={mood} size={160} name={state.companionName} species={state.companionSpecies} onPet={recordPet} accessoryId={state.equippedAccessoryId} backgroundId={state.equippedBackgroundId} />
         {editing ? (
           <div className="flex gap-2 mt-3 max-w-xs mx-auto">
             <Input value={nameDraft} onChange={e => setNameDraft(e.target.value)} maxLength={20} />

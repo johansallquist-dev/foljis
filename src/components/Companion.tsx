@@ -44,12 +44,18 @@ interface Props {
   pettable?: boolean;
   /** Anropas när användaren klappar följisen */
   onPet?: () => void;
+  /** Köpt och utrustad accessoar från affären */
+  accessoryId?: string | null;
+  /** Köpt och utrustad bakgrund från affären */
+  backgroundId?: string | null;
+  /** Aktiv rörelse-animation (en av "dance", "jump", "spin", "wave", "wiggle", "float") */
+  motion?: string | null;
 }
 
 interface Heart { id: number; x: number; y: number; }
 
 /** Helt SVG-baserade följis. Ansiktsuttryck byts efter humör. */
-export function Companion({ mood, size = 180, celebrate, name, species = "sun", pettable = true, onPet }: Props) {
+export function Companion({ mood, size = 180, celebrate, name, species = "sun", pettable = true, onPet, accessoryId, backgroundId, motion }: Props) {
   const [isPetting, setIsPetting] = useState(false);
   const [hearts, setHearts] = useState<Heart[]>([]);
   const pettingRef = useRef(false);
@@ -61,8 +67,9 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
     const base = "companion-float";
     if (celebrate) return `${base} celebrate`;
     if (isPetting) return `${base} wiggle`;
+    if (motion) return `${base} motion-${motion}`;
     return base;
-  }, [celebrate, isPetting]);
+  }, [celebrate, isPetting, motion]);
 
   // Boostat humör vid klapp
   const displayMood = isPetting ? Math.max(mood, 4) : mood;
@@ -119,8 +126,13 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
     <div className="flex flex-col items-center gap-2">
       <div
         ref={containerRef}
-        className={`relative ${pettable ? "cursor-grab active:cursor-grabbing select-none" : ""}`}
-        style={{ width: size, height: size, touchAction: pettable ? "none" : undefined }}
+        className={`relative rounded-3xl overflow-hidden ${pettable ? "cursor-grab active:cursor-grabbing select-none" : ""}`}
+        style={{
+          width: size,
+          height: size,
+          touchAction: pettable ? "none" : undefined,
+          background: getBackgroundStyle(backgroundId),
+        }}
         onMouseDown={pettable ? e => startPet(e.clientX, e.clientY) : undefined}
         onMouseMove={pettable ? e => handleMove(e.clientX, e.clientY) : undefined}
         onMouseEnter={pettable ? e => { if (e.buttons === 1) startPet(e.clientX, e.clientY); } : undefined}
@@ -128,6 +140,7 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
         onTouchStart={pettable ? e => { const t = e.touches[0]; startPet(t.clientX, t.clientY); } : undefined}
         onTouchMove={pettable ? e => { const t = e.touches[0]; handleMove(t.clientX, t.clientY); } : undefined}
       >
+        {backgroundId && <BackgroundDecor id={backgroundId} />}
         <div className={cls} style={{ width: size, height: size }}>
           <svg viewBox="0 0 200 200" width={size} height={size} aria-label={`${name || "Följis"}`}>
             <defs>
@@ -139,6 +152,7 @@ export function Companion({ mood, size = 180, celebrate, name, species = "sun", 
               </filter>
             </defs>
             {renderSpecies(species, expr, displayMood)}
+            {accessoryId && renderAccessory(accessoryId)}
           </svg>
         </div>
         {hearts.map(h => (
@@ -539,4 +553,148 @@ function Giraffe({ e, mood }: { e: Expression; mood: number }) {
       <Face e={e} cy={100} eyeDx={14} eyeDy={-8} mouthDy={28} />
     </>
   );
+}
+
+/* ---------- Tillbehör (köpta i affären) ---------- */
+function renderAccessory(id: string) {
+  switch (id) {
+    case "acc_hat":
+      return (
+        <g>
+          <path d="M70 50 L100 12 L130 50 Z" fill="hsl(220 50% 22%)" />
+          <rect x="62" y="48" width="76" height="8" rx="3" fill="hsl(220 50% 22%)" />
+          <rect x="62" y="48" width="76" height="3" fill="hsl(8 70% 55%)" />
+        </g>
+      );
+    case "acc_party":
+      return (
+        <g>
+          <path d="M82 55 L100 8 L118 55 Z" fill="hsl(330 80% 65%)" />
+          <circle cx="100" cy="10" r="5" fill="hsl(42 95% 60%)" />
+          <circle cx="92" cy="30" r="2.5" fill="hsl(42 95% 60%)" />
+          <circle cx="108" cy="40" r="2.5" fill="hsl(180 70% 60%)" />
+        </g>
+      );
+    case "acc_glasses":
+      return (
+        <g>
+          <circle cx="83" cy="95" r="14" fill="none" stroke="hsl(220 50% 15%)" strokeWidth="3" />
+          <circle cx="117" cy="95" r="14" fill="none" stroke="hsl(220 50% 15%)" strokeWidth="3" />
+          <circle cx="83" cy="95" r="13" fill="hsl(220 60% 25%)" opacity="0.7" />
+          <circle cx="117" cy="95" r="13" fill="hsl(220 60% 25%)" opacity="0.7" />
+          <line x1="97" y1="95" x2="103" y2="95" stroke="hsl(220 50% 15%)" strokeWidth="3" />
+        </g>
+      );
+    case "acc_bow":
+      return (
+        <g transform="translate(70 35)">
+          <path d="M0 8 L14 0 L14 16 Z" fill="hsl(330 80% 65%)" />
+          <path d="M28 8 L14 0 L14 16 Z" fill="hsl(330 80% 65%)" />
+          <circle cx="14" cy="8" r="4" fill="hsl(330 70% 50%)" />
+        </g>
+      );
+    case "acc_scarf":
+      return (
+        <g>
+          <path d="M55 150 Q100 165 145 150 L145 165 Q100 180 55 165 Z" fill="hsl(0 70% 55%)" />
+          <path d="M55 165 L40 195 L55 195 L62 168 Z" fill="hsl(0 70% 50%)" />
+        </g>
+      );
+    case "acc_crown":
+      return (
+        <g>
+          <path d="M65 55 L75 25 L85 50 L100 18 L115 50 L125 25 L135 55 L60 55 Z" fill="hsl(42 95% 55%)" stroke="hsl(35 80% 35%)" strokeWidth="1.5" />
+          <circle cx="100" cy="35" r="4" fill="hsl(0 80% 55%)" />
+          <circle cx="78" cy="42" r="3" fill="hsl(220 80% 60%)" />
+          <circle cx="122" cy="42" r="3" fill="hsl(140 70% 50%)" />
+        </g>
+      );
+    case "acc_flower":
+      return (
+        <g transform="translate(60 70)">
+          {[0, 72, 144, 216, 288].map(a => (
+            <ellipse key={a} cx="0" cy="-7" rx="5" ry="7" fill="hsl(330 85% 75%)" transform={`rotate(${a})`} />
+          ))}
+          <circle cx="0" cy="0" r="3.5" fill="hsl(42 95% 55%)" />
+        </g>
+      );
+    case "acc_headphones":
+      return (
+        <g>
+          <path d="M55 90 Q55 35 100 35 Q145 35 145 90" stroke="hsl(220 30% 25%)" strokeWidth="6" fill="none" strokeLinecap="round" />
+          <rect x="46" y="85" width="18" height="28" rx="6" fill="hsl(220 30% 25%)" />
+          <rect x="136" y="85" width="18" height="28" rx="6" fill="hsl(220 30% 25%)" />
+          <rect x="50" y="90" width="10" height="18" rx="3" fill="hsl(8 70% 55%)" />
+          <rect x="140" y="90" width="10" height="18" rx="3" fill="hsl(8 70% 55%)" />
+        </g>
+      );
+    case "acc_cap":
+      return (
+        <g>
+          <path d="M65 60 Q100 25 135 60 L135 70 L65 70 Z" fill="hsl(220 60% 45%)" />
+          <path d="M55 70 Q100 75 135 70 L135 78 Q100 84 55 78 Z" fill="hsl(220 60% 35%)" />
+          <circle cx="100" cy="50" r="4" fill="hsl(0 80% 55%)" />
+        </g>
+      );
+    case "acc_wizard":
+      return (
+        <g>
+          <path d="M70 60 Q100 -5 130 60 Z" fill="hsl(260 60% 35%)" />
+          <rect x="60" y="58" width="80" height="8" rx="3" fill="hsl(260 60% 25%)" />
+          <text x="92" y="40" fontSize="10" fill="hsl(42 95% 70%)">⭐</text>
+          <text x="80" y="55" fontSize="8" fill="hsl(42 95% 70%)">✨</text>
+          <text x="110" y="50" fontSize="8" fill="hsl(42 95% 70%)">✨</text>
+        </g>
+      );
+    default:
+      return null;
+  }
+}
+
+/* ---------- Bakgrunder (köpta i affären) ---------- */
+function getBackgroundStyle(id?: string | null): string | undefined {
+  switch (id) {
+    case "bg_meadow":  return "linear-gradient(180deg, hsl(200 80% 80%) 0%, hsl(200 80% 80%) 60%, hsl(95 55% 65%) 60%, hsl(95 55% 55%) 100%)";
+    case "bg_beach":   return "linear-gradient(180deg, hsl(28 90% 75%) 0%, hsl(35 95% 65%) 40%, hsl(200 70% 60%) 60%, hsl(45 85% 80%) 80%, hsl(45 85% 70%) 100%)";
+    case "bg_space":   return "linear-gradient(180deg, hsl(250 60% 15%) 0%, hsl(270 60% 25%) 100%)";
+    case "bg_forest":  return "linear-gradient(180deg, hsl(150 40% 60%) 0%, hsl(150 40% 45%) 60%, hsl(95 35% 35%) 100%)";
+    case "bg_night":   return "linear-gradient(180deg, hsl(230 60% 18%) 0%, hsl(240 50% 30%) 100%)";
+    case "bg_rainbow": return "linear-gradient(180deg, hsl(0 80% 75%), hsl(30 90% 75%), hsl(50 90% 75%), hsl(120 60% 70%), hsl(200 70% 70%), hsl(260 60% 75%))";
+    default: return undefined;
+  }
+}
+
+function BackgroundDecor({ id }: { id: string }) {
+  if (id === "bg_space" || id === "bg_night") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        {[
+          { x: 12, y: 18 }, { x: 30, y: 8 }, { x: 70, y: 14 }, { x: 88, y: 24 },
+          { x: 18, y: 40 }, { x: 80, y: 50 }, { x: 92, y: 70 }, { x: 8, y: 80 },
+        ].map((s, i) => (
+          <span key={i} className="absolute text-white" style={{ left: `${s.x}%`, top: `${s.y}%`, fontSize: 8 }}>✦</span>
+        ))}
+      </div>
+    );
+  }
+  if (id === "bg_forest") {
+    return (
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none flex items-end justify-around opacity-60 text-2xl pb-1">
+        <span>🌲</span><span>🌳</span><span>🌲</span>
+      </div>
+    );
+  }
+  if (id === "bg_meadow") {
+    return (
+      <div className="absolute inset-x-0 bottom-1 pointer-events-none flex justify-around opacity-90 text-sm">
+        <span>🌼</span><span>🌷</span><span>🌸</span><span>🌼</span>
+      </div>
+    );
+  }
+  if (id === "bg_beach") {
+    return (
+      <div className="absolute top-2 right-3 pointer-events-none text-2xl opacity-90">☀️</div>
+    );
+  }
+  return null;
 }

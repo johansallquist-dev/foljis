@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { AppState, initialState, todayKey, MoodEntry, MoodLevel, Feeling, RoutineItem, Lesson, CompanionSpeciesId, LessonRating } from "./types";
 import { ACHIEVEMENTS, evaluateAchievements } from "./achievements";
+import { findShopItem } from "./shop";
 import { toast } from "sonner";
 
 const STORAGE_KEY = "solstrale-app-state-v1";
@@ -306,6 +307,39 @@ export function useAppState() {
     toast("Allt är rensat", { description: "Vi börjar om från början 🌱" });
   }, []);
 
+  const buyShopItem = useCallback((itemId: string) => {
+    const item = findShopItem(itemId);
+    if (!item) return;
+    setState(s => {
+      if (s.ownedShopItems.includes(itemId)) {
+        toast("Du äger redan den här", { description: item.name });
+        return s;
+      }
+      if (s.points < item.price) {
+        toast.error("För få Följispoäng", { description: `Du behöver ${item.price - s.points} till för ${item.name}.` });
+        return s;
+      }
+      const next: AppState = {
+        ...s,
+        points: s.points - item.price,
+        ownedShopItems: [...s.ownedShopItems, itemId],
+        // Auto-utrusta nyköp av accessoarer/bakgrunder
+        equippedAccessoryId: item.category === "accessory" ? itemId : s.equippedAccessoryId,
+        equippedBackgroundId: item.category === "background" ? itemId : s.equippedBackgroundId,
+      };
+      toast.success(`${item.emoji} ${item.name} köpt!`, { description: `–${item.price} Följispoäng` });
+      return checkAchievements(next);
+    });
+  }, [checkAchievements]);
+
+  const equipAccessory = useCallback((itemId: string | null) => {
+    setState(s => ({ ...s, equippedAccessoryId: itemId }));
+  }, []);
+
+  const equipBackground = useCallback((itemId: string | null) => {
+    setState(s => ({ ...s, equippedBackgroundId: itemId }));
+  }, []);
+
   return {
     state,
     addPoints,
@@ -328,5 +362,8 @@ export function useAppState() {
     finishOnboarding,
     recordPet,
     resetAll,
+    buyShopItem,
+    equipAccessory,
+    equipBackground,
   };
 }

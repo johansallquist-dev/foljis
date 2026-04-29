@@ -42,7 +42,7 @@ export default function EveningPage() {
 
       {allDone && (
         <Card className="border-0 gradient-hero p-5 text-center pop-in shadow-card-soft">
-          <Companion mood={4} size={120} celebrate species={state.companionSpecies} />
+          <Companion mood={4} size={120} celebrate species={state.companionSpecies} accessoryId={state.equippedAccessoryId} backgroundId={state.equippedBackgroundId} />
           <p className="font-display text-lg mt-2">Bra jobbat – nu kan du sova lugnt 💤</p>
           <p className="text-sm text-muted-foreground">Imorgon blir en bra dag.</p>
         </Card>
