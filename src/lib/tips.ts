@@ -23,7 +23,7 @@ export const TIPS: Tip[] = [
   { id: "t6", category: "skola", emoji: "🤝", title: "Prata med någon vuxen",
     body: "Om något känns jobbigt – berätta för en lärare, annan trygg vuxen eller någon hemma. Du behöver inte bära det själv." },
   { id: "t7", category: "skola", emoji: "🪑", title: "Hitta en lugn plats",
-    body: "Om det blir för mycket – fråga om du får gå ut en stund eller sitta på biblioteket. Det är okej att behöva paus." },
+    body: "Om det blir för mycket – fråga om du får gå ut en stund eller sitta i ett grupprum. Det är okej att behöva paus." },
   { id: "t8", category: "skola", emoji: "📝", title: "Ett steg i taget",
     body: "Tänk inte på hela dagen. Tänk bara: 'nu går jag till första lektionen'. Sen 'nu går jag till rasten'." },
 
