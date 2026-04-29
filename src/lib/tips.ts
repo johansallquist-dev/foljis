@@ -21,7 +21,7 @@ export const TIPS: Tip[] = [
   { id: "t5", category: "skola", emoji: "💭", title: "Det är okej att inte må toppen",
     body: "Alla har dagar som känns tunga. Försök ändå att gå till skolan – ofta blir det lättare när du väl är där." },
   { id: "t6", category: "skola", emoji: "🤝", title: "Prata med någon vuxen",
-    body: "Om något känns jobbigt – berätta för en lärare, kurator eller någon hemma. Du behöver inte bära det själv." },
+    body: "Om något känns jobbigt – berätta för en lärare, annan trygg vuxen eller någon hemma. Du behöver inte bära det själv." },
   { id: "t7", category: "skola", emoji: "🪑", title: "Hitta en lugn plats",
     body: "Om det blir för mycket – fråga om du får gå ut en stund eller sitta på biblioteket. Det är okej att behöva paus." },
   { id: "t8", category: "skola", emoji: "📝", title: "Ett steg i taget",
