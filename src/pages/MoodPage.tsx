@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useApp } from "@/lib/AppStateContext";
 import { Feeling, MoodLevel } from "@/lib/types";
 import { Card } from "@/components/ui/card";
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FEELINGS, COPING_BY_FEELING, TIPS } from "@/lib/tips";
 import { Companion } from "@/components/Companion";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
 const MOOD_OPTIONS: { value: MoodLevel; emoji: string; label: string; color: string }[] = [
@@ -21,6 +22,11 @@ type Step = "mood" | "feeling" | "tips" | "history";
 
 export default function MoodPage() {
   const { state, addMoodEntry } = useApp();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const fromState = (location.state as { from?: string } | null)?.from;
+  const continueTo = fromState === "morgon" ? "/morgon" : fromState === "kvall" ? "/kvall" : null;
+  const continueLabel = fromState === "morgon" ? "Fortsätt till morgonrutinen" : "Fortsätt till kvällsrutinen";
   const [step, setStep] = useState<Step>("mood");
   const [mood, setMood] = useState<MoodLevel | null>(null);
   const [feeling, setFeeling] = useState<Feeling | null>(null);
@@ -154,6 +160,13 @@ export default function MoodPage() {
 
       {step === "mood" && (
         <div className="space-y-3">
+          {continueTo && (
+            <Card className="p-3 border-0 shadow-card-soft bg-primary-soft">
+              <p className="text-sm">
+                Innan vi går vidare till {fromState === "morgon" ? "morgonrutinen" : "kvällsrutinen"} – checka in hur det känns just nu 💛
+              </p>
+            </Card>
+          )}
           <p className="text-sm text-muted-foreground">Det finns inget rätt eller fel. Välj det som känns mest sant just nu.</p>
           <div className="grid grid-cols-5 gap-2">
             {MOOD_OPTIONS.map(opt => (
@@ -237,12 +250,18 @@ export default function MoodPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-2">
-            <Button onClick={reset} variant="outline" className="rounded-2xl">Checka in igen</Button>
-            <Button onClick={() => setStep("history")} className="rounded-2xl">
-              <Check className="w-4 h-4 mr-1" /> Klar
+          {continueTo ? (
+            <Button onClick={() => navigate(continueTo)} className="w-full rounded-2xl h-12">
+              {continueLabel} <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
-          </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-2">
+              <Button onClick={reset} variant="outline" className="rounded-2xl">Checka in igen</Button>
+              <Button onClick={() => setStep("history")} className="rounded-2xl">
+                <Check className="w-4 h-4 mr-1" /> Klar
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>

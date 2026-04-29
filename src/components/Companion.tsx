@@ -9,7 +9,8 @@ export type CompanionSpecies =
   | "owl"     // Ugglan
   | "dragon"  // Drakungen
   | "axolotl" // Axolotl
-  | "penguin";// Pingvin
+  | "penguin" // Pingvin
+  | "giraffe";// Giraff
 
 export interface SpeciesInfo {
   id: CompanionSpecies;
@@ -29,6 +30,7 @@ export const SPECIES: SpeciesInfo[] = [
   { id: "dragon",  name: "Drake",      emoji: "🐲", defaultName: "Funke",   description: "Modig och mysig" },
   { id: "axolotl", name: "Axolotl",    emoji: "🦎", defaultName: "Lotti",   description: "Lite annorlunda, väldigt snäll" },
   { id: "penguin", name: "Pingvin",    emoji: "🐧", defaultName: "Pingo",   description: "Cool och tålmodig" },
+  { id: "giraffe", name: "Giraff",     emoji: "🦒", defaultName: "Gina",    description: "Lång och lugn, ser långt fram" },
 ];
 
 interface Props {
@@ -40,7 +42,7 @@ interface Props {
   species?: CompanionSpecies;
   /** Aktivera klapp-interaktion (klicka och dra över). Default: true */
   pettable?: boolean;
-  /** Anropas när användaren klappar följisn */
+  /** Anropas när användaren klappar följisen */
   onPet?: () => void;
 }
 
@@ -181,6 +183,7 @@ function renderSpecies(s: CompanionSpecies, e: Expression, mood: number) {
     case "dragon":  return <Dragon e={e} mood={mood} />;
     case "axolotl": return <Axolotl e={e} mood={mood} />;
     case "penguin": return <Penguin e={e} mood={mood} />;
+    case "giraffe": return <Giraffe e={e} mood={mood} />;
   }
 }
 
@@ -497,6 +500,43 @@ function Penguin({ e, mood }: { e: Expression; mood: number }) {
       <ellipse cx="48" cy="125" rx="12" ry="28" fill={body} transform="rotate(-15 48 125)" />
       <ellipse cx="152" cy="125" rx="12" ry="28" fill={body} transform="rotate(15 152 125)" />
       <Face e={e} cy={108} eyeDx={14} eyeDy={-8} mouthDy={20} />
+    </>
+  );
+}
+
+/* ---------- Giraff ---------- */
+function Giraffe({ e, mood }: { e: Expression; mood: number }) {
+  const body = mood >= 1 ? "hsl(42 75% 70%)" : "hsl(42 25% 70%)";
+  const spot = mood >= 1 ? "hsl(28 60% 40%)" : "hsl(28 15% 50%)";
+  const dark = "hsl(28 50% 30%)";
+  return (
+    <>
+      {/* Horn (ossicones) */}
+      <line x1="88" y1="48" x2="86" y2="32" stroke={dark} strokeWidth="3" strokeLinecap="round" />
+      <line x1="112" y1="48" x2="114" y2="32" stroke={dark} strokeWidth="3" strokeLinecap="round" />
+      <circle cx="86" cy="30" r="4" fill={spot} />
+      <circle cx="114" cy="30" r="4" fill={spot} />
+      {/* Öron */}
+      <ellipse cx="68" cy="62" rx="10" ry="6" fill={body} transform="rotate(-25 68 62)" />
+      <ellipse cx="132" cy="62" rx="10" ry="6" fill={body} transform="rotate(25 132 62)" />
+      {/* Lång hals (bakom huvudet, leds neråt) */}
+      <rect x="92" y="115" width="16" height="60" rx="6" fill={body} />
+      {/* Man längs halsen */}
+      <path d="M92 120 Q90 140 92 170" stroke={spot} strokeWidth="3" fill="none" strokeLinecap="round" />
+      {/* Huvud */}
+      <ellipse cx="100" cy="105" rx="42" ry="48" fill={body} filter="url(#softShadow)" />
+      {/* Fläckar */}
+      <ellipse cx="78" cy="88" rx="6" ry="5" fill={spot} opacity="0.85" />
+      <ellipse cx="124" cy="92" rx="5" ry="4" fill={spot} opacity="0.85" />
+      <ellipse cx="82" cy="128" rx="5" ry="4" fill={spot} opacity="0.85" />
+      <ellipse cx="120" cy="130" rx="6" ry="5" fill={spot} opacity="0.85" />
+      <ellipse cx="98" cy="148" rx="5" ry="4" fill={spot} opacity="0.85" />
+      {/* Nosparti */}
+      <ellipse cx="100" cy="128" rx="20" ry="14" fill="hsl(42 60% 85%)" />
+      {/* Näsborrar */}
+      <ellipse cx="94" cy="126" rx="1.5" ry="2" fill={dark} />
+      <ellipse cx="106" cy="126" rx="1.5" ry="2" fill={dark} />
+      <Face e={e} cy={100} eyeDx={14} eyeDy={-8} mouthDy={28} />
     </>
   );
 }
