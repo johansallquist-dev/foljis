@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useApp } from "@/lib/AppStateContext";
 import { Feeling, MoodLevel } from "@/lib/types";
 import { Card } from "@/components/ui/card";
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FEELINGS, COPING_BY_FEELING, TIPS } from "@/lib/tips";
 import { Companion } from "@/components/Companion";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
 const MOOD_OPTIONS: { value: MoodLevel; emoji: string; label: string; color: string }[] = [
@@ -21,6 +22,11 @@ type Step = "mood" | "feeling" | "tips" | "history";
 
 export default function MoodPage() {
   const { state, addMoodEntry } = useApp();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const fromState = (location.state as { from?: string } | null)?.from;
+  const continueTo = fromState === "morgon" ? "/morgon" : fromState === "kvall" ? "/kvall" : null;
+  const continueLabel = fromState === "morgon" ? "Fortsätt till morgonrutinen" : "Fortsätt till kvällsrutinen";
   const [step, setStep] = useState<Step>("mood");
   const [mood, setMood] = useState<MoodLevel | null>(null);
   const [feeling, setFeeling] = useState<Feeling | null>(null);
