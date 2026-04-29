@@ -66,6 +66,10 @@ export interface AppState {
   companionSpecies: CompanionSpeciesId;
   onboardingDone: boolean;
   pettingCount: number;
+  // Shop / följis-utrustning
+  ownedShopItems: string[];
+  equippedAccessoryId: string | null;
+  equippedBackgroundId: string | null;
 }
 
 export const todayKey = (d = new Date()) => {
@@ -111,4 +115,7 @@ export const initialState: AppState = {
   companionSpecies: "sun",
   onboardingDone: false,
   pettingCount: 0,
+  ownedShopItems: [],
+  equippedAccessoryId: null,
+  equippedBackgroundId: null,
 };
