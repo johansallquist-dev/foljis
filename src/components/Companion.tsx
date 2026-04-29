@@ -9,7 +9,8 @@ export type CompanionSpecies =
   | "owl"     // Ugglan
   | "dragon"  // Drakungen
   | "axolotl" // Axolotl
-  | "penguin";// Pingvin
+  | "penguin" // Pingvin
+  | "giraffe";// Giraff
 
 export interface SpeciesInfo {
   id: CompanionSpecies;
@@ -29,6 +30,7 @@ export const SPECIES: SpeciesInfo[] = [
   { id: "dragon",  name: "Drake",      emoji: "🐲", defaultName: "Funke",   description: "Modig och mysig" },
   { id: "axolotl", name: "Axolotl",    emoji: "🦎", defaultName: "Lotti",   description: "Lite annorlunda, väldigt snäll" },
   { id: "penguin", name: "Pingvin",    emoji: "🐧", defaultName: "Pingo",   description: "Cool och tålmodig" },
+  { id: "giraffe", name: "Giraff",     emoji: "🦒", defaultName: "Gina",    description: "Lång och lugn, ser långt fram" },
 ];
 
 interface Props {
@@ -181,6 +183,7 @@ function renderSpecies(s: CompanionSpecies, e: Expression, mood: number) {
     case "dragon":  return <Dragon e={e} mood={mood} />;
     case "axolotl": return <Axolotl e={e} mood={mood} />;
     case "penguin": return <Penguin e={e} mood={mood} />;
+    case "giraffe": return <Giraffe e={e} mood={mood} />;
   }
 }
 
