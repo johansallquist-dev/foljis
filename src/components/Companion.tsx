@@ -44,6 +44,12 @@ interface Props {
   pettable?: boolean;
   /** Anropas när användaren klappar följisen */
   onPet?: () => void;
+  /** Köpt och utrustad accessoar från affären */
+  accessoryId?: string | null;
+  /** Köpt och utrustad bakgrund från affären */
+  backgroundId?: string | null;
+  /** Aktiv rörelse-animation (en av "dance", "jump", "spin", "wave", "wiggle", "float") */
+  motion?: string | null;
 }
 
 interface Heart { id: number; x: number; y: number; }
