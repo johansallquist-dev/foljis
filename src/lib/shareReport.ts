@@ -262,6 +262,53 @@ export function generateReportPdf(state: AppState): Blob {
     else ratings.none++;
   });
   writeLine(`Bra: ${ratings.good}    Mittemellan: ${ratings.ok}    Dåligt: ${ratings.bad}    Utan betyg: ${ratings.none}`);
+  y += 6;
+
+  // Per-activity breakdown by colour
+  const lessonById = new Map(state.schedule.map(l => [l.id, l]));
+  const buckets: Record<"good" | "ok" | "bad", { name: string; date: string }[]> = {
+    good: [], ok: [], bad: [],
+  };
+  recentLessons.forEach(c => {
+    if (!c.rating) return;
+    const lesson = lessonById.get(c.lessonId);
+    const name = lesson ? `${lesson.emoji} ${lesson.subject}` : "Okänd aktivitet";
+    buckets[c.rating].push({ name, date: c.date });
+  });
+
+  const renderBucket = (
+    label: string,
+    color: [number, number, number],
+    items: { name: string; date: string }[],
+  ) => {
+    if (y > pageHeight - margin - 30) { doc.addPage(); y = margin; }
+    // Color dot
+    doc.setFillColor(color[0], color[1], color[2]);
+    doc.circle(margin + 5, y - 4, 5, "F");
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(20, 20, 20);
+    doc.text(`${label} (${items.length})`, margin + 16, y);
+    y += 16;
+    doc.setFont("helvetica", "normal");
+    if (items.length === 0) {
+      doc.setTextColor(140, 140, 140);
+      writeLine("Inga aktiviteter markerade.", 16);
+      doc.setTextColor(20, 20, 20);
+    } else {
+      // Group by activity name with count
+      const counts = new Map<string, number>();
+      items.forEach(i => counts.set(i.name, (counts.get(i.name) ?? 0) + 1));
+      Array.from(counts.entries())
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([name, n]) => writeLine(`• ${name} – ${n} ggr`, 16));
+    }
+    y += 4;
+  };
+
+  renderBucket("🟢 Bra", [120, 180, 130], buckets.good);
+  renderBucket("🟡 Mittemellan", [230, 200, 90], buckets.ok);
+  renderBucket("🔴 Dåligt", [220, 110, 110], buckets.bad);
   y += 4;
 
   // Notes
