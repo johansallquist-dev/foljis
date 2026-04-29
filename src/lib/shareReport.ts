@@ -270,7 +270,7 @@ export function generateReportPdf(state: AppState): Blob {
     good: [], ok: [], bad: [],
   };
   recentLessons.forEach(c => {
-    if (!c.rating || c.rating === "none") return;
+    if (!c.rating) return;
     const lesson = lessonById.get(c.lessonId);
     const name = lesson ? `${lesson.emoji} ${lesson.subject}` : "Okänd aktivitet";
     buckets[c.rating].push({ name, date: c.date });
