@@ -42,7 +42,7 @@ interface Props {
   species?: CompanionSpecies;
   /** Aktivera klapp-interaktion (klicka och dra över). Default: true */
   pettable?: boolean;
-  /** Anropas när användaren klappar följisn */
+  /** Anropas när användaren klappar följisen */
   onPet?: () => void;
 }
 

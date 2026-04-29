@@ -55,7 +55,7 @@ export default function HomePage() {
         </h1>
       </div>
 
-      {/* Följisn */}
+      {/* Följisen */}
       <div className="gradient-hero rounded-3xl p-6 shadow-card-soft text-center space-y-3">
         <Companion mood={mood} size={180} name={state.companionName} species={state.companionSpecies} onPet={recordPet} />
         <div>

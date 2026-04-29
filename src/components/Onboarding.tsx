@@ -101,7 +101,7 @@ export function Onboarding() {
                 />
                 <FeatureCard
                   icon={<Hand className="w-5 h-5" />}
-                  title="Klappa följisn"
+                  title="Klappa följisen"
                   body="Tryck och dra över din följis för att klappa den. Den vickar, det regnar hjärtan och den blir gladare."
                 />
                 <FeatureCard
