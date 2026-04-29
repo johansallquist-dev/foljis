@@ -160,6 +160,13 @@ export default function MoodPage() {
 
       {step === "mood" && (
         <div className="space-y-3">
+          {continueTo && (
+            <Card className="p-3 border-0 shadow-card-soft bg-primary-soft">
+              <p className="text-sm">
+                Innan vi går vidare till {fromState === "morgon" ? "morgonrutinen" : "kvällsrutinen"} – checka in hur det känns just nu 💛
+              </p>
+            </Card>
+          )}
           <p className="text-sm text-muted-foreground">Det finns inget rätt eller fel. Välj det som känns mest sant just nu.</p>
           <div className="grid grid-cols-5 gap-2">
             {MOOD_OPTIONS.map(opt => (
@@ -243,12 +250,18 @@ export default function MoodPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-2">
-            <Button onClick={reset} variant="outline" className="rounded-2xl">Checka in igen</Button>
-            <Button onClick={() => setStep("history")} className="rounded-2xl">
-              <Check className="w-4 h-4 mr-1" /> Klar
+          {continueTo ? (
+            <Button onClick={() => navigate(continueTo)} className="w-full rounded-2xl h-12">
+              {continueLabel} <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
-          </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-2">
+              <Button onClick={reset} variant="outline" className="rounded-2xl">Checka in igen</Button>
+              <Button onClick={() => setStep("history")} className="rounded-2xl">
+                <Check className="w-4 h-4 mr-1" /> Klar
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>
