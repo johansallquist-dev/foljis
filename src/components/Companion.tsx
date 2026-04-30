@@ -646,6 +646,107 @@ function renderAccessory(id: string) {
           <text x="110" y="50" fontSize="8" fill="hsl(42 95% 70%)">✨</text>
         </g>
       );
+    case "acc_glasses_round":
+      return (
+        <g>
+          <circle cx="83" cy="95" r="13" fill="hsl(40 50% 96%)" fillOpacity="0.4" stroke="hsl(35 60% 30%)" strokeWidth="3" />
+          <circle cx="117" cy="95" r="13" fill="hsl(40 50% 96%)" fillOpacity="0.4" stroke="hsl(35 60% 30%)" strokeWidth="3" />
+          <line x1="96" y1="95" x2="104" y2="95" stroke="hsl(35 60% 30%)" strokeWidth="3" />
+        </g>
+      );
+    case "acc_tophat":
+      return (
+        <g>
+          <rect x="78" y="10" width="44" height="42" rx="2" fill="hsl(220 30% 12%)" />
+          <rect x="60" y="48" width="80" height="8" rx="2" fill="hsl(220 30% 12%)" />
+          <rect x="78" y="38" width="44" height="5" fill="hsl(0 70% 45%)" />
+        </g>
+      );
+    case "acc_beret":
+      return (
+        <g>
+          <ellipse cx="100" cy="48" rx="42" ry="16" fill="hsl(0 65% 45%)" />
+          <ellipse cx="100" cy="44" rx="38" ry="12" fill="hsl(0 70% 50%)" />
+          <circle cx="118" cy="35" r="5" fill="hsl(0 60% 35%)" />
+        </g>
+      );
+    case "acc_tiara":
+      return (
+        <g>
+          <path d="M65 58 Q100 30 135 58" stroke="hsl(42 95% 60%)" strokeWidth="4" fill="none" />
+          <circle cx="100" cy="35" r="5" fill="hsl(195 90% 70%)" stroke="hsl(42 95% 50%)" strokeWidth="1.5" />
+          <circle cx="80" cy="48" r="3" fill="hsl(330 80% 70%)" />
+          <circle cx="120" cy="48" r="3" fill="hsl(330 80% 70%)" />
+        </g>
+      );
+    case "acc_santa":
+      return (
+        <g>
+          <path d="M68 58 Q100 5 132 58 Z" fill="hsl(0 75% 50%)" />
+          <rect x="60" y="56" width="80" height="10" rx="3" fill="hsl(40 50% 96%)" />
+          <circle cx="130" cy="20" r="8" fill="hsl(40 50% 96%)" />
+        </g>
+      );
+    case "acc_witch":
+      return (
+        <g>
+          <path d="M70 58 Q95 0 125 55 Q110 30 100 18 Z" fill="hsl(260 30% 12%)" />
+          <rect x="58" y="56" width="84" height="9" rx="3" fill="hsl(260 30% 12%)" />
+          <rect x="92" y="40" width="14" height="6" fill="hsl(280 60% 50%)" />
+        </g>
+      );
+    case "acc_helmet":
+      return (
+        <g>
+          <path d="M62 65 Q62 28 100 28 Q138 28 138 65 Z" fill="hsl(220 15% 70%)" stroke="hsl(220 20% 40%)" strokeWidth="2" />
+          <rect x="62" y="60" width="76" height="8" fill="hsl(220 15% 55%)" />
+          <path d="M98 30 L102 30 L102 14 L98 14 Z" fill="hsl(0 70% 50%)" />
+          <circle cx="100" cy="12" r="4" fill="hsl(0 70% 50%)" />
+        </g>
+      );
+    case "acc_pirate":
+      return (
+        <g>
+          <ellipse cx="83" cy="95" rx="14" ry="11" fill="hsl(220 30% 10%)" />
+          <path d="M70 88 Q100 78 145 92" stroke="hsl(220 30% 10%)" strokeWidth="2.5" fill="none" />
+        </g>
+      );
+    case "acc_glasses_3d":
+      return (
+        <g>
+          <path d="M83 80 L93 105 L73 105 Z" fill="hsl(42 95% 60%)" stroke="hsl(35 70% 35%)" strokeWidth="2" />
+          <path d="M117 80 L127 105 L107 105 Z" fill="hsl(42 95% 60%)" stroke="hsl(35 70% 35%)" strokeWidth="2" />
+          <line x1="93" y1="95" x2="107" y2="95" stroke="hsl(35 70% 35%)" strokeWidth="2.5" />
+        </g>
+      );
+    case "acc_antlers":
+      return (
+        <g stroke="hsl(28 50% 30%)" strokeWidth="3" strokeLinecap="round" fill="none">
+          <path d="M82 50 L72 25" />
+          <path d="M75 35 L65 30" />
+          <path d="M78 42 L68 40" />
+          <path d="M118 50 L128 25" />
+          <path d="M125 35 L135 30" />
+          <path d="M122 42 L132 40" />
+        </g>
+      );
+    case "acc_butterfly":
+      return (
+        <g transform="translate(72 32)">
+          <ellipse cx="-4" cy="-2" rx="6" ry="4" fill="hsl(280 70% 65%)" />
+          <ellipse cx="4" cy="-2" rx="6" ry="4" fill="hsl(280 70% 65%)" />
+          <ellipse cx="-4" cy="4" rx="5" ry="3" fill="hsl(330 75% 70%)" />
+          <ellipse cx="4" cy="4" rx="5" ry="3" fill="hsl(330 75% 70%)" />
+          <ellipse cx="0" cy="1" rx="1.5" ry="5" fill="hsl(220 50% 20%)" />
+        </g>
+      );
+    case "acc_leaf":
+      return (
+        <g transform="translate(60 70) rotate(-25)">
+          <path d="M0 0 Q8 -10 14 0 Q8 10 0 0 Z" fill="hsl(20 80% 50%)" />
+          <line x1="0" y1="0" x2="14" y2="0" stroke="hsl(28 60% 30%)" strokeWidth="1" />
+        </g>
+      );
     default:
       return null;
   }
@@ -660,12 +761,22 @@ function getBackgroundStyle(id?: string | null): string | undefined {
     case "bg_forest":  return "linear-gradient(180deg, hsl(150 40% 60%) 0%, hsl(150 40% 45%) 60%, hsl(95 35% 35%) 100%)";
     case "bg_night":   return "linear-gradient(180deg, hsl(230 60% 18%) 0%, hsl(240 50% 30%) 100%)";
     case "bg_rainbow": return "linear-gradient(180deg, hsl(0 80% 75%), hsl(30 90% 75%), hsl(50 90% 75%), hsl(120 60% 70%), hsl(200 70% 70%), hsl(260 60% 75%))";
+    case "bg_mountain": return "linear-gradient(180deg, hsl(210 70% 75%) 0%, hsl(210 50% 60%) 50%, hsl(220 20% 85%) 60%, hsl(220 15% 70%) 100%)";
+    case "bg_ocean":    return "linear-gradient(180deg, hsl(200 80% 70%) 0%, hsl(210 80% 50%) 40%, hsl(220 80% 35%) 100%)";
+    case "bg_city":     return "linear-gradient(180deg, hsl(20 80% 70%) 0%, hsl(280 50% 45%) 60%, hsl(260 40% 25%) 100%)";
+    case "bg_aurora":   return "linear-gradient(180deg, hsl(240 60% 15%) 0%, hsl(160 70% 35%) 40%, hsl(280 60% 35%) 70%, hsl(240 60% 15%) 100%)";
+    case "bg_sunrise":  return "linear-gradient(180deg, hsl(280 50% 60%) 0%, hsl(20 90% 70%) 40%, hsl(42 100% 75%) 70%, hsl(42 100% 85%) 100%)";
+    case "bg_sakura":   return "linear-gradient(180deg, hsl(330 70% 88%) 0%, hsl(330 60% 75%) 100%)";
+    case "bg_winter":   return "linear-gradient(180deg, hsl(210 50% 80%) 0%, hsl(210 30% 90%) 60%, hsl(0 0% 96%) 60%, hsl(0 0% 90%) 100%)";
+    case "bg_garden":   return "linear-gradient(180deg, hsl(195 70% 80%) 0%, hsl(120 50% 70%) 60%, hsl(120 40% 50%) 100%)";
+    case "bg_clouds":   return "linear-gradient(180deg, hsl(200 80% 70%) 0%, hsl(200 80% 85%) 100%)";
+    case "bg_underwater": return "linear-gradient(180deg, hsl(190 80% 55%) 0%, hsl(210 80% 35%) 60%, hsl(220 70% 25%) 100%)";
     default: return undefined;
   }
 }
 
 function BackgroundDecor({ id }: { id: string }) {
-  if (id === "bg_space" || id === "bg_night") {
+  if (id === "bg_space" || id === "bg_night" || id === "bg_aurora") {
     return (
       <div className="absolute inset-0 pointer-events-none">
         {[
@@ -674,6 +785,9 @@ function BackgroundDecor({ id }: { id: string }) {
         ].map((s, i) => (
           <span key={i} className="absolute text-white" style={{ left: `${s.x}%`, top: `${s.y}%`, fontSize: 8 }}>✦</span>
         ))}
+        {id === "bg_night" && (
+          <span className="absolute text-2xl" style={{ left: "75%", top: "12%" }}>🌙</span>
+        )}
       </div>
     );
   }
@@ -694,6 +808,81 @@ function BackgroundDecor({ id }: { id: string }) {
   if (id === "bg_beach") {
     return (
       <div className="absolute top-2 right-3 pointer-events-none text-2xl opacity-90">☀️</div>
+    );
+  }
+  if (id === "bg_rainbow") {
+    return (
+      <div className="absolute top-2 left-3 pointer-events-none text-2xl opacity-90">☁️</div>
+    );
+  }
+  if (id === "bg_mountain") {
+    return (
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none flex items-end justify-around text-3xl opacity-90 pb-0">
+        <span>⛰️</span><span>🏔️</span><span>⛰️</span>
+      </div>
+    );
+  }
+  if (id === "bg_ocean") {
+    return (
+      <div className="absolute inset-x-0 bottom-1 pointer-events-none flex justify-around text-base opacity-90">
+        <span>🌊</span><span>🐟</span><span>🌊</span>
+      </div>
+    );
+  }
+  if (id === "bg_city") {
+    return (
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none flex items-end justify-around text-2xl opacity-90">
+        <span>🏢</span><span>🏙️</span><span>🏬</span>
+      </div>
+    );
+  }
+  if (id === "bg_sunrise") {
+    return (
+      <div className="absolute pointer-events-none text-3xl" style={{ left: "60%", top: "55%" }}>🌅</div>
+    );
+  }
+  if (id === "bg_sakura") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        {[{x:10,y:15},{x:75,y:20},{x:25,y:60},{x:85,y:70},{x:50,y:30}].map((s,i)=>(
+          <span key={i} className="absolute text-sm" style={{left:`${s.x}%`,top:`${s.y}%`}}>🌸</span>
+        ))}
+      </div>
+    );
+  }
+  if (id === "bg_winter") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        {[{x:15,y:20},{x:40,y:10},{x:70,y:25},{x:88,y:15},{x:25,y:45},{x:60,y:50}].map((s,i)=>(
+          <span key={i} className="absolute text-xs text-white" style={{left:`${s.x}%`,top:`${s.y}%`}}>❄️</span>
+        ))}
+      </div>
+    );
+  }
+  if (id === "bg_garden") {
+    return (
+      <div className="absolute inset-x-0 bottom-1 pointer-events-none flex justify-around text-sm">
+        <span>🌺</span><span>🌻</span><span>🌷</span><span>🌹</span>
+      </div>
+    );
+  }
+  if (id === "bg_clouds") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        <span className="absolute text-2xl" style={{left:"10%",top:"15%"}}>☁️</span>
+        <span className="absolute text-xl" style={{left:"70%",top:"25%"}}>☁️</span>
+        <span className="absolute text-lg" style={{left:"40%",top:"8%"}}>☁️</span>
+      </div>
+    );
+  }
+  if (id === "bg_underwater") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        <span className="absolute text-lg" style={{left:"15%",top:"30%"}}>🐠</span>
+        <span className="absolute text-base" style={{left:"70%",top:"50%"}}>🐟</span>
+        <span className="absolute text-sm" style={{left:"40%",top:"20%"}}>🫧</span>
+        <span className="absolute text-2xl" style={{left:"50%",bottom:"2%",top:"auto"}}>🪸</span>
+      </div>
     );
   }
   return null;
