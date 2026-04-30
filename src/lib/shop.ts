@@ -32,7 +32,7 @@ export const SHOP_ITEMS: ShopItem[] = [
   { id: "acc_witch",      category: "accessory", name: "Häxhatt",          description: "Spetsig svart häxhatt", emoji: "🧙‍♀️", price: 280 },
   { id: "acc_helmet",     category: "accessory", name: "Riddarhjälm",      description: "Skinande riddarhjälm", emoji: "⛑️", price: 240 },
   { id: "acc_pirate",     category: "accessory", name: "Piratlapp",        description: "Svart ögonlapp för pirater", emoji: "🏴‍☠️", price: 190 },
-  { id: "acc_glasses_3d", category: "accessory", name: "Stjärnglasögon",   description: "Glasögon i stjärnform", emoji: "⭐", price: 210 },
+  { id: "acc_glasses_3d", category: "accessory", name: "Trekantiga glasögon",   description: "Glasögon i trekantsform", emoji: "🔺", price: 210 },
   { id: "acc_antlers",    category: "accessory", name: "Renhorn",          description: "Mysiga horn för julstämning", emoji: "🦌", price: 230 },
   { id: "acc_butterfly",  category: "accessory", name: "Fjäril",           description: "Fjäril som landat på huvudet", emoji: "🦋", price: 150 },
   { id: "acc_leaf",       category: "accessory", name: "Höstlöv",          description: "Litet löv på örat", emoji: "🍁", price: 80 },
