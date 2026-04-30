@@ -4,26 +4,17 @@ import { SHOP_ITEMS, SHOP_CATEGORIES, ShopCategory, ShopItem, findShopItem } fro
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Companion } from "@/components/Companion";
-import { Check, Lock, Sparkles, Play } from "lucide-react";
+import { Check, Lock, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ShopPage() {
   const { state, buyShopItem, equipAccessory, equipBackground } = useApp();
   const [tab, setTab] = useState<ShopCategory>("accessory");
-  const [previewMotion, setPreviewMotion] = useState<string | null>(null);
 
   const items = SHOP_ITEMS.filter(i => i.category === tab);
 
   const equippedAccessory = findShopItem(state.equippedAccessoryId ?? "");
   const equippedBackground = findShopItem(state.equippedBackgroundId ?? "");
-
-  const motionKey = (id: string) => id.replace(/^mo_/, "");
-
-  const playMotion = (itemId: string) => {
-    const key = motionKey(itemId);
-    setPreviewMotion(key);
-    setTimeout(() => setPreviewMotion(null), 2500);
-  };
 
   const handleAction = (item: ShopItem) => {
     const owned = state.ownedShopItems.includes(item.id);
@@ -39,8 +30,6 @@ export default function ShopPage() {
       const isEq = state.equippedBackgroundId === item.id;
       equipBackground(isEq ? null : item.id);
       toast(isEq ? `Bakgrund borttagen` : `${item.emoji} ny scen!`);
-    } else {
-      playMotion(item.id);
     }
   };
 
@@ -50,7 +39,7 @@ export default function ShopPage() {
         <p className="text-sm text-muted-foreground">Affären</p>
         <h1 className="text-2xl font-display font-semibold">Pynta din följis ✨</h1>
         <p className="text-sm text-muted-foreground">
-          Använd dina Följispoäng till tillbehör, bakgrunder och rörelser. Allt du köper är ditt för alltid.
+          Använd dina Följispoäng till tillbehör och bakgrunder. Allt du köper är ditt för alltid.
         </p>
       </header>
 
@@ -63,7 +52,6 @@ export default function ShopPage() {
             species={state.companionSpecies}
             accessoryId={state.equippedAccessoryId}
             backgroundId={state.equippedBackgroundId}
-            motion={previewMotion}
             pettable={false}
           />
         </div>
@@ -85,7 +73,7 @@ export default function ShopPage() {
       </Card>
 
       {/* Flikar */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 gap-2">
         {SHOP_CATEGORIES.map(cat => (
           <button
             key={cat.id}
@@ -150,9 +138,6 @@ export default function ShopPage() {
                   )}
                   {owned && item.category === "accessory" && (equipped ? "Ta av" : "Ta på")}
                   {owned && item.category === "background" && (equipped ? "Ta bort" : "Använd")}
-                  {owned && item.category === "motion" && (
-                    <><Play className="w-3 h-3 mr-1" /> Spela</>
-                  )}
                 </Button>
               </div>
             </Card>
