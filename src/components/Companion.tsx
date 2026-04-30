@@ -646,6 +646,107 @@ function renderAccessory(id: string) {
           <text x="110" y="50" fontSize="8" fill="hsl(42 95% 70%)">✨</text>
         </g>
       );
+    case "acc_glasses_round":
+      return (
+        <g>
+          <circle cx="83" cy="95" r="13" fill="hsl(40 50% 96%)" fillOpacity="0.4" stroke="hsl(35 60% 30%)" strokeWidth="3" />
+          <circle cx="117" cy="95" r="13" fill="hsl(40 50% 96%)" fillOpacity="0.4" stroke="hsl(35 60% 30%)" strokeWidth="3" />
+          <line x1="96" y1="95" x2="104" y2="95" stroke="hsl(35 60% 30%)" strokeWidth="3" />
+        </g>
+      );
+    case "acc_tophat":
+      return (
+        <g>
+          <rect x="78" y="10" width="44" height="42" rx="2" fill="hsl(220 30% 12%)" />
+          <rect x="60" y="48" width="80" height="8" rx="2" fill="hsl(220 30% 12%)" />
+          <rect x="78" y="38" width="44" height="5" fill="hsl(0 70% 45%)" />
+        </g>
+      );
+    case "acc_beret":
+      return (
+        <g>
+          <ellipse cx="100" cy="48" rx="42" ry="16" fill="hsl(0 65% 45%)" />
+          <ellipse cx="100" cy="44" rx="38" ry="12" fill="hsl(0 70% 50%)" />
+          <circle cx="118" cy="35" r="5" fill="hsl(0 60% 35%)" />
+        </g>
+      );
+    case "acc_tiara":
+      return (
+        <g>
+          <path d="M65 58 Q100 30 135 58" stroke="hsl(42 95% 60%)" strokeWidth="4" fill="none" />
+          <circle cx="100" cy="35" r="5" fill="hsl(195 90% 70%)" stroke="hsl(42 95% 50%)" strokeWidth="1.5" />
+          <circle cx="80" cy="48" r="3" fill="hsl(330 80% 70%)" />
+          <circle cx="120" cy="48" r="3" fill="hsl(330 80% 70%)" />
+        </g>
+      );
+    case "acc_santa":
+      return (
+        <g>
+          <path d="M68 58 Q100 5 132 58 Z" fill="hsl(0 75% 50%)" />
+          <rect x="60" y="56" width="80" height="10" rx="3" fill="hsl(40 50% 96%)" />
+          <circle cx="130" cy="20" r="8" fill="hsl(40 50% 96%)" />
+        </g>
+      );
+    case "acc_witch":
+      return (
+        <g>
+          <path d="M70 58 Q95 0 125 55 Q110 30 100 18 Z" fill="hsl(260 30% 12%)" />
+          <rect x="58" y="56" width="84" height="9" rx="3" fill="hsl(260 30% 12%)" />
+          <rect x="92" y="40" width="14" height="6" fill="hsl(280 60% 50%)" />
+        </g>
+      );
+    case "acc_helmet":
+      return (
+        <g>
+          <path d="M62 65 Q62 28 100 28 Q138 28 138 65 Z" fill="hsl(220 15% 70%)" stroke="hsl(220 20% 40%)" strokeWidth="2" />
+          <rect x="62" y="60" width="76" height="8" fill="hsl(220 15% 55%)" />
+          <path d="M98 30 L102 30 L102 14 L98 14 Z" fill="hsl(0 70% 50%)" />
+          <circle cx="100" cy="12" r="4" fill="hsl(0 70% 50%)" />
+        </g>
+      );
+    case "acc_pirate":
+      return (
+        <g>
+          <ellipse cx="83" cy="95" rx="14" ry="11" fill="hsl(220 30% 10%)" />
+          <path d="M70 88 Q100 78 145 92" stroke="hsl(220 30% 10%)" strokeWidth="2.5" fill="none" />
+        </g>
+      );
+    case "acc_glasses_3d":
+      return (
+        <g>
+          <path d="M83 80 L93 105 L73 105 Z" fill="hsl(42 95% 60%)" stroke="hsl(35 70% 35%)" strokeWidth="2" />
+          <path d="M117 80 L127 105 L107 105 Z" fill="hsl(42 95% 60%)" stroke="hsl(35 70% 35%)" strokeWidth="2" />
+          <line x1="93" y1="95" x2="107" y2="95" stroke="hsl(35 70% 35%)" strokeWidth="2.5" />
+        </g>
+      );
+    case "acc_antlers":
+      return (
+        <g stroke="hsl(28 50% 30%)" strokeWidth="3" strokeLinecap="round" fill="none">
+          <path d="M82 50 L72 25" />
+          <path d="M75 35 L65 30" />
+          <path d="M78 42 L68 40" />
+          <path d="M118 50 L128 25" />
+          <path d="M125 35 L135 30" />
+          <path d="M122 42 L132 40" />
+        </g>
+      );
+    case "acc_butterfly":
+      return (
+        <g transform="translate(72 32)">
+          <ellipse cx="-4" cy="-2" rx="6" ry="4" fill="hsl(280 70% 65%)" />
+          <ellipse cx="4" cy="-2" rx="6" ry="4" fill="hsl(280 70% 65%)" />
+          <ellipse cx="-4" cy="4" rx="5" ry="3" fill="hsl(330 75% 70%)" />
+          <ellipse cx="4" cy="4" rx="5" ry="3" fill="hsl(330 75% 70%)" />
+          <ellipse cx="0" cy="1" rx="1.5" ry="5" fill="hsl(220 50% 20%)" />
+        </g>
+      );
+    case "acc_leaf":
+      return (
+        <g transform="translate(60 70) rotate(-25)">
+          <path d="M0 0 Q8 -10 14 0 Q8 10 0 0 Z" fill="hsl(20 80% 50%)" />
+          <line x1="0" y1="0" x2="14" y2="0" stroke="hsl(28 60% 30%)" strokeWidth="1" />
+        </g>
+      );
     default:
       return null;
   }
