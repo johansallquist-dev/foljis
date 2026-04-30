@@ -687,14 +687,6 @@ function renderAccessory(id: string) {
           <circle cx="130" cy="20" r="8" fill="hsl(40 50% 96%)" />
         </g>
       );
-    case "acc_witch":
-      return (
-        <g>
-          <path d="M70 58 Q95 0 125 55 Q110 30 100 18 Z" fill="hsl(260 30% 12%)" />
-          <rect x="58" y="56" width="84" height="9" rx="3" fill="hsl(260 30% 12%)" />
-          <rect x="92" y="40" width="14" height="6" fill="hsl(280 60% 50%)" />
-        </g>
-      );
     case "acc_helmet":
       return (
         <g>
