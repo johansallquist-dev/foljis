@@ -761,12 +761,22 @@ function getBackgroundStyle(id?: string | null): string | undefined {
     case "bg_forest":  return "linear-gradient(180deg, hsl(150 40% 60%) 0%, hsl(150 40% 45%) 60%, hsl(95 35% 35%) 100%)";
     case "bg_night":   return "linear-gradient(180deg, hsl(230 60% 18%) 0%, hsl(240 50% 30%) 100%)";
     case "bg_rainbow": return "linear-gradient(180deg, hsl(0 80% 75%), hsl(30 90% 75%), hsl(50 90% 75%), hsl(120 60% 70%), hsl(200 70% 70%), hsl(260 60% 75%))";
+    case "bg_mountain": return "linear-gradient(180deg, hsl(210 70% 75%) 0%, hsl(210 50% 60%) 50%, hsl(220 20% 85%) 60%, hsl(220 15% 70%) 100%)";
+    case "bg_ocean":    return "linear-gradient(180deg, hsl(200 80% 70%) 0%, hsl(210 80% 50%) 40%, hsl(220 80% 35%) 100%)";
+    case "bg_city":     return "linear-gradient(180deg, hsl(20 80% 70%) 0%, hsl(280 50% 45%) 60%, hsl(260 40% 25%) 100%)";
+    case "bg_aurora":   return "linear-gradient(180deg, hsl(240 60% 15%) 0%, hsl(160 70% 35%) 40%, hsl(280 60% 35%) 70%, hsl(240 60% 15%) 100%)";
+    case "bg_sunrise":  return "linear-gradient(180deg, hsl(280 50% 60%) 0%, hsl(20 90% 70%) 40%, hsl(42 100% 75%) 70%, hsl(42 100% 85%) 100%)";
+    case "bg_sakura":   return "linear-gradient(180deg, hsl(330 70% 88%) 0%, hsl(330 60% 75%) 100%)";
+    case "bg_winter":   return "linear-gradient(180deg, hsl(210 50% 80%) 0%, hsl(210 30% 90%) 60%, hsl(0 0% 96%) 60%, hsl(0 0% 90%) 100%)";
+    case "bg_garden":   return "linear-gradient(180deg, hsl(195 70% 80%) 0%, hsl(120 50% 70%) 60%, hsl(120 40% 50%) 100%)";
+    case "bg_clouds":   return "linear-gradient(180deg, hsl(200 80% 70%) 0%, hsl(200 80% 85%) 100%)";
+    case "bg_underwater": return "linear-gradient(180deg, hsl(190 80% 55%) 0%, hsl(210 80% 35%) 60%, hsl(220 70% 25%) 100%)";
     default: return undefined;
   }
 }
 
 function BackgroundDecor({ id }: { id: string }) {
-  if (id === "bg_space" || id === "bg_night") {
+  if (id === "bg_space" || id === "bg_night" || id === "bg_aurora") {
     return (
       <div className="absolute inset-0 pointer-events-none">
         {[
@@ -775,6 +785,9 @@ function BackgroundDecor({ id }: { id: string }) {
         ].map((s, i) => (
           <span key={i} className="absolute text-white" style={{ left: `${s.x}%`, top: `${s.y}%`, fontSize: 8 }}>✦</span>
         ))}
+        {id === "bg_night" && (
+          <span className="absolute text-2xl" style={{ left: "75%", top: "12%" }}>🌙</span>
+        )}
       </div>
     );
   }
@@ -795,6 +808,81 @@ function BackgroundDecor({ id }: { id: string }) {
   if (id === "bg_beach") {
     return (
       <div className="absolute top-2 right-3 pointer-events-none text-2xl opacity-90">☀️</div>
+    );
+  }
+  if (id === "bg_rainbow") {
+    return (
+      <div className="absolute top-2 left-3 pointer-events-none text-2xl opacity-90">☁️</div>
+    );
+  }
+  if (id === "bg_mountain") {
+    return (
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none flex items-end justify-around text-3xl opacity-90 pb-0">
+        <span>⛰️</span><span>🏔️</span><span>⛰️</span>
+      </div>
+    );
+  }
+  if (id === "bg_ocean") {
+    return (
+      <div className="absolute inset-x-0 bottom-1 pointer-events-none flex justify-around text-base opacity-90">
+        <span>🌊</span><span>🐟</span><span>🌊</span>
+      </div>
+    );
+  }
+  if (id === "bg_city") {
+    return (
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none flex items-end justify-around text-2xl opacity-90">
+        <span>🏢</span><span>🏙️</span><span>🏬</span>
+      </div>
+    );
+  }
+  if (id === "bg_sunrise") {
+    return (
+      <div className="absolute pointer-events-none text-3xl" style={{ left: "60%", top: "55%" }}>🌅</div>
+    );
+  }
+  if (id === "bg_sakura") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        {[{x:10,y:15},{x:75,y:20},{x:25,y:60},{x:85,y:70},{x:50,y:30}].map((s,i)=>(
+          <span key={i} className="absolute text-sm" style={{left:`${s.x}%`,top:`${s.y}%`}}>🌸</span>
+        ))}
+      </div>
+    );
+  }
+  if (id === "bg_winter") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        {[{x:15,y:20},{x:40,y:10},{x:70,y:25},{x:88,y:15},{x:25,y:45},{x:60,y:50}].map((s,i)=>(
+          <span key={i} className="absolute text-xs text-white" style={{left:`${s.x}%`,top:`${s.y}%`}}>❄️</span>
+        ))}
+      </div>
+    );
+  }
+  if (id === "bg_garden") {
+    return (
+      <div className="absolute inset-x-0 bottom-1 pointer-events-none flex justify-around text-sm">
+        <span>🌺</span><span>🌻</span><span>🌷</span><span>🌹</span>
+      </div>
+    );
+  }
+  if (id === "bg_clouds") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        <span className="absolute text-2xl" style={{left:"10%",top:"15%"}}>☁️</span>
+        <span className="absolute text-xl" style={{left:"70%",top:"25%"}}>☁️</span>
+        <span className="absolute text-lg" style={{left:"40%",top:"8%"}}>☁️</span>
+      </div>
+    );
+  }
+  if (id === "bg_underwater") {
+    return (
+      <div className="absolute inset-0 pointer-events-none">
+        <span className="absolute text-lg" style={{left:"15%",top:"30%"}}>🐠</span>
+        <span className="absolute text-base" style={{left:"70%",top:"50%"}}>🐟</span>
+        <span className="absolute text-sm" style={{left:"40%",top:"20%"}}>🫧</span>
+        <span className="absolute text-2xl" style={{left:"50%",bottom:"2%",top:"auto"}}>🪸</span>
+      </div>
     );
   }
   return null;
