@@ -29,7 +29,7 @@ export const SHOP_ITEMS: ShopItem[] = [
   { id: "acc_beret",      category: "accessory", name: "Basker",           description: "Konstnärlig basker", emoji: "🎨", price: 170 },
   { id: "acc_tiara",      category: "accessory", name: "Diadem",           description: "Glittrigt diadem med ädelstenar", emoji: "💎", price: 320 },
   { id: "acc_santa",      category: "accessory", name: "Tomtemössa",       description: "Röd och vit tomtemössa", emoji: "🎅", price: 200 },
-  { id: "acc_witch",      category: "accessory", name: "Häxhatt",          description: "Spetsig svart häxhatt", emoji: "🧙‍♀️", price: 280 },
+  
   { id: "acc_helmet",     category: "accessory", name: "Riddarhjälm",      description: "Skinande riddarhjälm", emoji: "⛑️", price: 240 },
   { id: "acc_pirate",     category: "accessory", name: "Piratlapp",        description: "Svart ögonlapp för pirater", emoji: "🏴‍☠️", price: 190 },
   { id: "acc_glasses_3d", category: "accessory", name: "Trekantiga glasögon",   description: "Glasögon i trekantsform", emoji: "🔺", price: 210 },
