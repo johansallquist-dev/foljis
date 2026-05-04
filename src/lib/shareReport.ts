@@ -264,65 +264,60 @@ export function generateReportPdf(state: AppState): Blob {
   writeLine(`Bra: ${ratings.good}    Mittemellan: ${ratings.ok}    Dåligt: ${ratings.bad}    Utan betyg: ${ratings.none}`);
   y += 6;
 
-  // Per-activity breakdown by colour
+  // Per-day activity breakdown
   const lessonById = new Map(state.schedule.map(l => [l.id, l]));
-  const buckets: Record<"good" | "ok" | "bad", { name: string; date: string }[]> = {
-    good: [], ok: [], bad: [],
+  const ratingLabel: Record<"good" | "ok" | "bad", string> = {
+    good: "Bra",
+    ok: "Mittemellan",
+    bad: "Daligt",
   };
-  recentLessons.forEach(c => {
-    if (!c.rating) return;
-    const lesson = lessonById.get(c.lessonId);
-    const name = lesson ? `${lesson.emoji} ${lesson.subject}` : "Okänd aktivitet";
-    buckets[c.rating].push({ name, date: c.date });
-  });
+  const ratingColor: Record<"good" | "ok" | "bad", [number, number, number]> = {
+    good: [120, 180, 130],
+    ok: [230, 200, 90],
+    bad: [220, 110, 110],
+  };
 
-  const renderBucket = (
-    label: string,
-    color: [number, number, number],
-    items: { name: string; date: string }[],
-  ) => {
+  writeHeading("Aktiviteter per dag (senaste 7 dagarna)");
+  days.forEach(d => {
+    const dayLessons = recentLessons.filter(c => c.date === d);
     if (y > pageHeight - margin - 30) { doc.addPage(); y = margin; }
-    // Color dot
-    doc.setFillColor(color[0], color[1], color[2]);
-    doc.circle(margin + 5, y - 4, 5, "F");
     doc.setFont("helvetica", "bold");
     doc.setFontSize(11);
-    doc.setTextColor(20, 20, 20);
-    doc.text(`${label} (${items.length})`, margin + 16, y);
-    y += 16;
+    doc.text(formatDate(d), margin, y);
+    y += 14;
     doc.setFont("helvetica", "normal");
-    if (items.length === 0) {
+    doc.setFontSize(11);
+    if (dayLessons.length === 0) {
       doc.setTextColor(140, 140, 140);
-      writeLine("Inga aktiviteter markerade.", 16);
+      writeLine("Inga markerade aktiviteter.", 12);
       doc.setTextColor(20, 20, 20);
     } else {
-      // Group by activity name with count
-      const counts = new Map<string, number>();
-      items.forEach(i => counts.set(i.name, (counts.get(i.name) ?? 0) + 1));
-      Array.from(counts.entries())
-        .sort((a, b) => b[1] - a[1])
-        .forEach(([name, n]) => writeLine(`• ${name} – ${n} ggr`, 16));
+      dayLessons.forEach(c => {
+        if (y > pageHeight - margin) { doc.addPage(); y = margin; }
+        const lesson = lessonById.get(c.lessonId);
+        const name = lesson ? lesson.subject : "Okand aktivitet";
+        const rating = c.rating;
+        if (rating) {
+          const col = ratingColor[rating];
+          doc.setFillColor(col[0], col[1], col[2]);
+          doc.circle(margin + 16, y - 4, 4, "F");
+        } else {
+          doc.setDrawColor(180, 180, 180);
+          doc.circle(margin + 16, y - 4, 4, "S");
+        }
+        const ratingTxt = rating ? ratingLabel[rating] : "Utan betyg";
+        doc.text(`${name} – ${ratingTxt}`, margin + 26, y);
+        y += 14;
+      });
     }
     y += 4;
-  };
-
-  renderBucket("🟢 Bra", [120, 180, 130], buckets.good);
-  renderBucket("🟡 Mittemellan", [230, 200, 90], buckets.ok);
-  renderBucket("🔴 Dåligt", [220, 110, 110], buckets.bad);
-  y += 4;
+  });
 
   // Notes
   const notes = recentMoods.filter(m => m.note && m.note.trim()).slice(0, 5);
   if (notes.length) {
     writeHeading("Egna anteckningar");
     notes.forEach(n => writeLine(`${formatDate(n.date.slice(0, 10))}: "${n.note}"`));
-  }
-
-  // Achievements
-  const unlocked = ACHIEVEMENTS.filter(a => state.unlockedAchievements.includes(a.id));
-  if (unlocked.length) {
-    writeHeading(`Achievements upplåsta (${unlocked.length})`);
-    unlocked.forEach(a => writeLine(`• ${a.title} – ${a.description}`));
   }
 
   // Footer note
