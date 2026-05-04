@@ -5,13 +5,14 @@ import { todayKey } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Trash2, Check } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Companion } from "@/components/Companion";
+import { SortableRoutineList } from "@/components/SortableRoutineList";
 
 const SUGGESTIONS = ["🍎","🥪","🪥","👕","🎒","📚","🚲","🚌","💧","🧸","📱","🧥","🧦","🪞","🎧"];
 
 export default function MorningPage() {
-  const { state, toggleRoutineItem, addRoutineItem, removeRoutineItem } = useApp();
+  const { state, toggleRoutineItem, addRoutineItem, removeRoutineItem, reorderRoutine } = useApp();
   const today = todayKey();
   const hasMoodToday = state.moodEntries.some(m => m.date.startsWith(today));
   if (!hasMoodToday) return <Navigate to="/maende" replace state={{ from: "morgon" }} />;
@@ -55,35 +56,15 @@ export default function MorningPage() {
           </Card>
         )}
 
-        {state.routine.map(item => {
-          const done = todayDone.includes(item.id);
-          return (
-            <button
-              key={item.id}
-              onClick={() => toggleRoutineItem(item.id)}
-              className={`w-full text-left rounded-2xl p-4 shadow-card-soft transition-all active:scale-[0.99] flex items-center gap-4 ${
-                done ? "bg-calm-soft" : "bg-card"
-              }`}
-            >
-              <span className="text-3xl">{item.emoji}</span>
-              <span className={`flex-1 font-medium ${done ? "line-through text-muted-foreground" : ""}`}>
-                {item.label}
-              </span>
-              <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${
-                done ? "bg-calm border-calm" : "border-border"
-              }`}>
-                {done && <Check className="w-5 h-5 text-calm-foreground" />}
-              </div>
-              <button
-                onClick={(e) => { e.stopPropagation(); removeRoutineItem(item.id); }}
-                className="p-1 text-muted-foreground hover:text-destructive transition-colors"
-                aria-label="Ta bort"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </button>
-          );
-        })}
+        {state.routine.length > 0 && (
+          <SortableRoutineList
+            items={state.routine}
+            doneIds={todayDone}
+            onToggle={toggleRoutineItem}
+            onRemove={removeRoutineItem}
+            onReorder={reorderRoutine}
+          />
+        )}
       </div>
 
       {adding ? (
