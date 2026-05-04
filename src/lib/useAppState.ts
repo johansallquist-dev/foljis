@@ -167,6 +167,10 @@ export function useAppState() {
     setState(s => ({ ...s, eveningRoutine: s.eveningRoutine.filter(r => r.id !== id) }));
   }, []);
 
+  const reorderEveningRoutine = useCallback((items: RoutineItem[]) => {
+    setState(s => ({ ...s, eveningRoutine: items }));
+  }, []);
+
   const addMoodEntry = useCallback((mood: MoodLevel, feeling?: Feeling, note?: string) => {
     setState(s => {
       const entry: MoodEntry = {
@@ -354,6 +358,7 @@ export function useAppState() {
     toggleEveningItem,
     addEveningItem,
     removeEveningItem,
+    reorderEveningRoutine,
     addMoodEntry,
     addLesson,
     updateLesson,
