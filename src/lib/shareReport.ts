@@ -24,11 +24,13 @@ export function buildReportText(state: AppState): string {
   const days = last7Dates();
   const morningStats = days.map(d => {
     const h = state.routineHistory.find(x => x.date === d);
-    return { date: d, done: h?.itemIds.length ?? 0, total: state.routine.length };
+    const total = state.routine.length;
+    return { date: d, done: Math.min(h?.itemIds.length ?? 0, total), total };
   });
   const eveningStats = days.map(d => {
     const h = state.eveningHistory.find(x => x.date === d);
-    return { date: d, done: h?.itemIds.length ?? 0, total: state.eveningRoutine.length };
+    const total = state.eveningRoutine.length;
+    return { date: d, done: Math.min(h?.itemIds.length ?? 0, total), total };
   });
 
   // Mood last 7 days
@@ -74,14 +76,14 @@ export function buildReportText(state: AppState): string {
 
   lines.push("Morgonrutin – senaste 7 dagarna");
   morningStats.forEach(s => {
-    const pct = s.total ? Math.round((s.done / s.total) * 100) : 0;
+    const pct = s.total ? Math.min(100, Math.round((s.done / s.total) * 100)) : 0;
     lines.push(`• ${formatDate(s.date)}: ${s.done}/${s.total} (${pct}%)`);
   });
   lines.push("");
 
   lines.push("Kvällsrutin – senaste 7 dagarna");
   eveningStats.forEach(s => {
-    const pct = s.total ? Math.round((s.done / s.total) * 100) : 0;
+    const pct = s.total ? Math.min(100, Math.round((s.done / s.total) * 100)) : 0;
     lines.push(`• ${formatDate(s.date)}: ${s.done}/${s.total} (${pct}%)`);
   });
   lines.push("");
@@ -212,8 +214,9 @@ export function generateReportPdf(state: AppState): Blob {
     writeHeading(title);
     days.forEach(d => {
       const h = history.find(x => x.date === d);
-      const done = h?.itemIds.length ?? 0;
-      const pct = total ? Math.round((done / total) * 100) : 0;
+      const rawDone = h?.itemIds.length ?? 0;
+      const done = Math.min(rawDone, total);
+      const pct = total ? Math.min(100, Math.round((done / total) * 100)) : 0;
       // Date + text
       doc.text(`${formatDate(d)}`, margin, y);
       doc.text(`${done}/${total}`, margin + 110, y);
