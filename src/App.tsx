@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppStateProvider, useApp } from "@/lib/AppStateContext";
 import { AppLayout } from "@/components/AppLayout";
 import { Onboarding } from "@/components/Onboarding";
+import { CookieBanner } from "@/components/CookieBanner";
 import HomePage from "./pages/HomePage";
 import MorningPage from "./pages/MorningPage";
 import EveningPage from "./pages/EveningPage";
@@ -47,6 +48,7 @@ const App = () => (
       <Sonner position="top-center" />
       <AppStateProvider>
         <AppContent />
+        <CookieBanner />
       </AppStateProvider>
     </TooltipProvider>
   </QueryClientProvider>
