@@ -19,9 +19,44 @@ export default function EveningPage() {
   const todayDone = state.eveningHistory.find(h => h.date === today)?.itemIds || [];
   const allDone = state.eveningRoutine.length > 0 && todayDone.length === state.eveningRoutine.length;
 
-  const [adding, setAdding] = useState(false);
-  const [newLabel, setNewLabel] = useState("");
-  const [newEmoji, setNewEmoji] = useState("🌙");
+  // Plocka fram något positivt från dagen
+  const morningDoneToday = state.routineHistory.find(h => h.date === today)?.itemIds.length ?? 0;
+  const morningTotal = state.routine.length;
+  const morningAllDone = morningTotal > 0 && morningDoneToday >= morningTotal;
+  const lessonsToday = state.lessonCompletions.filter(c => c.date === today);
+  const goodLessons = lessonsToday.filter(c => c.rating === "good");
+  const moodEntriesToday = state.moodEntries.filter(m => m.date.startsWith(today));
+  const avgMoodToday = moodEntriesToday.length
+    ? moodEntriesToday.reduce((a, b) => a + b.mood, 0) / moodEntriesToday.length
+    : 0;
+
+  type Highlight = { emoji: string; title: string; text: string };
+  const highlights: Highlight[] = [];
+  if (morningAllDone) {
+    highlights.push({ emoji: "☀️", title: "Du klarade hela morgonrutinen!", text: "Vilken bra start på dagen – det är något att vara stolt över." });
+  } else if (morningDoneToday > 0) {
+    highlights.push({ emoji: "🌅", title: `Du gjorde ${morningDoneToday} av ${morningTotal} morgonrutiner`, text: "Varje liten sak räknas – bra jobbat!" });
+  }
+  if (goodLessons.length > 0) {
+    highlights.push({ emoji: "🎉", title: `${goodLessons.length} aktivitet${goodLessons.length === 1 ? "" : "er"} kändes bra idag`, text: "Kul att något gick riktigt fint – kom ihåg den känslan." });
+  } else if (lessonsToday.length > 0) {
+    highlights.push({ emoji: "💪", title: `Du tog dig igenom ${lessonsToday.length} aktivitet${lessonsToday.length === 1 ? "" : "er"}`, text: "Att göra det man ska, även sega dagar, är värt att fira." });
+  }
+  if (moodEntriesToday.length > 0) {
+    if (avgMoodToday >= 4) {
+      highlights.push({ emoji: "💛", title: "Du checkade in ditt mående", text: "Och det verkar ha varit en ganska fin dag – härligt!" });
+    } else {
+      highlights.push({ emoji: "💛", title: "Du checkade in ditt mående", text: "Det är modigt att lyssna på sig själv – bra att du gjorde det." });
+    }
+  }
+  if (state.streak > 1) {
+    highlights.push({ emoji: "🔥", title: `${state.streak} dagar i rad!`, text: "Din streak växer – du dyker upp för dig själv." });
+  }
+  if (highlights.length === 0) {
+    highlights.push({ emoji: "🌱", title: "Du är här – och det räknas", text: "Bara att checka in på kvällen är en bra vana att vara stolt över." });
+  }
+  const highlight = highlights[Math.floor(Math.random() * highlights.length)];
+
 
   const handleAdd = () => {
     if (!newLabel.trim()) return;
