@@ -79,6 +79,17 @@ export default function EveningPage() {
         </p>
       </header>
 
+      <Card className="border-0 p-4 shadow-card-soft bg-primary-soft">
+        <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">Något fint från idag</p>
+        <div className="flex items-start gap-3">
+          <span className="text-3xl shrink-0" aria-hidden>{highlight.emoji}</span>
+          <div>
+            <p className="font-display font-semibold leading-tight">{highlight.title}</p>
+            <p className="text-sm text-muted-foreground mt-1">{highlight.text}</p>
+          </div>
+        </div>
+      </Card>
+
       {allDone && (
         <Card className="border-0 gradient-hero p-5 text-center pop-in shadow-card-soft">
           <Companion mood={4} size={120} celebrate species={state.companionSpecies} accessoryId={state.equippedAccessoryId} backgroundId={state.equippedBackgroundId} />
