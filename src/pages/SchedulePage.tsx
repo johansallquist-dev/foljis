@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import { Plus, Trash2, Clock, MapPin } from "lucide-react";
 
 const DAYS = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag"];
@@ -21,7 +22,7 @@ const SUBJECT_EMOJIS = [
 ];
 
 export default function SchedulePage() {
-  const { state, addLesson, removeLesson, setLessonRating } = useApp();
+  const { state, addLesson, removeLesson, setLessonRating, setLessonNote } = useApp();
   const today = todayKey();
   const jsDay = new Date().getDay();
   const todaySchoolDay = jsDay >= 1 && jsDay <= 5 ? jsDay - 1 : 0;
