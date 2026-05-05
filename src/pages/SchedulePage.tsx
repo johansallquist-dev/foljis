@@ -21,6 +21,15 @@ const SUBJECT_EMOJIS = [
   "🎭","🎬","🧩","♟️","🐴","🐶","🌳","🧘","🛼","🧗"
 ];
 
+const QUICK_TAGS: { emoji: string; label: string }[] = [
+  { emoji: "😊", label: "Bra lektion" },
+  { emoji: "👥", label: "Grupparbete" },
+  { emoji: "🔊", label: "Högljutt" },
+  { emoji: "🤫", label: "Lugnt" },
+  { emoji: "🧑", label: "Eget arbete" },
+  { emoji: "😞", label: "Dålig lektion" },
+];
+
 export default function SchedulePage() {
   const { state, addLesson, removeLesson, setLessonRating, setLessonNote } = useApp();
   const today = todayKey();
