@@ -381,6 +381,7 @@ export function useAppState() {
     removeLesson,
     toggleLessonComplete,
     setLessonRating,
+    setLessonNote,
     markTipRead,
     setCompanionName,
     setCompanionSpecies,
