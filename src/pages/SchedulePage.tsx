@@ -146,6 +146,16 @@ export default function SchedulePage() {
                       );
                     })}
                   </div>
+                  <div className="mt-3">
+                    <p className="text-xs text-muted-foreground mb-1.5">Kommentar (valfritt)</p>
+                    <Textarea
+                      value={completion?.note ?? ""}
+                      onChange={e => setLessonNote(l.id, e.target.value)}
+                      placeholder="Skriv något du vill berätta för en vuxen…"
+                      className="rounded-xl bg-background min-h-[60px] text-sm"
+                      maxLength={500}
+                    />
+                  </div>
                 </div>
               )}
             </Card>
