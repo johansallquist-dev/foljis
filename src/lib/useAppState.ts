@@ -264,6 +264,22 @@ export function useAppState() {
     });
   }, [checkAchievements]);
 
+  const setLessonNote = useCallback((lessonId: string, note: string) => {
+    setState(s => {
+      const today = todayKey();
+      const existing = s.lessonCompletions.find(c => c.date === today && c.lessonId === lessonId);
+      let completions;
+      if (existing) {
+        completions = s.lessonCompletions.map(c =>
+          c.date === today && c.lessonId === lessonId ? { ...c, note } : c
+        );
+      } else {
+        completions = [...s.lessonCompletions, { date: today, lessonId, note }];
+      }
+      return { ...s, lessonCompletions: completions };
+    });
+  }, []);
+
   const markTipRead = useCallback((tipId: string) => {
     setState(s => {
       if (s.readTips.includes(tipId)) return s;
@@ -365,6 +381,7 @@ export function useAppState() {
     removeLesson,
     toggleLessonComplete,
     setLessonRating,
+    setLessonNote,
     markTipRead,
     setCompanionName,
     setCompanionSpecies,

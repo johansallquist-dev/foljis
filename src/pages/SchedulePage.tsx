@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import { Plus, Trash2, Clock, MapPin } from "lucide-react";
 
 const DAYS = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag"];
@@ -21,7 +22,7 @@ const SUBJECT_EMOJIS = [
 ];
 
 export default function SchedulePage() {
-  const { state, addLesson, removeLesson, setLessonRating } = useApp();
+  const { state, addLesson, removeLesson, setLessonRating, setLessonNote } = useApp();
   const today = todayKey();
   const jsDay = new Date().getDay();
   const todaySchoolDay = jsDay >= 1 && jsDay <= 5 ? jsDay - 1 : 0;
@@ -144,6 +145,16 @@ export default function SchedulePage() {
                         </button>
                       );
                     })}
+                  </div>
+                  <div className="mt-3">
+                    <p className="text-xs text-muted-foreground mb-1.5">Kommentar (valfritt)</p>
+                    <Textarea
+                      value={completion?.note ?? ""}
+                      onChange={e => setLessonNote(l.id, e.target.value)}
+                      placeholder="Skriv något du vill berätta för en vuxen…"
+                      className="rounded-xl bg-background min-h-[60px] text-sm"
+                      maxLength={500}
+                    />
                   </div>
                 </div>
               )}

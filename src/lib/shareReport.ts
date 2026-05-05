@@ -311,6 +311,18 @@ export function generateReportPdf(state: AppState): Blob {
         const ratingTxt = rating ? ratingLabel[rating] : "Utan betyg";
         doc.text(`${name} – ${ratingTxt}`, margin + 26, y);
         y += 14;
+        if (c.note && c.note.trim()) {
+          doc.setFont("helvetica", "italic");
+          doc.setTextColor(90, 80, 70);
+          const wrapped = doc.splitTextToSize(`"${c.note.trim()}"`, maxWidth - 36);
+          wrapped.forEach((line: string) => {
+            if (y > pageHeight - margin) { doc.addPage(); y = margin; }
+            doc.text(line, margin + 26, y);
+            y += 13;
+          });
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(20, 20, 20);
+        }
       });
     }
     y += 4;

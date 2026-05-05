@@ -44,6 +44,7 @@ export interface LessonCompletion {
   date: string;
   lessonId: string;
   rating?: LessonRating;
+  note?: string;
 }
 
 export type CompanionSpeciesId =
