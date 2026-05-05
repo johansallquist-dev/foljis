@@ -21,6 +21,15 @@ const SUBJECT_EMOJIS = [
   "🎭","🎬","🧩","♟️","🐴","🐶","🌳","🧘","🛼","🧗"
 ];
 
+const QUICK_TAGS: { emoji: string; label: string }[] = [
+  { emoji: "😊", label: "Bra lektion" },
+  { emoji: "👥", label: "Grupparbete" },
+  { emoji: "🔊", label: "Högljutt" },
+  { emoji: "🤫", label: "Lugnt" },
+  { emoji: "🧑", label: "Eget arbete" },
+  { emoji: "😞", label: "Dålig lektion" },
+];
+
 export default function SchedulePage() {
   const { state, addLesson, removeLesson, setLessonRating, setLessonNote } = useApp();
   const today = todayKey();
@@ -147,6 +156,40 @@ export default function SchedulePage() {
                     })}
                   </div>
                   <div className="mt-3">
+                    <p className="text-xs text-muted-foreground mb-1.5">Snabbval</p>
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      {QUICK_TAGS.map(tag => {
+                        const note = completion?.note ?? "";
+                        const marker = `#${tag.label}`;
+                        const active = note.includes(marker);
+                        return (
+                          <button
+                            key={tag.label}
+                            type="button"
+                            onClick={() => {
+                              const current = completion?.note ?? "";
+                              let next: string;
+                              if (active) {
+                                next = current
+                                  .replace(new RegExp(`\\s*${marker}\\b`, "g"), "")
+                                  .trim();
+                              } else {
+                                next = current ? `${current.trim()} ${marker}` : marker;
+                              }
+                              setLessonNote(l.id, next);
+                            }}
+                            className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
+                              active
+                                ? "bg-primary text-primary-foreground shadow-soft"
+                                : "bg-muted text-muted-foreground hover:bg-secondary"
+                            }`}
+                            aria-pressed={active}
+                          >
+                            {tag.emoji} {tag.label}
+                          </button>
+                        );
+                      })}
+                    </div>
                     <p className="text-xs text-muted-foreground mb-1.5">Kommentar (valfritt)</p>
                     <Textarea
                       value={completion?.note ?? ""}
