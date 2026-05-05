@@ -57,6 +57,9 @@ export default function EveningPage() {
   }
   const highlight = highlights[Math.floor(Math.random() * highlights.length)];
 
+  const [adding, setAdding] = useState(false);
+  const [newLabel, setNewLabel] = useState("");
+  const [newEmoji, setNewEmoji] = useState("🌙");
 
   const handleAdd = () => {
     if (!newLabel.trim()) return;
