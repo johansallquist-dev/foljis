@@ -23,11 +23,16 @@ const SUBJECT_EMOJIS = [
 
 const QUICK_TAGS: { emoji: string; label: string }[] = [
   { emoji: "😊", label: "Bra lektion" },
+  { emoji: "😞", label: "Dålig lektion" },
   { emoji: "👥", label: "Grupparbete" },
+  { emoji: "🧑", label: "Eget arbete" },
   { emoji: "🔊", label: "Högljutt" },
   { emoji: "🤫", label: "Lugnt" },
-  { emoji: "🧑", label: "Eget arbete" },
-  { emoji: "😞", label: "Dålig lektion" },
+  { emoji: "🙋", label: "Fick hjälp" },
+  { emoji: "🤷", label: "Fick ingen hjälp" },
+  { emoji: "🟢", label: "För lätt" },
+  { emoji: "🟡", label: "Lagom svårt" },
+  { emoji: "🔴", label: "För svårt" },
 ];
 
 export default function SchedulePage() {
