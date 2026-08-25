@@ -6,9 +6,8 @@ export type CompanionSpecies =
   | "panda"   // Pandan
   | "bunny"   // Kaninen
   | "cat"     // Katten
-  | "owl"     // Ugglan
-  | "dragon"  // Drakungen
-  | "axolotl" // Axolotl
+  | "dog"     // Labrador
+  | "horse"   // Häst
   | "penguin" // Pingvin
   | "giraffe";// Giraff
 
@@ -26,9 +25,8 @@ export const SPECIES: SpeciesInfo[] = [
   { id: "panda",   name: "Panda",      emoji: "🐼", defaultName: "Bambu",   description: "Lugn och mysig" },
   { id: "bunny",   name: "Kanin",      emoji: "🐰", defaultName: "Hopp",    description: "Pigg och peppig" },
   { id: "cat",     name: "Katt",       emoji: "🐱", defaultName: "Mons",    description: "Mjuk och självsäker" },
-  { id: "owl",     name: "Uggla",      emoji: "🦉", defaultName: "Ulf",     description: "Vis och stöttande" },
-  { id: "dragon",  name: "Drake",      emoji: "🐲", defaultName: "Funke",   description: "Modig och mysig" },
-  { id: "axolotl", name: "Axolotl",    emoji: "🦎", defaultName: "Lotti",   description: "Lite annorlunda, väldigt snäll" },
+  { id: "dog",     name: "Labrador",   emoji: "🐕", defaultName: "Ludde",   description: "Lekfull och lojal" },
+  { id: "horse",   name: "Häst",       emoji: "🐴", defaultName: "Hilda",   description: "Stark och snäll" },
   { id: "penguin", name: "Pingvin",    emoji: "🐧", defaultName: "Pingo",   description: "Cool och tålmodig" },
   { id: "giraffe", name: "Giraff",     emoji: "🦒", defaultName: "Gina",    description: "Lång och lugn, ser långt fram" },
 ];
@@ -193,9 +191,8 @@ function renderSpecies(s: CompanionSpecies, e: Expression, mood: number) {
     case "panda":   return <Panda e={e} mood={mood} />;
     case "bunny":   return <Bunny e={e} mood={mood} />;
     case "cat":     return <Cat e={e} mood={mood} />;
-    case "owl":     return <Owl e={e} mood={mood} />;
-    case "dragon":  return <Dragon e={e} mood={mood} />;
-    case "axolotl": return <Axolotl e={e} mood={mood} />;
+    case "dog":     return <Dog e={e} mood={mood} />;
+    case "horse":   return <Horse e={e} mood={mood} />;
     case "penguin": return <Penguin e={e} mood={mood} />;
     case "giraffe": return <Giraffe e={e} mood={mood} />;
   }
