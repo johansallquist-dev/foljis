@@ -7,9 +7,8 @@ const SPECIES = [
   { id: "panda", label: "Panda" },
   { id: "bunny", label: "Kanin" },
   { id: "cat", label: "Katt" },
-  { id: "owl", label: "Uggla" },
-  { id: "dragon", label: "Drake" },
-  { id: "axolotl", label: "Axolotl" },
+  { id: "dog", label: "Labrador" },
+  { id: "horse", label: "Häst" },
   { id: "penguin", label: "Pingvin" },
   { id: "giraffe", label: "Giraff" },
 ];

@@ -11,7 +11,17 @@ function loadState(): AppState {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return initialState;
     const parsed = JSON.parse(raw);
-    return { ...initialState, ...parsed };
+    const merged = { ...initialState, ...parsed };
+    // Migrera borttagna/ersatta följis-arter
+    const speciesMigration: Record<string, CompanionSpeciesId> = {
+      owl: "dog",
+      dragon: "horse",
+      axolotl: "panda",
+    };
+    if (merged.companionSpecies in speciesMigration) {
+      merged.companionSpecies = speciesMigration[merged.companionSpecies];
+    }
+    return merged;
   } catch {
     return initialState;
   }
