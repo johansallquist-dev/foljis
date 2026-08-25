@@ -6,9 +6,8 @@ export type CompanionSpecies =
   | "panda"   // Pandan
   | "bunny"   // Kaninen
   | "cat"     // Katten
-  | "owl"     // Ugglan
-  | "dragon"  // Drakungen
-  | "axolotl" // Axolotl
+  | "dog"     // Labrador
+  | "horse"   // Häst
   | "penguin" // Pingvin
   | "giraffe";// Giraff
 
@@ -26,9 +25,8 @@ export const SPECIES: SpeciesInfo[] = [
   { id: "panda",   name: "Panda",      emoji: "🐼", defaultName: "Bambu",   description: "Lugn och mysig" },
   { id: "bunny",   name: "Kanin",      emoji: "🐰", defaultName: "Hopp",    description: "Pigg och peppig" },
   { id: "cat",     name: "Katt",       emoji: "🐱", defaultName: "Mons",    description: "Mjuk och självsäker" },
-  { id: "owl",     name: "Uggla",      emoji: "🦉", defaultName: "Ulf",     description: "Vis och stöttande" },
-  { id: "dragon",  name: "Drake",      emoji: "🐲", defaultName: "Funke",   description: "Modig och mysig" },
-  { id: "axolotl", name: "Axolotl",    emoji: "🦎", defaultName: "Lotti",   description: "Lite annorlunda, väldigt snäll" },
+  { id: "dog",     name: "Labrador",   emoji: "🐕", defaultName: "Ludde",   description: "Lekfull och lojal" },
+  { id: "horse",   name: "Häst",       emoji: "🐴", defaultName: "Hilda",   description: "Stark och snäll" },
   { id: "penguin", name: "Pingvin",    emoji: "🐧", defaultName: "Pingo",   description: "Cool och tålmodig" },
   { id: "giraffe", name: "Giraff",     emoji: "🦒", defaultName: "Gina",    description: "Lång och lugn, ser långt fram" },
 ];
@@ -193,9 +191,8 @@ function renderSpecies(s: CompanionSpecies, e: Expression, mood: number) {
     case "panda":   return <Panda e={e} mood={mood} />;
     case "bunny":   return <Bunny e={e} mood={mood} />;
     case "cat":     return <Cat e={e} mood={mood} />;
-    case "owl":     return <Owl e={e} mood={mood} />;
-    case "dragon":  return <Dragon e={e} mood={mood} />;
-    case "axolotl": return <Axolotl e={e} mood={mood} />;
+    case "dog":     return <Dog e={e} mood={mood} />;
+    case "horse":   return <Horse e={e} mood={mood} />;
     case "penguin": return <Penguin e={e} mood={mood} />;
     case "giraffe": return <Giraffe e={e} mood={mood} />;
   }
@@ -409,92 +406,73 @@ function Cat({ e, mood }: { e: Expression; mood: number }) {
   );
 }
 
-/* ---------- Uggla ---------- */
-function Owl({ e, mood }: { e: Expression; mood: number }) {
-  const body = mood >= 1 ? "hsl(260 30% 55%)" : "hsl(260 15% 60%)";
-  const belly = "hsl(260 40% 88%)";
+/* ---------- Hund (svart labrador) ---------- */
+function Dog({ e, mood }: { e: Expression; mood: number }) {
+  const fur = mood >= 1 ? "hsl(220 25% 18%)" : "hsl(220 10% 40%)";
+  const light = "hsl(40 30% 88%)";
   return (
     <>
-      {/* Tofsar */}
-      <path d="M70 55 L78 38 L86 58 Z" fill={body} />
-      <path d="M130 55 L122 38 L114 58 Z" fill={body} />
-      {/* Kropp */}
-      <ellipse cx="100" cy="115" rx="60" ry="58" fill={body} filter="url(#softShadow)" />
-      <ellipse cx="100" cy="125" rx="38" ry="38" fill={belly} />
-      {/* Stora ögoncirklar */}
-      <circle cx="83" cy="98" r="18" fill="hsl(40 50% 96%)" />
-      <circle cx="117" cy="98" r="18" fill="hsl(40 50% 96%)" />
-      {/* Näbb */}
-      <path d="M94 118 L100 128 L106 118 Z" fill="hsl(42 95% 55%)" />
-      {/* Ögon i de stora cirklarna */}
+      {/* Hängande öron */}
+      <ellipse cx="52" cy="92" rx="16" ry="34" fill={fur} transform="rotate(15 52 92)" />
+      <ellipse cx="148" cy="92" rx="16" ry="34" fill={fur} transform="rotate(-15 148 92)" />
+      {/* Huvud */}
+      <ellipse cx="100" cy="112" rx="60" ry="56" fill={fur} filter="url(#softShadow)" />
+      {/* Panna/mellansida */}
+      <ellipse cx="100" cy="108" rx="34" ry="38" fill={light} />
+      {/* Nos */}
+      <ellipse cx="100" cy="130" rx="14" ry="10" fill="hsl(220 20% 12%)" />
+      <ellipse cx="100" cy="126" rx="5" ry="3.5" fill="hsl(220 30% 25%)" />
+      {/* Ögon ovanför nospartiet */}
       {e.eyes === "happy" && (
         <>
-          <path d="M76 100 Q83 92 90 100" stroke="hsl(220 50% 22%)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-          <path d="M110 100 Q117 92 124 100" stroke="hsl(220 50% 22%)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+          <path d="M80 98 Q86 90 92 98" stroke="hsl(220 50% 12%)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+          <path d="M108 98 Q114 90 120 98" stroke="hsl(220 50% 12%)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
         </>
       )}
       {e.eyes === "open" && (
         <>
-          <circle cx="83" cy="98" r="6" fill="hsl(220 50% 22%)" /><circle cx="85" cy="96" r="2" fill="white" />
-          <circle cx="117" cy="98" r="6" fill="hsl(220 50% 22%)" /><circle cx="119" cy="96" r="2" fill="white" />
+          <circle cx="86" cy="98" r="4.5" fill="hsl(220 50% 12%)" />
+          <circle cx="87" cy="96.5" r="1.5" fill="white" />
+          <circle cx="114" cy="98" r="4.5" fill="hsl(220 50% 12%)" />
+          <circle cx="115" cy="96.5" r="1.5" fill="white" />
         </>
       )}
       {e.eyes === "tired" && (
         <>
-          <path d="M76 100 L90 100" stroke="hsl(220 30% 40%)" strokeWidth="4" strokeLinecap="round" />
-          <path d="M110 100 L124 100" stroke="hsl(220 30% 40%)" strokeWidth="4" strokeLinecap="round" />
+          <path d="M79 100 L93 100" stroke="hsl(220 30% 35%)" strokeWidth="3.5" strokeLinecap="round" />
+          <path d="M107 100 L121 100" stroke="hsl(220 30% 35%)" strokeWidth="3.5" strokeLinecap="round" />
         </>
       )}
-      <FaceMouthOnly e={e} cy={120} mouthDy={20} />
-      {e.cheeks && (<><ellipse cx="65" cy="125" rx="6" ry="3" fill="hsl(8 85% 75%)" opacity="0.55"/><ellipse cx="135" cy="125" rx="6" ry="3" fill="hsl(8 85% 75%)" opacity="0.55"/></>)}
+      <FaceMouthOnly e={e} cy={112} mouthDy={24} color="hsl(220 50% 12%)" />
+      {e.cheeks && (<><ellipse cx="68" cy="122" rx="7" ry="4" fill="hsl(8 85% 75%)" opacity="0.55"/><ellipse cx="132" cy="122" rx="7" ry="4" fill="hsl(8 85% 75%)" opacity="0.55"/></>)}
       {e.sparkles && (<g><text x="40" y="55" fontSize="20">✨</text><text x="150" y="60" fontSize="20">✨</text></g>)}
     </>
   );
 }
 
-/* ---------- Drake ---------- */
-function Dragon({ e, mood }: { e: Expression; mood: number }) {
-  const body = mood >= 1 ? "hsl(152 50% 60%)" : "hsl(152 20% 60%)";
-  const dark = "hsl(152 55% 40%)";
+/* ---------- Häst ---------- */
+function Horse({ e, mood }: { e: Expression; mood: number }) {
+  const body = mood >= 1 ? "hsl(30 45% 55%)" : "hsl(30 15% 60%)";
+  const mane = mood >= 1 ? "hsl(30 60% 30%)" : "hsl(30 15% 35%)";
+  const light = "hsl(40 45% 85%)";
   return (
     <>
-      {/* Hornen */}
-      <path d="M70 60 L65 38 L80 55 Z" fill={dark} />
-      <path d="M130 60 L135 38 L120 55 Z" fill={dark} />
-      {/* Vingar */}
-      <path d="M40 110 Q20 90 30 130 Q45 130 50 115 Z" fill={dark} opacity="0.85" />
-      <path d="M160 110 Q180 90 170 130 Q155 130 150 115 Z" fill={dark} opacity="0.85" />
-      {/* Kropp */}
-      <ellipse cx="100" cy="115" rx="58" ry="55" fill={body} filter="url(#softShadow)" />
-      {/* Buktecken */}
-      <ellipse cx="100" cy="130" rx="30" ry="22" fill="hsl(42 80% 88%)" />
-      {/* Ryggtaggar */}
-      <path d="M85 60 L95 50 L105 60 L115 50 L125 60" stroke={dark} strokeWidth="3" fill="none" strokeLinejoin="round" />
-      <Face e={e} cy={112} eyeDx={16} eyeDy={-10} mouthDy={14} />
-    </>
-  );
-}
-
-/* ---------- Axolotl ---------- */
-function Axolotl({ e, mood }: { e: Expression; mood: number }) {
-  const body = mood >= 1 ? "hsl(330 80% 85%)" : "hsl(330 25% 80%)";
-  const gill = mood >= 1 ? "hsl(330 80% 75%)" : "hsl(330 25% 70%)";
-  return (
-    <>
-      {/* Gälar – små "fjädrar" på sidorna */}
-      {[0, 1, 2].map(i => (
-        <g key={`l${i}`}>
-          <ellipse cx={50 - i*4} cy={90 + i*16} rx="10" ry="6" fill={gill} transform={`rotate(${-20 + i*8} ${50} ${90 + i*16})`} />
-        </g>
-      ))}
-      {[0, 1, 2].map(i => (
-        <g key={`r${i}`}>
-          <ellipse cx={150 + i*4} cy={90 + i*16} rx="10" ry="6" fill={gill} transform={`rotate(${20 - i*8} ${150} ${90 + i*16})`} />
-        </g>
-      ))}
-      {/* Kropp */}
-      <ellipse cx="100" cy="115" rx="55" ry="55" fill={body} filter="url(#softShadow)" />
-      <Face e={e} cy={112} eyeDx={16} eyeDy={-8} mouthDy={14} />
+      {/* Mähne */}
+      <path d="M70 75 Q78 40 100 35 Q122 40 130 75" fill={mane} />
+      <path d="M78 55 Q82 35 95 32" stroke={mane} strokeWidth="5" fill="none" strokeLinecap="round" />
+      <path d="M95 52 Q100 28 110 32" stroke={mane} strokeWidth="5" fill="none" strokeLinecap="round" />
+      <path d="M110 58 Q118 35 125 45" stroke={mane} strokeWidth="4" fill="none" strokeLinecap="round" />
+      {/* Öron */}
+      <path d="M68 72 L62 48 L80 65 Z" fill={body} />
+      <path d="M132 72 L138 48 L120 65 Z" fill={body} />
+      {/* Huvud */}
+      <ellipse cx="100" cy="112" rx="58" ry="54" fill={body} filter="url(#softShadow)" />
+      {/* Nosparti */}
+      <ellipse cx="100" cy="132" rx="22" ry="16" fill={light} />
+      {/* Näsborrar */}
+      <ellipse cx="94" cy="130" rx="2" ry="2.5" fill="hsl(30 40% 25%)" />
+      <ellipse cx="106" cy="130" rx="2" ry="2.5" fill="hsl(30 40% 25%)" />
+      <Face e={e} cy={108} eyeDx={16} eyeDy={-8} mouthDy={22} color="hsl(30 40% 20%)" />
     </>
   );
 }
