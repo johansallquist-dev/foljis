@@ -1,7 +1,7 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
-import { COPING_BY_FEELING, FEELINGS } from "@/lib/tips";
-import type { Feeling } from "@/lib/types";
+import { COPING_BY_FEELING, FEELINGS } from "../../tips";
+import type { Feeling } from "../../types";
 
 const feelings = FEELINGS.map((f) => f.value) as [Feeling, ...Feeling[]];
 

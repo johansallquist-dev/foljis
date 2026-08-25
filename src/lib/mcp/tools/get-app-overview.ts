@@ -1,5 +1,5 @@
 import { defineTool } from "@lovable.dev/mcp-js";
-import { defaultRoutine, defaultEveningRoutine } from "@/lib/types";
+import { defaultRoutine, defaultEveningRoutine } from "../../types";
 
 const SPECIES = [
   { id: "sun", label: "Sol" },

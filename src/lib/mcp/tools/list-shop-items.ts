@@ -1,6 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
-import { SHOP_ITEMS, SHOP_CATEGORIES } from "@/lib/shop";
+import { SHOP_ITEMS, SHOP_CATEGORIES } from "../../shop";
 
 export default defineTool({
   name: "list_shop_items",

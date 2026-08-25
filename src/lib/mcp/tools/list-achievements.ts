@@ -1,5 +1,5 @@
 import { defineTool } from "@lovable.dev/mcp-js";
-import { ACHIEVEMENTS } from "@/lib/achievements";
+import { ACHIEVEMENTS } from "../../achievements";
 
 export default defineTool({
   name: "list_achievements",

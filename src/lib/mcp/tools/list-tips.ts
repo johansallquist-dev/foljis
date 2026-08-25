@@ -1,6 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
-import { TIPS, TIP_CATEGORIES } from "@/lib/tips";
+import { TIPS, TIP_CATEGORIES } from "../../tips";
 
 export default defineTool({
   name: "list_tips",
