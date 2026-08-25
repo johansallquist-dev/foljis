@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "sdk_version": "0.28.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "foljis-mcp",
+      "version": "0.1.0",
+      "title": "Följis"
+    },
+    "tools": [
+      {
+        "name": "get_app_overview",
+        "title": "Om appen",
+        "description": "Förklarar vad Följis-appen är, vilka funktioner den har, hur Följispoäng fungerar, vilka följis-arter som finns och vilka standardrutiner som föreslås för morgon och kväll.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_tips",
+        "title": "Lista tips och råd",
+        "description": "Lista Följis-appens tips och råd för barn (morgon, skola, andning, social, fokus, kväll, sömn, kropp). Filtrera på kategori eller sökord.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Begränsa till en kategori.",
+              "type": "string",
+              "enum": [
+                "morgon",
+                "skola",
+                "andning",
+                "social",
+                "fokus",
+                "kvall",
+                "sömn",
+                "kropp"
+              ]
+            },
+            "query": {
+              "description": "Fritextsökning i titel och text.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "suggest_coping",
+        "title": "Förslag utifrån känsla",
+        "description": "Ge appens konkreta förslag på vad man kan göra när man känner en viss känsla (t.ex. stressad, ledsen, okoncentrerad).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "feeling": {
+              "type": "string",
+              "enum": [
+                "glad",
+                "lugn",
+                "stolt",
+                "tacksam",
+                "trött",
+                "okoncentrerad",
+                "uttråkad",
+                "orolig",
+                "nervös",
+                "stressad",
+                "ledsen",
+                "ensam",
+                "besviken",
+                "arg",
+                "frustrerad"
+              ],
+              "description": "Känslan som förslagen ska matcha."
+            }
+          },
+          "required": [
+            "feeling"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_achievements",
+        "title": "Lista achievements",
+        "description": "Lista alla achievements som går att låsa upp i Följis-appen, med titel, beskrivning och tips om hur man låser upp dem.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_shop_items",
+        "title": "Lista affärens sortiment",
+        "description": "Lista allt som går att köpa med Följispoäng i appens affär: tillbehör/kläder och bakgrunder, med pris.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Begränsa till tillbehör eller bakgrunder.",
+              "type": "string",
+              "enum": [
+                "accessory",
+                "background"
+              ]
+            },
+            "maxPrice": {
+              "description": "Visa bara saker som kostar högst så många Följispoäng.",
+              "type": "number"
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
