@@ -86,13 +86,13 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+    font-family: ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
     font-feature-settings: "kern";
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Fredoka', 'Quicksand', system-ui, sans-serif;
+    font-family: ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
     @apply font-semibold tracking-tight;
   }
 }
