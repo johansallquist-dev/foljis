@@ -12,8 +12,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Fredoka', 'Quicksand', 'system-ui', 'sans-serif'],
-        body: ['Quicksand', 'Nunito', 'system-ui', 'sans-serif'],
+        display: ['ui-rounded', 'Arial Rounded MT Bold', 'system-ui', 'sans-serif'],
+        body: ['ui-rounded', 'Arial Rounded MT Bold', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
