@@ -48,7 +48,7 @@ export interface LessonCompletion {
 }
 
 export type CompanionSpeciesId =
-  | "sun" | "fox" | "panda" | "bunny" | "cat" | "dog" | "horse" | "penguin" | "giraffe";
+  | "sun" | "fox" | "panda" | "bunny" | "cat" | "horse" | "penguin" | "giraffe";
 
 export interface AppState {
   points: number;
