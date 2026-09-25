@@ -6,7 +6,6 @@ export type CompanionSpecies =
   | "panda"   // Pandan
   | "bunny"   // Kaninen
   | "cat"     // Katten
-  | "dog"     // Labrador
   | "horse"   // Häst
   | "penguin" // Pingvin
   | "giraffe";// Giraff
@@ -25,7 +24,6 @@ export const SPECIES: SpeciesInfo[] = [
   { id: "panda",   name: "Panda",      emoji: "🐼", defaultName: "Bambu",   description: "Lugn och mysig" },
   { id: "bunny",   name: "Kanin",      emoji: "🐰", defaultName: "Hopp",    description: "Pigg och peppig" },
   { id: "cat",     name: "Katt",       emoji: "🐱", defaultName: "Mons",    description: "Mjuk och självsäker" },
-  { id: "dog",     name: "Labrador",   emoji: "🐕", defaultName: "Ludde",   description: "Lekfull och lojal" },
   { id: "horse",   name: "Häst",       emoji: "🐴", defaultName: "Hilda",   description: "Stark och snäll" },
   { id: "penguin", name: "Pingvin",    emoji: "🐧", defaultName: "Pingo",   description: "Cool och tålmodig" },
   { id: "giraffe", name: "Giraff",     emoji: "🦒", defaultName: "Gina",    description: "Lång och lugn, ser långt fram" },
@@ -191,7 +189,6 @@ function renderSpecies(s: CompanionSpecies, e: Expression, mood: number) {
     case "panda":   return <Panda e={e} mood={mood} />;
     case "bunny":   return <Bunny e={e} mood={mood} />;
     case "cat":     return <Cat e={e} mood={mood} />;
-    case "dog":     return <Dog e={e} mood={mood} />;
     case "horse":   return <Horse e={e} mood={mood} />;
     case "penguin": return <Penguin e={e} mood={mood} />;
     case "giraffe": return <Giraffe e={e} mood={mood} />;
@@ -402,50 +399,6 @@ function Cat({ e, mood }: { e: Expression; mood: number }) {
       <line x1="140" y1="120" x2="120" y2="118" stroke={dark} strokeWidth="1.5" strokeLinecap="round" />
       <line x1="140" y1="128" x2="120" y2="124" stroke={dark} strokeWidth="1.5" strokeLinecap="round" />
       <Face e={e} cy={112} eyeDx={17} eyeDy={-10} mouthDy={14} />
-    </>
-  );
-}
-
-/* ---------- Hund (svart labrador) ---------- */
-function Dog({ e, mood }: { e: Expression; mood: number }) {
-  const fur = mood >= 1 ? "hsl(220 25% 18%)" : "hsl(220 10% 40%)";
-  const light = "hsl(40 30% 88%)";
-  return (
-    <>
-      {/* Hängande öron */}
-      <ellipse cx="52" cy="92" rx="16" ry="34" fill={fur} transform="rotate(15 52 92)" />
-      <ellipse cx="148" cy="92" rx="16" ry="34" fill={fur} transform="rotate(-15 148 92)" />
-      {/* Huvud */}
-      <ellipse cx="100" cy="112" rx="60" ry="56" fill={fur} filter="url(#softShadow)" />
-      {/* Panna/mellansida */}
-      <ellipse cx="100" cy="108" rx="34" ry="38" fill={light} />
-      {/* Nos */}
-      <ellipse cx="100" cy="130" rx="14" ry="10" fill="hsl(220 20% 12%)" />
-      <ellipse cx="100" cy="126" rx="5" ry="3.5" fill="hsl(220 30% 25%)" />
-      {/* Ögon ovanför nospartiet */}
-      {e.eyes === "happy" && (
-        <>
-          <path d="M80 98 Q86 90 92 98" stroke="hsl(220 50% 12%)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-          <path d="M108 98 Q114 90 120 98" stroke="hsl(220 50% 12%)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-        </>
-      )}
-      {e.eyes === "open" && (
-        <>
-          <circle cx="86" cy="98" r="4.5" fill="hsl(220 50% 12%)" />
-          <circle cx="87" cy="96.5" r="1.5" fill="white" />
-          <circle cx="114" cy="98" r="4.5" fill="hsl(220 50% 12%)" />
-          <circle cx="115" cy="96.5" r="1.5" fill="white" />
-        </>
-      )}
-      {e.eyes === "tired" && (
-        <>
-          <path d="M79 100 L93 100" stroke="hsl(220 30% 35%)" strokeWidth="3.5" strokeLinecap="round" />
-          <path d="M107 100 L121 100" stroke="hsl(220 30% 35%)" strokeWidth="3.5" strokeLinecap="round" />
-        </>
-      )}
-      <FaceMouthOnly e={e} cy={112} mouthDy={24} color="hsl(220 50% 12%)" />
-      {e.cheeks && (<><ellipse cx="68" cy="122" rx="7" ry="4" fill="hsl(8 85% 75%)" opacity="0.55"/><ellipse cx="132" cy="122" rx="7" ry="4" fill="hsl(8 85% 75%)" opacity="0.55"/></>)}
-      {e.sparkles && (<g><text x="40" y="55" fontSize="20">✨</text><text x="150" y="60" fontSize="20">✨</text></g>)}
     </>
   );
 }

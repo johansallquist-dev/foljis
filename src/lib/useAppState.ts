@@ -14,7 +14,8 @@ function loadState(): AppState {
     const merged = { ...initialState, ...parsed };
     // Migrera borttagna/ersatta följis-arter
     const speciesMigration: Record<string, CompanionSpeciesId> = {
-      owl: "dog",
+      owl: "panda",
+      dog: "panda",
       dragon: "horse",
       axolotl: "panda",
     };
