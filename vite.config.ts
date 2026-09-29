@@ -5,6 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // GitHub Pages serves under /foljis/; Lovable hosting serves from root
+  base: process.env.GITHUB_ACTIONS ? "/foljis/" : "/",
   server: {
     host: "::",
     port: 8080,
